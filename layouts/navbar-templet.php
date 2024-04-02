@@ -30,105 +30,66 @@ if (!$koneksi) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        /* Custom CSS for Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 200;
+        /* Custom CSS for Navbar */
+        .navbar {
             background-color: #343a40;
-            padding-top: 3.5rem; /* Height of navbar */
-            overflow-x: hidden;
-            transition: all 0.3s;
         }
 
-        .sidebar-nav {
-            padding: 0;
-        }
-
-        .sidebar-nav .nav-item {
-            margin: 20;
-        }
-
-        .sidebar-nav .nav-link {
-            padding: 10px 25px;
-            text-align: left;
-            color: rgba(255, 255, 255, 0.75);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-nav .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        .navbar-brand {
             color: #fff;
-            text-decoration: none;
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 0;
-            }
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.75);
         }
-        .profile-image {
-            max-width: 100px; /* Maksimum lebar gambar */
-            max-height: 100px; /* Maksimum tinggi gambar */
+
+        .navbar-nav .nav-link:hover {
+            color: #fff;
         }
-    
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Brand</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="#">Blog</a>
                         </li>
+                        <?php
+                        // Periksa apakah pengguna sudah login
+                        if (isset($_SESSION['username'])) { ?>
+                            <li class="nav-item">
+                                <a href="in/logout.php" class="nav-link">Log Out</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="blogs/upload.php" class="nav-link">Upload</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="profile/profile_user.php">Profile</a>
+                            </li>
+                        <?php
+                        } else {
+                            // Jika belum login, tampilkan menu login dan registrasi
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login1/login.php">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login1/register.php">Registrasi</a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <ul class="sidebar-nav nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="../index.php">Beranda</a>
-                </li>
-                <?php
-                // Periksa apakah pengguna sudah login
-                if (isset($_SESSION['username'])) { ?>
-                    <li class="nav-item">
-                        <a href="in/logout.php" class="nav-link">Log Out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="blogs/upload.php" class="nav-link">Upload</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile/profile_user.php">Profile</a>
-                    </li>
-                <?php
-                } else {
-                    // Jika belum login, tampilkan menu login dan registrasi
-                ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login1/login.php">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login1/register.php">Registrasi</a>
-                    </li>
-                <?php
-                }
-                ?>
-            </ul>
-        </div>
-        <!-- End Sidebar -->
+        <!-- End Navbar -->
 
         <!-- Main content -->
         <div class="container-fluid">
@@ -142,3 +103,4 @@ if (!$koneksi) {
 </body>
 
 </html>
+
