@@ -29,7 +29,7 @@ include('layouts/navbar-templet.php')
                 <div class="card mb-5  ">
                     <div class="position-relative">
                         <!-- class imga -->
-                        <img src="blogs/uploads/<?php echo $row['image']; ?>" class=" card-img-top mt-3  post-image m-6 img-fluid" style="border-radius: 15px;" alt="<?php echo $row['title']; ?>">
+                        <img src="blogs/uploads/<?php echo $row['image']; ?>" class=" card-img-top mt-4 post-image m-6 img-fluid" style="border-radius: 15px;" alt="<?php echo $row['title']; ?>">
                         <div class="overlay"></div> <!-- overlay untuk efek bayangan -->
                     </div>
                     <div class="card-body mb-4">
@@ -58,7 +58,10 @@ include('layouts/navbar-templet.php')
 
         // Tutup koneksi
         $conn->close();
+
+        include('footer/footer.php');
         ?>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/scroll-animation@0.2.1/dist/index.min.js"></script>
+    
+    
 </div>

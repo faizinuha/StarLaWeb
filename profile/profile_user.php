@@ -86,15 +86,6 @@ if (mysqli_num_rows($result) > 0) {
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
-                <p class="mb-0">Role</p>
-              </div>
-              <div class="col-sm-9">
-              <p class="text-muted mb-0"><?php echo $_SESSION['user_name']; ?> </p>
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
                 <p class="mb-0">Name</p>
               </div>
               <div class="col-sm-9">
