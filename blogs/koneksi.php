@@ -4,6 +4,7 @@ $host = "localhost";
 $username = "root";
 $password = "";
 $database = "blog_db";
+// $database = "users";
 
 // Buat koneksi ke database
 $conn = new mysqli($host, $username, $password, $database);

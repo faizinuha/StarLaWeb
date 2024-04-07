@@ -53,12 +53,17 @@ if (mysqli_num_rows($result) > 0) {
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-         <a href="upload.php">
-         <img src="upload/<?php echo $row['profile_image_path']; ?>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-         </a>
+            <!-- foto -->
+            <a href="upload.php">
+              <img src="<?php echo $row['profile_image_path']; ?>"
+               alt="avatar"
+                class="rounded float-start" 
+                style="width: 150px;">
+            </a>
+            <!-- akhir -->
             <h5 class="my-3"><?php echo $name ?></h5>
             <p class="text-muted mb-1"><?php echo $username ?></p>
-            <div class="d-flex justify-content-center mb-2">
+            <div class="d-flex justify-content-center mt-lg-5 " style=".btn-primary:hover{  background-color: #dc3545;}" >
               <a href="edit.php" type="button" class="btn btn-primary">Edit</a>
             </div>
           </div>

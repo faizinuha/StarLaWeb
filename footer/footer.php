@@ -12,7 +12,7 @@
     <div class="container mx-auto flex justify-between items-center">
         <div>
             <p>&copy; 2024 Blog Kami. All rights reserved.</p>
-            <p>Designed with <i class="fas fa-heart text-red-500 mx-1"></i> by Your Name</p>
+            <p>Designed with <i class="fas fa-heart text-red-500 mx-1"></i>Zaki BLogs</p>
         </div>
         <div class="social-links">
             <a href="#" class="text-gray-300 hover:text-gray-500 mx-2"><i class="bi bi-facebook"></i></i></a>

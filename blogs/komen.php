@@ -35,6 +35,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Fetch comments from database
 $sql = "SELECT * FROM comments ORDER BY created_at DESC";
 $result = $conn->query($sql);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["profile_image_path"])) {
+    // Path untuk menyimpan gambar
+    $target_dir = "../profile/upload/";
+    $target_file = $target_dir . basename($_FILES["profile_image_path"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+    // Memeriksa ukuran file
+    if ($_FILES["profile_image_path"]["size"] > 900000) {
+        echo "Maaf, file Anda terlalu besar.";
+        $uploadOk = 0;
+    }
+
+    // Izinkan hanya format gambar tertentu
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif") {
+        echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
+        $uploadOk = 0;
+    }
+
+    // Jika semua validasi terpenuhi, simpan file gambar
+    if ($uploadOk == 1) {
+        if (move_uploaded_file($_FILES["profile_image_path"]["tmp_name"], $target_file)) {
+            // Simpan path gambar ke database
+            $image_path = $target_file;
+            $query = "UPDATE users SET profile_image_path=? WHERE id=?";
+            $stmt = mysqli_prepare($koneksi, $query);
+            mysqli_stmt_bind_param($stmt, "si", $image_path, $user_id);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+            echo "File " . basename($_FILES["profile_image_path"]["name"]) . " telah diunggah.";
+        } else {
+            echo "User ID tidak ditemukan.";
+            echo "Maaf, terjadi kesalahan saat mengunggah file Anda.";
+        }
+    }
+}
+
+// Jika user_id tidak diatur
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +147,8 @@ $result = $conn->query($sql);
                             <div class="card mb-3 comment-card">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <a href="../profile/profile_user.php"><img src="../img/Bg.jpg" alt="Avatar" class="comment-avatar"></a>
+                                    <a href="../profile/profile_user.php">
+                                        <img src="<?php echo $row['profile_image_path']; ?>" alt="Avatar" class="comment-avatar"></a>
                                         <div>
                                             <h6 class="card-title mb-0"><?php echo $row['author']; ?></h6>
                                             <p class="card-text mb-0"><?php echo $row['content']; ?></p>
