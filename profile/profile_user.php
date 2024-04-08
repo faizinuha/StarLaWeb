@@ -55,17 +55,23 @@ if (mysqli_num_rows($result) > 0) {
           <div class="card-body text-center">
             <!-- foto -->
             <a href="upload.php">
-              <img src="<?php echo $row['profile_image_path']; ?>"
-               alt="avatar"
-                class="rounded float-start" 
-                style="width: 150px;">
+              <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="rounded float-start" style="width: 150px;">
             </a>
             <!-- akhir -->
             <h5 class="my-3"><?php echo $name ?></h5>
             <p class="text-muted mb-1"><?php echo $username ?></p>
-            <div class="d-flex justify-content-center mt-lg-5 " style=".btn-primary:hover{  background-color: #dc3545;}" >
-              <a href="edit.php" type="button" class="btn btn-primary">Edit</a>
+
+            <div class="row justify-content-center mt-lg-5">
+              <div class="col-md-auto">
+                <a href="edit.php" type="button" class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i></a>
+              </div>
+              <div class="col-md-auto">
+                <a href="#" type="button" class="btn btn-outline-danger "><i class="bi bi-chat-right-text"></i></a>
+              </div>
             </div>
+
+
+
           </div>
         </div>
         <!-- target ganti -->
@@ -121,7 +127,7 @@ if (mysqli_num_rows($result) > 0) {
             <hr>
           </div>
 
-          <div class="row">
+          <div class="row justify-content-center  text-center">
             <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
                 <div class="card-body">
@@ -133,7 +139,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="card mb-4 mb-md-0">
                 <div class="card-body">
                   <p class="mb-4"><span class="text-primary font-italic me-1">Status </span>
@@ -144,7 +150,7 @@ if (mysqli_num_rows($result) > 0) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@ mysqli_close($koneksi);
     <h1>Edit Profil</h1>
     <div class="card">
       <div class="card-body">
-        <form id="editForm" action="proses_edit_profil.php" method="POST">
+        <form id="editForm"  method="POST">
           <div class="form-group">
             <label for="name">Nama:</label>
             <input type="text" class="form-control" id="name" name="name" value="<?php echo isset($name) ? $name : ''; ?>">
