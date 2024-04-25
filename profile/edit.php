@@ -72,44 +72,46 @@ mysqli_close($koneksi);
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- Tambahkan stylesheet tambahan untuk menyesuaikan tampilan -->
   <style>
-    body {
-      background-color: #f8f9fa;
-    }
+  body {
+    background-color: #f8f9fa;
+  }
 
-    .container {
-      margin-top: 50px;
-    }
+  .container {
+    margin-top: 50px;
+  }
 
-    .card {
-      border-radius: 15px;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    }
+  .card {
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
 
-    .card-body {
-      padding: 40px;
-    }
+  .card-body {
+    padding: 40px;
+  }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+  .form-group {
+    margin-bottom: 20px;
+  }
 
-    label {
-      font-weight: bold;
-    }
+  label {
+    font-weight: bold;
+  }
 
-    textarea.form-control {
-      min-height: 100px;
-    }
+  textarea.form-control {
+    min-height: 100px;
+  }
 
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-top: 20px;
+    /* tambahkan margin top agar tombol submit terpisah dari input */
+  }
 
-    .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-    }
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
   </style>
 </head>
 
@@ -118,44 +120,52 @@ mysqli_close($koneksi);
     <h1>Edit Profil</h1>
     <div class="card">
       <div class="card-body">
-        <form id="editForm"  method="POST">
-          <div class="form-group">
-            <label for="name">Nama:</label>
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo isset($name) ? $name : ''; ?>">
+        <form class="row g-3" method="POST">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Nama:</label>
+            <input type="text" class="form-control" id="name" name="name"
+              value="<?php echo isset($name) ? $name : ''; ?>">
           </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" value="<?php echo isset($email) ? $email : ''; ?>">
+          <div class="col-md-4">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email"
+              value="<?php echo isset($email) ? $email : ''; ?>">
           </div>
-          <div class="form-group">
-            <label for="instagram">Instagram:</label>
-            <input type="text" class="form-control" id="instagram" name="instagram" value="<?php echo isset($instagram) ? $instagram : ''; ?>">
+          <div class="col-md-4">
+            <label for="instagram" class="form-label">Instagram:</label>
+            <input type="text" class="form-control" id="instagram" name="instagram"
+              value="<?php echo isset($instagram) ? $instagram : ''; ?>">
           </div>
-          <div class="form-group">
-            <label for="TikTok">TikTok:</label>
-            <input type="text" class="form-control" id="TikTok" name="TikTok" value="<?php echo isset($TikTok) ? $TikTok : ''; ?>">
+          <div class="col-md-4">
+            <label for="TikTok" class="form-label">TikTok:</label>
+            <input type="text" class="form-control" id="TikTok" name="TikTok"
+              value="<?php echo isset($TikTok) ? $TikTok : ''; ?>">
           </div>
-          <div class="form-group">
-            <label for="Twitter">Twitter:</label>
-            <input type="text" class="form-control" id="Twitter" name="Twitter" value="<?php echo isset($Twitter) ? $Twitter : '' ?>">
+          <div class="col-md-4">
+            <label for="Twitter" class="form-label">Twitter:</label>
+            <input type="text" class="form-control" id="Twitter" name="Twitter"
+              value="<?php echo isset($Twitter) ? $Twitter : ''; ?>">
           </div>
-          <div class="form-group">
-            <label for="about_me">Tentang Saya:</label>
-            <textarea class="form-control" id="about_me" name="about_me"><?php echo isset($about_me) ? $about_me : ''; ?></textarea>
+          <div class="col-12">
+            <label for="about_me" class="form-label">Tentang Saya:</label>
+            <textarea class="form-control" id="about_me" name="about_me"
+              rows="3"><?php echo isset($about_me) ? $about_me : ''; ?></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-          <button type="button" class="btn btn-primary" onclick="cancelEdit()">Cancel</button>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Simpan</button>
+            <button class="btn btn-primary" type="button" onclick="cancelEdit()">Cancel</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
 
   <script>
-    function cancelEdit() {
-      if (confirm("Apakah Anda yakin ingin membatalkan pengeditan profil?")) {
-        window.location.href = "profile_user.php";
-      }
+  function cancelEdit() {
+    if (confirm("Apakah Anda yakin ingin membatalkan pengeditan profil?")) {
+      window.location.href = "profile_user.php";
     }
+  }
   </script>
 </body>
 

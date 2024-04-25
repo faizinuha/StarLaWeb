@@ -66,7 +66,7 @@ if (mysqli_num_rows($result) > 0) {
                 <a href="edit.php" type="button" class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i></a>
               </div>
               <div class="col-md-auto">
-                <a href="#" type="button" class="btn btn-outline-danger "><i class="bi bi-chat-right-text"></i></a>
+                <a href="../chatapp/home.php" type="button" class="btn btn-outline-danger "><i class="bi bi-chat-right-text"></i></a>
               </div>
             </div>
 

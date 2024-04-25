@@ -10,10 +10,10 @@ $password = $_POST['password'];
 $tiktok_value = ""; 
 $instagram_value = ""; 
 $twitter_value = ""; 
-//$profile_photo_value = ""; 
+$about_me = ""; 
+$profile_image_path = ""; 
 
-
-$stmt = $conn->prepare("SELECT id FROM users WHERE email=?");
+$stmt = $koneksi->prepare("SELECT id FROM users WHERE email=?");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -27,8 +27,8 @@ if ($result->num_rows > 0) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Menyiapkan dan mem-binding
-        $stmt = $conn->prepare("INSERT INTO users (name, email, username, password, TikTok, instagram, Twitter) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $name, $email, $username, $hashed_password, $tiktok_value, $instagram_value, $twitter_value);
+        $stmt = $koneksi->prepare("INSERT INTO users (name, email, username, password, TikTok, instagram, Twitter, about_me, profile_image_path) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssss", $name, $email, $username, $hashed_password, $tiktok_value, $instagram_value, $twitter_value, $about_me, $profile_image_path); // Menyediakan nilai untuk profile_image_path
 
         if ($stmt->execute()) {
             header("Location: login.php");
@@ -42,5 +42,5 @@ if ($result->num_rows > 0) {
 }
 
 // Menutup koneksi
-$conn->close();
+$koneksi->close();
 ?>
