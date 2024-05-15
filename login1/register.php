@@ -43,6 +43,7 @@
       from {
         opacity: 0;
       }
+
       to {
         opacity: 1;
       }
@@ -87,22 +88,28 @@
     .was-validated .error-feedback {
       display: block;
     }
-    .img{
+
+    .img {
       position: absolute;
       right: 300px;
       width: 500px;
       top: 200px;
     }
-    .regi{
+
+    .regi {
       position: relative;
-      left: 230px ;
+      left: 230px;
       top: -90px;
       font-size: 20px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
+      /* add a light gray background */
+      padding: 10px;
+      color: blue;
     }
-    .image{
+
+    .image {
       position: relative;
-      top: var(--background-color);
       top: 30px;
       left: 20px;
     }
@@ -110,10 +117,10 @@
 </head>
 
 <body>
-<div class="img-thumbnail img">
-<img class="image" src="../assets/img/com.nexon.bluearchive.png" >
-<p class="regi">Selamat datang di Register</p>
-</div>
+  <div class="img-thumbnail img">
+    <img class="image" src="../assets/img/com.nexon.bluearchive.png">
+    <p class="regi">Selamat datang di Register</p>
+  </div>
   <div class="container">
     <div class="card">
       <div class="card-body">
@@ -133,12 +140,14 @@
             <div class="col-md-6">
               <label for="username" class="form-label">Username:</label>
               <input type="text" class="form-control" name="username" required placeholder="Masukkan Username">
-              <div class="error-feedback">Masukkan Username.</div><hr>
+              <div class="error-feedback">Masukkan Username.</div>
+              <hr>
             </div>
             <div class="col-md-6">
               <label for="password" class="form-label">Password:</label>
               <input type="password" class="form-control" name="password" required placeholder="Masukkan Password">
-              <div class="error-feedback">Masukkan Password.</div><hr>
+              <div class="error-feedback">Masukkan Password.</div>
+              <hr>
             </div>
           </div>
           <div class="d-grid gap-2">

@@ -5,29 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch & Profile built-in server",
-      "type": "php",
-      "request": "launch",
-      "noDebug": true,
-      "profile": true,
-      "runtimeArgs": [
-        "-S",
-        "localhost:8000",
-        "-t",
-        "."
-      ],
-      "port": 9003,
-      "serverReadyAction": {
-        "action": "openExternally"
-      }
-    },
-    
-    {
       "name": "Attach to Chrome",
-      "port": 9222,
+      "port": 3000,
       "request": "attach",
       "type": "chrome",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${file}"
     },
     {
       "name": "Launch built-in server and debug",
