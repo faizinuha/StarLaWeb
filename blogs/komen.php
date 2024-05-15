@@ -113,6 +113,7 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <h6 class="card-title mb-0 btn btn-outline-primary "><?php echo $row['author']; ?></h6>
+                                            
                                             <p class="card-text mb-0"><?php echo $row['content']; ?></p>
                                             <p class="text-muted mb-0"><?php echo $row['created_at']; ?></p>
                                         </div>

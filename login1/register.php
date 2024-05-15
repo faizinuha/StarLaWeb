@@ -8,57 +8,85 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-  :root {
-    --primary-color: #3498db;
-    --secondary-color: #95a5a6;
-    --background-color: rgba(255, 255, 255, 0.7);
-    --button-hover-color: #2980b9;
-    --button-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #95a5a6;
+      --background-color: rgba(255, 255, 255, 0.7);
+      --button-hover-color: #2980b9;
+      --button-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      --gradient-bg: linear-gradient(135deg, #81c784, #64b5f6);
+    }
 
-  .card {
-    max-width: 500px;
-    margin: auto;
-    margin-top: 5%;
-    background-color: var(--background-color);
-    border-radius: 10px;
-    box-shadow: var(--button-shadow);
-  }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--gradient-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-  .form-label {
-    font-weight: bold;
-  }
+    .card {
+      max-width: 500px;
+      background-color: var(--background-color);
+      border-radius: 10px;
+      box-shadow: var(--button-shadow);
+      padding: 20px;
+      margin: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
 
-  .btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-  }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-  .btn-primary:hover {
-    background-color: var(--button-hover-color);
-    border-color: var(--button-hover-color);
-  }
+    .form-label {
+      font-weight: bold;
+    }
 
-  .btn-secondary {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-  }
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
 
-  .btn-secondary:hover {
-    background-color: var(--button-hover-color);
-    border-color: var(--button-hover-color);
-  }
+    .btn-primary:hover {
+      background-color: var(--button-hover-color);
+      border-color: var(--button-hover-color);
+    }
 
-  .spinner {
-    margin: 20px auto;
-  }
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
 
-  /* Style untuk tampilan kesalahan */
-  .error-feedback {
-    color: #dc3545;
-    font-size: 0.8rem;
-  }
+    .btn-secondary:hover {
+      background-color: var(--button-hover-color);
+      border-color: var(--button-hover-color);
+    }
+
+    .spinner {
+      margin: 20px auto;
+    }
+
+    .error-feedback {
+      color: #dc3545;
+      font-size: 0.8rem;
+      display: none;
+    }
+
+    .was-validated .error-feedback {
+      display: block;
+    }
   </style>
 </head>
 
@@ -66,6 +94,7 @@
 
   <div class="container">
     <div class="card">
+      <img src="" alt="">
       <div class="card-body">
         <h2 class="card-title text-center font-monospace mb-4">Registrasi Pengguna</h2>
         <form id="registerForm" action="proses_register.php" method="post" novalidate>
@@ -83,12 +112,12 @@
             <div class="col-md-6">
               <label for="username" class="form-label">Username:</label>
               <input type="text" class="form-control" name="username" required placeholder="Masukkan Username">
-              <div class="error-feedback">Masukkan Username.</div>
+              <div class="error-feedback">Masukkan Username.</div><hr>
             </div>
             <div class="col-md-6">
               <label for="password" class="form-label">Password:</label>
               <input type="password" class="form-control" name="password" required placeholder="Masukkan Password">
-              <div class="error-feedback">Masukkan Password.</div>
+              <div class="error-feedback">Masukkan Password.</div><hr>
             </div>
           </div>
           <div class="d-grid gap-2">
@@ -104,22 +133,18 @@
   </div>
 
   <script>
-  document.getElementById('registerBtn').addEventListener('click', function(event) {
-    var form = document.getElementById('registerForm');
-    var spinner = document.getElementById('spinner');
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      var form = this;
+      var spinner = document.getElementById('spinner');
 
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-      form.classList.add('was-validated');
-      spinner.classList.add('visually-hidden');
-    } else {
-      spinner.classList.remove('visually-hidden');
-      setTimeout(function() {
-        spinner.classList.add('visually-hidden');
-      }, 2000);
-    }
-  });
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.classList.add('was-validated');
+      } else {
+        spinner.classList.remove('visually-hidden');
+      }
+    });
   </script>
 </body>
 

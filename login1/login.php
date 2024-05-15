@@ -63,6 +63,9 @@
                     <div class="card-header text-center">
                         <h2 class="mb-0">Login</h2>
                     </div>
+                    <!-- <div class="card-body text-center">
+                        <a href="/auth/github" class="btn btn-dark">Login with GitHub</a>
+                    </div> -->
                     <div class="card-body">
                         <form id="loginForm" action="proses_login.php" method="post" onclick>
                             <div class="mb-3">
