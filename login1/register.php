@@ -87,14 +87,35 @@
     .was-validated .error-feedback {
       display: block;
     }
+    .img{
+      position: absolute;
+      right: 300px;
+      width: 500px;
+      top: 200px;
+    }
+    .regi{
+      position: relative;
+      left: 230px ;
+      top: -90px;
+      font-size: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .image{
+      position: relative;
+      top: var(--background-color);
+      top: 30px;
+      left: 20px;
+    }
   </style>
 </head>
 
 <body>
-
+<div class="img-thumbnail img">
+<img class="image" src="../assets/img/com.nexon.bluearchive.png" >
+<p class="regi">Selamat datang di Register</p>
+</div>
   <div class="container">
     <div class="card">
-      <img src="" alt="">
       <div class="card-body">
         <h2 class="card-title text-center font-monospace mb-4">Registrasi Pengguna</h2>
         <form id="registerForm" action="proses_register.php" method="post" novalidate>
