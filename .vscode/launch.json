@@ -8,9 +8,9 @@
       "name": "Attach to Chrome",
       "port": 3000,
       "request": "attach",
-      "url": "http://localhost:3000/",
+      "url": "http://localhost:3000/index.php",
       "type": "chrome",
-      "webRoot": "${file}"
+      "webRoot": "${index.php}"
     },
     {
       "name": "Launch built-in server and debug",
@@ -18,7 +18,7 @@
       "request": "launch",
       "runtimeArgs": [
         "-S",
-        "localhost:8000",
+        "localhost:3000",
         "-t",
         "."
       ],

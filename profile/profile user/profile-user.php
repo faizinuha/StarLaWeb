@@ -8,6 +8,7 @@
 <body>
     <?php
     // Koneksi ke database
+    include_once "../koneksi.php";
     $conn = new mysqli("localhost", "root", "", "users");
 
     // Periksa koneksi
