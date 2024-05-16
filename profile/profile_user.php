@@ -26,7 +26,6 @@ if (mysqli_num_rows($result) > 0) {
   $instagram = $row['instagram'];
   $Twitter = $row['Twitter'];
   $about_me = $row['about_me'];
-  // $profile_photo = $row['profile_photo'];
 } else {
   echo "Informasi pengguna tidak ditemukan.";
 }
@@ -54,9 +53,16 @@ if (mysqli_num_rows($result) > 0) {
         <div class="card mb-4">
           <div class="card-body text-center">
             <!-- foto -->
+            <!-- foto -->
             <a href="upload.php">
-              <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="rounded float-start" style="width: 150px;">
+              <?php if (!empty($row['profile_image_path'])) : ?>
+                <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="rounded float-start" style="width: 150px;">
+              <?php else : ?>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="rounded float-start" style="width: 150px;">
+              <?php endif; ?>
             </a>
+            <!-- akhir -->
+
             <!-- akhir -->
             <h5 class="my-3"><?php echo $name ?></h5>
             <p class="text-muted mb-1"><?php echo $username ?></p>
