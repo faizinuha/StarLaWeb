@@ -21,7 +21,7 @@ if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $username = $row['username'];
-    $email = $row['email'];
+    // $email = $row['email'];
     $TikTok = $row['TikTok'];
     $instagram = $row['instagram'];
     $Twitter = $row['Twitter'];

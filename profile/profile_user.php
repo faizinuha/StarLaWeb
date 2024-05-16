@@ -13,7 +13,7 @@ include_once "koneksi.php";
 
 // Ambil informasi pengguna dari database
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM users WHERE id = $user_id";
+$query = "SELECT * FROM profile WHERE id = $user_id";
 $result = mysqli_query($koneksi, $query);
 
 // Periksa apakah pengguna ditemukan
@@ -21,7 +21,7 @@ if (mysqli_num_rows($result) > 0) {
   $row = mysqli_fetch_assoc($result);
   $name = $row['name'];
   $username = $row['username'];
-  $email = $row['email'];
+  // $email = $row['email'];
   $TikTok = $row['TikTok'];
   $instagram = $row['instagram'];
   $Twitter = $row['Twitter'];
@@ -122,7 +122,7 @@ if (mysqli_num_rows($result) > 0) {
             </div>
             <hr>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Email</p>
               </div>
@@ -130,7 +130,7 @@ if (mysqli_num_rows($result) > 0) {
                 <p class="text-muted mb-0"><?php echo $email ?></p>
               </div>
             </div>
-            <hr>
+            <hr> -->
           </div>
 
           <div class="row justify-content-center  text-center">
