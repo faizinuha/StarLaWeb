@@ -8,6 +8,7 @@
       "name": "Attach to Chrome",
       "port": 3000,
       "request": "attach",
+      "url": "http://localhost:3000/",
       "type": "chrome",
       "webRoot": "${file}"
     },

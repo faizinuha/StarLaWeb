@@ -92,24 +92,11 @@
     </div>
     <script>
         function sweetalert() {
-            Swal.fire({
-                icon: 'success',
-                title: 'Signed in successfully',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-        }
-
-        // Call the sweetalert function when the form is submitted
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            sweetalert();
-        });
+           Toast.fire({
+            icon: "success",
+            title: "Signed in successfully"
+        }); 
+            }
     </script>
     <!-- Toast.fire({
             icon: "success",

@@ -72,9 +72,9 @@ if (!$koneksi) {
                             <li class="nav-item">
                                 <a class="nav-link" href="profile/profile_user.php">Profile</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="#" class="nav-link">Tambah Teman</a>
-                            </li>
+                            </li> -->
                         <?php
                         } else {
                             // Jika belum login, tampilkan menu login dan registrasi
