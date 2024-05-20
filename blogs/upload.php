@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             // Koneksi ke database
-            $conn = new mysqli("localhost", "root", "", "blog_db");
+            $conn = new mysqli("localhost", "root", "", "blog");
 
             // Periksa koneksi
             if ($conn->connect_error) {
@@ -58,7 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Simpan posting ke database
-            $sql = "INSERT INTO posts (title, content, image, uploaded_by) VALUES ('$title', '$content', '" . basename($_FILES["image"]["name"]) . "', '$uploaded_by')";
+            $sql = "INSERT INTO posts (title, content, image, uploaded_by) 
+            VALUES ('$title', '$content', '" . basename($_FILES["image"]["name"]) . "', '$uploaded_by')";
             if ($conn->query($sql) === TRUE) {
                 header("Location: ../index.php");
                 echo "Posting berhasil ditambahkan.";

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
     $host = "localhost";
     $user = "root";
     $password = "";
-    $database = "blog_db";
+    $database = "blog";
 
     // Buat koneksi
     $koneksi = new mysqli($host, $user, $password, $database);

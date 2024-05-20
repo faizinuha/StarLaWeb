@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Koneksi ke database
-$conn = new mysqli("localhost", "root", "", "blog_db");
+$conn = new mysqli("localhost", "root", "", "blog");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

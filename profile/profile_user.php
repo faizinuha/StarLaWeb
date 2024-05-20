@@ -13,7 +13,7 @@ include_once "koneksi.php";
 
 // Ambil informasi pengguna dari database
 $user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM profile WHERE id = $user_id";
+$query = "SELECT * FROM users WHERE id = $user_id";
 $result = mysqli_query($koneksi, $query);
 
 // Periksa apakah pengguna ditemukan

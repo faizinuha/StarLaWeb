@@ -11,33 +11,64 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
     // Connect to database
-    $conn = new mysqli("localhost", "root", "", "blog_db");
+    $conn = new mysqli("localhost", "root", "", "blog");
 
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Get the post_id from the URL or another source
+    if (isset($_GET['post_id'])) {
+        $post_id = intval($_GET['post_id']);
+    } else {
+        die("Invalid post_id.");
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validate and sanitize input
         $content = trim($_POST['content']);
+        $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
 
-        $sql = "INSERT INTO comments (author, content, created_at) VALUES (?, ?, NOW())";
+        // Debug output
+        echo "post_id: " . $post_id . "<br>";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $_SESSION['username'], $content);
-        $stmt->execute();
+        // Check if the post_id exists in the posts table
+        $check_post_sql = "SELECT id FROM posts WHERE id = ?";
+        $check_stmt = $conn->prepare($check_post_sql);
+        $check_stmt->bind_param("i", $post_id);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        $stmt->close();
+        if ($check_stmt->num_rows > 0) {
+            // Prepare the SQL statement
+            $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
+    
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
+            
+            if ($stmt->execute()) {
+                // Redirect to prevent form resubmission
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+    
+            $stmt->close();
+        } else {
+            echo "Invalid post_id.";
+        }
 
-        // Redirect to prevent form resubmission
-        header("Location: " . $_SERVER['REQUEST_URI']);
-        exit();
+        $check_stmt->close();
     }
 
     // Fetch comments from database
-    $sql = "SELECT * FROM comments ORDER BY created_at DESC";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM comments WHERE post_id = ? ORDER BY created_at DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 }
 ?>
 
@@ -94,8 +125,9 @@ if (isset($_SESSION['user_id'])) {
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <!-- Form untuk menambah komentar -->
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . $post_id; ?>" method="POST">
                     <div class="form-group">
+                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                         <label for="comment" class="form-label">Tambah Komentar:</label>
                         <textarea class="form-control" id="comment" name="content" rows="3" required></textarea>
                     </div>
@@ -113,7 +145,7 @@ if (isset($_SESSION['user_id'])) {
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <h6 class="card-title mb-0 btn btn-outline-primary"><?php echo $row['author']; ?></h6>
-                                            
+                                            +
                                             <p class="card-text mb-0"><?php echo $row['content']; ?></p>
                                             <p class="text-muted mb-0"><?php echo $row['created_at']; ?></p>
                                         </div>
@@ -121,7 +153,6 @@ if (isset($_SESSION['user_id'])) {
                                             <a href="hapuschat.php?hapus=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </div>
-                                   
                                 </div>
                             </div>
                         <?php endwhile; ?>
@@ -140,3 +171,4 @@ if (isset($_SESSION['user_id'])) {
 </body>
 
 </html>
+ 

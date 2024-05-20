@@ -9,7 +9,7 @@ include('layouts/navbar-templet.php')
     <div class="row">
         <?php
         // Koneksi ke database
-        $conn = new mysqli("localhost", "root", "", "blog_db");
+        $conn = new mysqli("localhost", "root", "", "blog");
 
         // Periksa koneksi
         if ($conn->connect_error) {
@@ -42,7 +42,7 @@ include('layouts/navbar-templet.php')
                             Diposting oleh: <?php echo $row['uploaded_by']; ?> pada <?php echo $row['upload_date']; ?>
                         </div>
                         <div>
-                            <!-- <a href="blogs/komen.php?post_id=<?php echo $row['id']; ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a> -->
+                            <a href="blogs/komen.php?post_id=<?php echo $row['id']; ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
                             <a href="download.php?gambar=<?php echo $row['image']; ?>" class="btn btn-primary"><i class="bi bi-download"></i></a>
                         </div>
                     </div>
