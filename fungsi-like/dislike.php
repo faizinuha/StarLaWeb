@@ -10,4 +10,4 @@ $conn->query($sql);
 
 $conn->close();
 
-header("location: ../index.php");
+header("Location: ../index.php");
