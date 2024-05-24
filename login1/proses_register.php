@@ -21,7 +21,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     echo '<script>alert("Email sudah digunakan. Silakan gunakan email lain."); window.location.href = "register.php";</script>';
 } else {
-    if (strlen($password) < 5) {
+    if (strlen($password) < 2) {
         echo '<script>alert("Password harus memiliki minimal 5 karakter."); window.location.href = "register.php";</script>';
     } else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
