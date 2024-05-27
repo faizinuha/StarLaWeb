@@ -43,8 +43,7 @@ include('layouts/navbar-templet.php')
                         </div>
 
                         <div>
-                            <a href="fungsi-like/like.php?post_id=<?php echo $row['id'] ?>" class="btn btn-primary"><i class="bi bi-star-fill"></i></a>
-                            <a href="fungsi-like/dislike.php?post_id=<?php echo $row['id'] ?>" class="btn btn-primary "><i class="bi bi-star"></i></a>
+                           
                             <a href="blogs/komen.php?post_id=<?php echo $row['id']; ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
                             <a href="download.php?gambar=<?php echo $row['image']; ?>" class="btn btn-primary"><i class="bi bi-download"></i></a>
                         </div>
