@@ -18,8 +18,8 @@ if (isset($_SESSION['user_id'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Get the post_id from the URL or another source
-    if (isset($_GET['post_id'])) {
+    // Get the post_id from the URL
+    if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
         $post_id = intval($_GET['post_id']);
     } else {
         die("Invalid post_id.");
@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
         $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
 
         // Debug output
-        echo "post_id: " . $post_id . "<br>";
+        echo "post_id: " . htmlspecialchars($post_id) . "<br>";
 
         // Check if the post_id exists in the posts table
         $check_post_sql = "SELECT id FROM posts WHERE id = ?";
@@ -125,9 +125,9 @@ if (isset($_SESSION['user_id'])) {
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <!-- Form untuk menambah komentar -->
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . $post_id; ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . htmlspecialchars($post_id); ?>" method="POST">
                     <div class="form-group">
-                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                        <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
                         <label for="comment" class="form-label">Tambah Komentar:</label>
                         <textarea class="form-control" id="comment" name="content" rows="3" required></textarea>
                     </div>
@@ -144,13 +144,12 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <div>
-                                            <h6 class="card-title mb-0 btn btn-outline-primary"><?php echo $row['author']; ?></h6>
-                                            <!-- + -->
-                                            <p class="card-text mb-0"><?php echo $row['content']; ?></p>
-                                            <p class="text-muted mb-0"><?php echo $row['created_at']; ?></p>
+                                        <a href="../profile/profile-user/profile-user.php?username=<?php echo htmlspecialchars($row['author']); ?>"><h6 class="card-title mb-0 btn btn-outline-primary"><?php echo htmlspecialchars($row['author']); ?></h6></a>
+                                            <p class="card-text mb-0"><?php echo htmlspecialchars($row['content']); ?></p>
+                                            <p class="text-muted mb-0"><?php echo htmlspecialchars($row['created_at']); ?></p>
                                         </div>
                                         <div class="ms-auto comment-actions">
-                                            <a href="hapuschat.php?hapus=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                            <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -171,4 +170,3 @@ if (isset($_SESSION['user_id'])) {
 </body>
 
 </html>
- 
