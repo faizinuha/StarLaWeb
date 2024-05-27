@@ -43,10 +43,10 @@ if (isset($_SESSION['user_id'])) {
         if ($check_stmt->num_rows > 0) {
             // Prepare the SQL statement
             $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
-    
+
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
-            
+
             if ($stmt->execute()) {
                 // Redirect to prevent form resubmission
                 header("Location: " . $_SERVER['REQUEST_URI']);
@@ -54,7 +54,7 @@ if (isset($_SESSION['user_id'])) {
             } else {
                 echo "Error: " . $stmt->error;
             }
-    
+
             $stmt->close();
         } else {
             echo "Invalid post_id.";
@@ -144,9 +144,11 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <div>
-                                        <a href="../profile/profile-user/profile-user.php?username=<?php echo htmlspecialchars($row['author']); ?>"><h6 class="card-title mb-0 btn btn-outline-primary"><?php echo htmlspecialchars($row['author']); ?></h6></a>
-                                            <p class="card-text mb-0"><?php echo htmlspecialchars($row['content']); ?></p>
-                                            <p class="text-muted mb-0"><?php echo htmlspecialchars($row['created_at']); ?></p>
+                                            <a href="../profile/profile-pengguna.php?username=<?php echo htmlspecialchars($row['author']); ?>">
+                                                <h6 class="card-title mb-0 btn btn-outline-primary"><?php echo htmlspecialchars($row['author']); ?></h6>
+                                            </a>
+                                            <p class="card-text mb-0">Chat:<?php echo htmlspecialchars($row['content']); ?></p>
+                                            <p class="text-muted mb-0">Date:<?php echo htmlspecialchars($row['created_at']); ?></p>
                                         </div>
                                         <div class="ms-auto comment-actions">
                                             <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
@@ -154,6 +156,7 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 </div>
                             </div>
+
                         <?php endwhile; ?>
                     <?php else : ?>
                         <p>Tidak ada komentar.</p>

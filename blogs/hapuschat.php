@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Pastikan pengguna sudah login
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login1/login.php");
+    exit();
+}
+
 // Pastikan hanya request method GET yang diizinkan
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
     // Definisikan informasi koneksi ke database
@@ -17,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
         die("Koneksi gagal: " . $koneksi->connect_error);
     }
 
-    // Ambil parameter hapus dari URL
-    $hapus_id = $_GET['hapus'];
+    // Ambil parameter hapus dari URL dan pastikan itu adalah integer
+    $hapus_id = intval($_GET['hapus']);
 
     // Ambil informasi pengguna yang sedang login
     $pengguna_login = $_SESSION['username'];
@@ -30,18 +36,19 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
 
     // Periksa apakah query berhasil dijalankan
     if ($query->affected_rows > 0) {
-        header('Location: komen.php');
+        // Redirect ke halaman komentar atau halaman sebelumnya
+        // echo "<script>alert('Komentar berhasil dihapus.'); window.history.back();</script>";
+        echo "<script>window.history.back();</script>";
         exit;
     } else {
-        // echo "Gagal menghapus komentar atau Anda tidak memiliki izin untuk menghapus komentar ini.";
         echo "<script>alert('Gagal menghapus komentar atau Anda tidak memiliki izin untuk menghapus komentar ini.'); window.history.back();</script>";
-
     }
 
     // Tutup koneksi
+    $query->close();
     $koneksi->close();
 } else {
     // Jika request method bukan GET, atau parameter hapus tidak ada, tampilkan pesan kesalahan
-    echo "Metode request tidak valid atau parameter hapus tidak ditemukan.";
+    echo "<script>alert('Metode request tidak valid atau parameter hapus tidak ditemukan.'); window.history.back();</script>";
 }
 ?>

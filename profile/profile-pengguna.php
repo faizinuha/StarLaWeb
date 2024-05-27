@@ -34,7 +34,10 @@ if (isset($_GET['username'])) {
                     <div class="col-md-8 offset-md-2">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                                <a href="/blog/komen.php">
+                                    <h5 class="text-lg-end">Back</h5>
+                                </a>
+                            <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="img-thumbnail rounded w-50%" style="width: 100px;">
                                 <h5 class="my-3"><?php echo htmlspecialchars($name); ?></h5>
                                 <p class="text-muted mb-1"><?php echo htmlspecialchars($username); ?></p>
                             </div>
@@ -71,6 +74,7 @@ if (isset($_GET['username'])) {
                         </div>
                         <div class="card mb-4">
                             <div class="card-body p-0">
+                                <h3 class="card mb-2 text-bg-danger text-center" >Media Sosial</h3>
                                 <ul class="list-group list-group-flush rounded-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                         <i class="fa fa-instagram" style="color: #C13584;"></i>
