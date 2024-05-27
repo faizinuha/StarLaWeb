@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <style>
         body {
             background-color: #f8f9fa;
@@ -63,11 +61,8 @@
                     <div class="card-header text-center">
                         <h2 class="mb-0">Login</h2>
                     </div>
-                    <!-- <div class="card-body text-center">
-                        <a href="/auth/github" class="btn btn-dark">Login with GitHub</a>
-                    </div> -->
                     <div class="card-body">
-                        <form id="loginForm" action="proses_login.php" method="post" onclick>
+                        <form id="loginForm" action="proses_login.php" method="post">
                             <div class="mb-3">
                                 <label for="emailOrUsername" class="form-label">Username or Email</label>
                                 <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter your Email!" required>
@@ -78,7 +73,7 @@
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
                                 <div class="invalid-feedback">Please enter your password.</div>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100" onclick="sweetalert()">Login</button>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <div class="mt-3 text-center">
                             <a href="register.php" class="btn-link">Register</a>
@@ -90,18 +85,26 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function sweetalert() {
-           Toast.fire({
-            icon: "success",
-            title: "Signed in successfully"
-        }); 
+        // Function to show SweetAlert if there's a login error
+        function showLoginErrorAlert() {
+            let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';
+            if (error === 'true') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '<?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?>',
+                    footer: '<a href="forgot_reset_password.php">Forgot your password?</a>'
+                });
             }
+        }
+
+        // Show SweetAlert when page loads
+        window.onload = function() {
+            showLoginErrorAlert();
+        };
     </script>
-    <!-- Toast.fire({
-            icon: "success",
-            title: "Signed in successfully"
-        }); -->
 </body>
 
 </html>

@@ -34,19 +34,19 @@ if ($result && $result->num_rows > 0) {
         header("Location: ../index.php");
         exit(); 
     } else {
-      
         $_SESSION['login_error'] = "Invalid username or password";
-        // Redirect to login page
-        header("Location: login.php");
+        // Redirect to login page with error message
+        header("Location: login.php?login_error=true");
         exit(); 
     }
 } else {
     // User not found
     $_SESSION['login_error'] = "User not found";
     // Redirect to register page
-    header("Location: register.php");
+    header("Location: register.php?login_error=true");
     exit(); // Exit to prevent further execution
-}
+} 
 
 $stmt->close();
 mysqli_close($conn);
+?>

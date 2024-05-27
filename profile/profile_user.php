@@ -30,10 +30,13 @@ if (mysqli_num_rows($result) > 0) {
   echo "Informasi pengguna tidak ditemukan.";
 }
 ?>
+<!-- bosstraps -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- sweealert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <section style="background-color: #eee;">
   <div class="container py-5">
     <div class="row">
@@ -42,11 +45,53 @@ if (mysqli_num_rows($result) > 0) {
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
             <li class="breadcrumb-item"><a href="profile_user.php">User</a></li>
+            <li class="breadcrumb-item"><a href="../in/logout.php" id="logout" >Log Out</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $name ?></li>
           </ol>
         </nav>
       </div>
     </div>
+    <script>
+  // Dapatkan elemen tautan logout
+  var logoutLink = document.getElementById('logout');
+
+  // Tambahkan event listener klik ke tautan logout
+  logoutLink.addEventListener('click', function(event) {
+    // Mencegah tindakan default dari tautan
+    event.preventDefault();
+
+    // Panggil fungsi logout
+    logout();
+  });
+
+  // Tentukan fungsi logout
+  function logout() {
+    // Gunakan SweetAlert untuk mengonfirmasi logout
+    Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: "Anda tidak akan dapat mengembalikannya!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, keluar!"
+    }).then((result) => {
+      // Jika pengguna mengonfirmasi, tampilkan pesan berhasil (Anda bisa melakukan redirect di sini)
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Berhasil Keluar!",
+          text: "Anda telah keluar.",
+          icon: "success"
+        });
+
+        // Arahkan pengguna ke halaman logout setelah beberapa waktu
+        setTimeout(function() {
+          window.location.href = "../in/logout.php";
+        }, 2000); // 2000 milidetik = 2 detik
+      }
+    });
+  }
+</script>
 
     <div class="row">
       <div class="col-lg-4">

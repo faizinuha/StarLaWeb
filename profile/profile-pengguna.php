@@ -30,18 +30,23 @@ if (isset($_GET['username'])) {
         </head>
         <body>
             <div class="container py-5">
+                
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
                         <div class="card mb-4">
+                        <button onclick="back()" >back</button>
                             <div class="card-body text-center">
-                                <a href="/blog/komen.php">
-                                    <h5 class="text-lg-end">Back</h5>
-                                </a>
+                            
                             <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="img-thumbnail rounded w-50%" style="width: 100px;">
                                 <h5 class="my-3"><?php echo htmlspecialchars($name); ?></h5>
                                 <p class="text-muted mb-1"><?php echo htmlspecialchars($username); ?></p>
                             </div>
                         </div>
+                        <script>
+                            function back() {
+                                window.history.back();
+                            }
+                        </script>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="row">
