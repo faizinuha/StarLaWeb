@@ -165,7 +165,9 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
     </div>
-
+        <?php 
+          include('../footer/footer.php');
+        ?>
     <!-- Bootstrap JS (Optional) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
