@@ -29,6 +29,9 @@ if (mysqli_num_rows($result) > 0) {
 } else {
   echo "Informasi pengguna tidak ditemukan.";
 }
+
+// Tutup koneksi ke database
+
 ?>
 <!-- bosstraps -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -45,53 +48,53 @@ if (mysqli_num_rows($result) > 0) {
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
             <li class="breadcrumb-item"><a href="profile_user.php">User</a></li>
-            <li class="breadcrumb-item"><a href="../in/logout.php" id="logout" >Log Out</a></li>
+            <li class="breadcrumb-item"><a href="../in/logout.php" id="logout">Log Out</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?php echo $name ?></li>
           </ol>
         </nav>
       </div>
     </div>
     <script>
-  // Dapatkan elemen tautan logout
-  var logoutLink = document.getElementById('logout');
+      // Dapatkan elemen tautan logout
+      var logoutLink = document.getElementById('logout');
 
-  // Tambahkan event listener klik ke tautan logout
-  logoutLink.addEventListener('click', function(event) {
-    // Mencegah tindakan default dari tautan
-    event.preventDefault();
+      // Tambahkan event listener klik ke tautan logout
+      logoutLink.addEventListener('click', function(event) {
+        // Mencegah tindakan default dari tautan
+        event.preventDefault();
 
-    // Panggil fungsi logout
-    logout();
-  });
+        // Panggil fungsi logout
+        logout();
+      });
 
-  // Tentukan fungsi logout
-  function logout() {
-    // Gunakan SweetAlert untuk mengonfirmasi logout
-    Swal.fire({
-      title: "Apakah Anda yakin?",
-      text: "Anda tidak akan dapat mengembalikannya!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, keluar!"
-    }).then((result) => {
-      // Jika pengguna mengonfirmasi, tampilkan pesan berhasil (Anda bisa melakukan redirect di sini)
-      if (result.isConfirmed) {
+      // Tentukan fungsi logout
+      function logout() {
+        // Gunakan SweetAlert untuk mengonfirmasi logout
         Swal.fire({
-          title: "Berhasil Keluar!",
-          text: "Anda telah keluar.",
-          icon: "success"
-        });
+          title: "Apakah Anda yakin?",
+          text: "Anda tidak akan dapat mengembalikannya!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ya, keluar!"
+        }).then((result) => {
+          // Jika pengguna mengonfirmasi, tampilkan pesan berhasil (Anda bisa melakukan redirect di sini)
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Berhasil Keluar!",
+              text: "Anda telah keluar.",
+              icon: "success"
+            });
 
-        // Arahkan pengguna ke halaman logout setelah beberapa waktu
-        setTimeout(function() {
-          window.location.href = "../in/logout.php";
-        }, 2000); // 2000 milidetik = 2 detik
+            // Arahkan pengguna ke halaman logout setelah beberapa waktu
+            setTimeout(function() {
+              window.location.href = "../in/logout.php";
+            }, 2000); // 2000 milidetik = 2 detik
+          }
+        });
       }
-    });
-  }
-</script>
+    </script>
 
     <div class="row">
       <div class="col-lg-4">
@@ -190,20 +193,10 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
               </div>
             </div>
-            <!-- <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Status </span>
-                  </p>
-                  <div class="card">
-                    <p class="m-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis unde libero
-                      assumenda totam et nulla dolorum omnis deleniti rem! Illo?</p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
           </div>
         </div>
+
       </div>
     </div>
 </section>
