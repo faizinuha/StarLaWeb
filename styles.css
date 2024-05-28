@@ -1,0 +1,62 @@
+body, html {
+  height: 100%;
+}
+
+.content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+footer {
+  background-color: #8e44ad;
+  color: #ff99cc;
+  padding: 1rem;
+}
+
+.social-links a {
+  color: #ff99cc;
+  margin: 0 0.5rem;
+}
+
+.social-links a:hover {
+  color: #ff66b2;
+}
+
+.bg-pink-900 {
+  background-color: #8e44ad;
+}
+
+.text-pink-300 {
+  color: #ff99cc;
+}
+
+.text-pink-500 {
+  color: #ff66b2;
+}
+
+.hover\:text-pink-500:hover {
+  color: #ff66b2;
+}
+
+.scroll-to-top {
+  border-radius: 50%;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 576px) {
+  .scroll-to-top {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
