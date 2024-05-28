@@ -1,62 +1,25 @@
 body, html {
-  height: 100%;
+  height: 100%; /* Memastikan elemen body dan html mengisi tinggi 100% dari viewport */
 }
 
 .content {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+  min-height: 100%; /* Memberi elemen .content tinggi minimal 100% dari viewport */
+  display: flex; /* Menggunakan flexbox untuk mengatur tata letak */
+  flex-direction: column; /* Mengatur tata letak .content menjadi kolom */
 }
 
 .main {
-  flex: 1;
+  flex: 1; /* Memberi elemen .main fleksibilitas sehingga mengisi ruang yang tersedia */
 }
-
-footer {
-  background-color: #8e44ad;
-  color: #ff99cc;
-  padding: 1rem;
-}
-
-.social-links a {
-  color: #ff99cc;
-  margin: 0 0.5rem;
-}
-
-.social-links a:hover {
-  color: #ff66b2;
-}
-
-.bg-pink-900 {
-  background-color: #8e44ad;
-}
-
-.text-pink-300 {
-  color: #ff99cc;
-}
-
-.text-pink-500 {
-  color: #ff66b2;
-}
-
-.hover\:text-pink-500:hover {
-  color: #ff66b2;
-}
-
-.scroll-to-top {
-  border-radius: 50%;
-  font-size: 24px;
-  width: 50px;
-  height: 50px;
+.button-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* Menempatkan elemen-elemen pada ujung kiri dan kanan */
 }
 
-@media (max-width: 576px) {
-  .scroll-to-top {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
+.button-container a:first-child {
+  margin-right: 10px; /* Atur jarak antara tombol pertama dan kedua */
+}
+
+.button-container a:last-child {
+  margin-left: 10px; /* Atur jarak antara tombol kedua dan pertama */
 }
