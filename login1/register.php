@@ -1,7 +1,4 @@
-<?php
-session_start();
-$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : array();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,17 +27,17 @@ $form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : array();
           <div class="row g-3">
             <div class="col-md-6">
               <label for="nama" class="form-label">Nama:</label>
-              <input type="text" class="form-control" name="nama" required placeholder="Masukkan Nama" value="<?php echo isset($form_data['nama']) ? htmlspecialchars($form_data['nama']) : ''; ?>">
+              <input type="text" class="form-control" name="nama" required placeholder="Masukkan Nama" >
               <div class="error-feedback">Masukkan Nama.</div>
             </div>
             <div class="col-md-6">
               <label for="email" class="form-label">Email:</label>
-              <input type="email" class="form-control" name="email" required placeholder="Masukkan Email" value="<?php echo isset($form_data['email']) ? htmlspecialchars($form_data['email']) : ''; ?>">
+              <input type="email" class="form-control" name="email" required placeholder="Masukkan Email">
               <div class="error-feedback">Masukkan Email yang valid.</div>
             </div>
             <div class="col-md-6">
               <label for="username" class="form-label">Username:</label>
-              <input type="text" class="form-control" name="username" required placeholder="Masukkan Username" value="<?php echo isset($form_data['username']) ? htmlspecialchars($form_data['username']) : ''; ?>">
+              <input type="text" class="form-control" name="username" required placeholder="Masukkan Username"  >
               <div class="error-feedback">Masukkan Username.</div>
             </div>
             <div class="col-md-6">

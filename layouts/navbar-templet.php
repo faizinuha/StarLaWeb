@@ -13,6 +13,21 @@ $koneksi = mysqli_connect($server, $username, $password, $database);
 if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $query = "SELECT name FROM users WHERE username = '$username'";
+    $result = mysqli_query($koneksi, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+    } else {
+        $name = "Guest";
+    }
+} else {
+    $name = "Guest";
+}
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +117,9 @@ if (!$koneksi) {
                         <?php } ?>
                         <li class="nav-item">
                             <a href="https://discord.gg/rvaNTU63s3" class="btn btn-discord "><i class="bi bi-discord"></i> Join Discord</a>
+                        </li>
+                        <li class="nav-item">
+                            <h1 class="nav-link">Welcome:<?php echo $name ?></h1>
                         </li>
                     </ul>
                 </div>
