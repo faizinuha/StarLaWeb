@@ -1,0 +1,110 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #95a5a6;
+  --background-color: rgba(255, 255, 255, 0.7);
+  --button-hover-color: #2980b9;
+  --button-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  --gradient-bg: linear-gradient(135deg, #81c784, #64b5f6);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: var(--gradient-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.card {
+  max-width: 500px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: var(--button-shadow);
+  padding: 20px;
+  margin: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--button-hover-color);
+  border-color: var(--button-hover-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--button-hover-color);
+  border-color: var(--button-hover-color);
+}
+
+.spinner {
+  margin: 20px auto;
+}
+
+.error-feedback {
+  color: #dc3545;
+  font-size: 0.8rem;
+  display: none;
+}
+
+.was-validated .error-feedback {
+  display: block;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.regi {
+  font-size: 20px;
+  font-family: "Roboto", sans-serif;
+  color: blue;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (min-width: 700px) {
+  .container {
+    flex-direction: row;
+  }
+  .regi {
+    text-align: left;
+  }
+
+  
+}
