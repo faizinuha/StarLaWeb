@@ -126,11 +126,11 @@ mysqli_close($koneksi);
             <input type="text" class="form-control" id="name" name="name"
               value="<?php echo isset($name) ? $name : ''; ?>">
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" name="email"
               value="<?php echo isset($email) ? $email : ''; ?>">
-          </div>
+          </div> -->
           <div class="col-md-4">
             <label for="instagram" class="form-label">Instagram:</label>
             <input type="text" class="form-control" id="instagram" name="instagram"

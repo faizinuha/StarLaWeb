@@ -39,7 +39,7 @@ if (isset($_SESSION['username'])) {
     <title>Navbar Design</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- icons -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -75,63 +75,52 @@ if (isset($_SESSION['username'])) {
         .btn-discord:hover {
             background-color: #4752C4;
         }
-
-      
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
-
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Bloger</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-
-                        <?php
-                        if (isset($_SESSION['username'])) { ?>
-                            <li class="nav-item">
-                                <a href="in/logout.php" class="nav-link">Log Out</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="blogs/upload.php" class="nav-link">Upload</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="profile/profile_user.php">Profile</a>
-                            </li>
-
-                        <?php
-
-                        } else { ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="login1/login.php">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="login1/register.php">Registrasi</a>
-                            </li>
-                        <?php } ?>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Bloger</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
-                            <a href="https://discord.gg/rvaNTU63s3" class="btn btn-discord "><i class="bi bi-discord"></i> Join Discord</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> <?php echo $name; ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
+                                <a href="blogs/upload.php" class="nav-link"><i class="bi bi-plus-circle"></i> Upload</a>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="in/logout.php"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
+                            </ul>
+                        </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login1/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <h1 class="nav-link">Welcome:<?php echo $name ?></h1>
+                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a>
                         </li>
-                    </ul>
-                </div>
+                    <?php } ?>
+                    <li class="nav-item">
+                        <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i class="bi bi-discord"></i> Join Discord</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <!-- End Navbar -->
-
-        <!-- Main content -->
-        <div class="container">
-            <!-- Content here -->
         </div>
-    </div>
+    </nav>
+    <!-- End Navbar -->
 
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

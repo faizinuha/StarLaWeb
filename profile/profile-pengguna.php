@@ -50,7 +50,7 @@ if (isset($_GET['username'])) {
                         <script>
                             function back() {
                                 window.history.back();
-                                logout();
+                              
                             }
 
                             function logout() {
