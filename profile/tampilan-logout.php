@@ -40,10 +40,12 @@ $koneksi->close();
         <h3 class="text-center mb-4">Other Accounts</h3>
         <div class="row">
             <?php foreach ($users as $user): ?>
-                <div class="col-md-4">
-                    <div class="card mb-4">
+                <div class="col-md-5">
+                    <div class="card mb-5">
                     <a href="../login1/password.php?id=<?php echo $user['id']; ?>">
-                            <img src="<?php echo $user['profile_image_path']; ?>" alt="avatar" class="card-img-top rounded-circle mx-auto d-block" style="width: 150px; height: 150px;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s
+                            <?php echo $user['profile_image_path']; ?>" alt="avatar" class="card-img-top mx-auto  d-block" 
+                            style="width: 160px; height: 160px;">
                             <div class="card-body text-center">
                                 <p class="card-text font-weight-bold"><?php echo htmlspecialchars($user['name']); ?></p>
                             </div>

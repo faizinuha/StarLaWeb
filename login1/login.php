@@ -9,46 +9,62 @@
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <style>
      body {
-          background-color: #f8f9fa;
+          background-color: #e9ecef;
      }
 
      .card {
           border: none;
-          border-radius: 10px;
-          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+          border-radius: 15px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
      }
 
      .card-header {
-          background-color: #007bff;
-          border-radius: 10px 10px 0 0;
+          background-color: #17a2b8;
+          border-radius: 15px 15px 0 0;
           color: white;
+          text-align: center;
      }
 
      .card-body {
-          padding: 30px;
+          padding: 40px;
      }
 
      .form-label {
           font-weight: bold;
      }
 
+     .form-control {
+          border-radius: 8px;
+     }
+
      .btn-primary {
-          background-color: #007bff;
+          background-color: #17a2b8;
           border: none;
+          border-radius: 8px;
           transition: all 0.3s ease;
      }
 
      .btn-primary:hover {
-          background-color: #0056b3;
+          background-color: #138496;
      }
 
      .btn-link {
-          color: #007bff;
+          color: #17a2b8;
           text-decoration: none;
      }
 
      .btn-link:hover {
           text-decoration: underline;
+     }
+
+     @media (max-width: 767px) {
+          .card {
+               margin: 0 10px;
+          }
+
+          .card-body {
+               padding: 20px;
+          }
      }
      </style>
 </head>
@@ -58,15 +74,15 @@
           <div class="row justify-content-center">
                <div class="col-md-6">
                     <div class="card">
-                         <div class="card-header text-center">
+                         <div class="card-header">
                               <h2 class="mb-0">Login</h2>
                          </div>
                          <div class="card-body">
-                              <form id="loginForm" action="proses_login.php" method="post">
+                              <form id="loginForm" action="proses_login.php" method="post" onsubmit="return validateForm()">
                                    <div class="mb-3">
                                         <label for="emailOrUsername" class="form-label">Username or Email</label>
                                         <input type="text" class="form-control" name="emailOrUsername"
-                                             id="emailOrUsername" placeholder="Enter your Email!" required>
+                                             id="emailOrUsername" placeholder="Enter your Email or Username" required>
                                         <div class="invalid-feedback">Please enter your email or username.</div>
                                    </div>
                                    <div class="mb-3">
@@ -89,6 +105,22 @@
      </div>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script>
+     function validateForm() {
+          const emailOrUsername = document.getElementById('emailOrUsername').value;
+          const password = document.getElementById('password').value;
+
+          if (emailOrUsername === '' || password === '') {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill in both the email/username and password fields.',
+               });
+               return false;
+          }
+
+          return true;
+     }
+
      // Function to show SweetAlert if there's a login error
      function showLoginErrorAlert() {
           let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';

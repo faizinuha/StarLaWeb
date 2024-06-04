@@ -17,7 +17,8 @@ if (isset($_GET['username'])) {
         $instagram = $row['instagram'];
         $Twitter = $row['Twitter'];
         $about_me = $row['about_me'];
-        $profile_image_path = !empty($row['profile_image_path']) ? $row['profile_image_path'] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s";
+        $profile_image_path = !empty($row['profile_image_path']) ? $row['profile_image_path'] : 
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s";
 ?>
 
         <!DOCTYPE html>
