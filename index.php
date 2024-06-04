@@ -61,7 +61,7 @@
                               <div class="button-container">
                                    <a href="blogs/komen.php?post_id=<?php echo $row['id']; ?>"
                                         class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                   <a href="download.php?gambar=<?php echo $row['image']; ?>" class="btn btn-primary"><i
+                                   <a href="in/download.php?gambar=<?php echo $row['image']; ?>" class="btn btn-primary"><i
                                              class="bi bi-download"></i></a>
                               </div>
 
