@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data yang dikirimkan dari formulir
     $name = $_POST['name'];
-    // $email = $_POST['email'];
+    $email = $_POST['email'];
     $TikTok = $_POST['TikTok'];
     $instagram = $_POST['instagram'];
     $Twitter = $_POST['Twitter'];
@@ -126,11 +126,11 @@ mysqli_close($koneksi);
             <input type="text" class="form-control" id="name" name="name"
               value="<?php echo isset($name) ? $name : ''; ?>">
           </div>
-          <!-- <div class="col-md-4">
+          <div class="col-md-4">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" name="email"
               value="<?php echo isset($email) ? $email : ''; ?>">
-          </div> -->
+          </div>
           <div class="col-md-4">
             <label for="instagram" class="form-label">Instagram:</label>
             <input type="text" class="form-control" id="instagram" name="instagram"
@@ -162,9 +162,9 @@ mysqli_close($koneksi);
 
   <script>
   function cancelEdit() {
-    if (confirm("Apakah Anda yakin ingin membatalkan pengeditan profil?")) {
-      window.location.href = "profile_user.php";
-    }
+  //   if (confirm("Apakah Anda yakin ingin membatalkan pengeditan profil?")) {
+  //   }
+  window.location.href = "profile_user.php";
   }
   </script>
 </body>

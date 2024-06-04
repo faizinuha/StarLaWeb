@@ -1,4 +1,4 @@
-<?php include('layouts/navbar-templet.php'); ?>
+<?php include('../layouts/navbar-templet.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +82,7 @@
                </div>
           </div>
 
-          <?php include('footer/footer.php'); ?>
+          
      </div>
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
