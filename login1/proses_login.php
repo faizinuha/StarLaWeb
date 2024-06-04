@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 // Database connection
@@ -32,12 +32,12 @@ if ($result && $result->num_rows > 0) {
         $_SESSION['user_name'] = $row['name'];
         // Redirect to dashboard or home page
         header("Location: ../index.php");
-        exit(); 
+        exit();
     } else {
         $_SESSION['login_error'] = "Invalid username or password";
         // Redirect to login page with error message
         header("Location: login.php?login_error=true");
-        exit(); 
+        exit();
     }
 } else {
     // User not found
@@ -45,8 +45,7 @@ if ($result && $result->num_rows > 0) {
     // Redirect to register page
     header("Location: register.php?login_error=true");
     exit(); // Exit to prevent further execution
-} 
+}
 
 $stmt->close();
 mysqli_close($conn);
-?>

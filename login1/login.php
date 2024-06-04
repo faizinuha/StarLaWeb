@@ -1,9 +1,3 @@
-<?php
-// Ambil status login dari URL
-$error = isset($_GET['login_error']) ? $_GET['login_error'] : '';
-$login_success = isset($_GET['login_success']) ? $_GET['login_success'] : '';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,8 +89,9 @@ $login_success = isset($_GET['login_success']) ? $_GET['login_success'] : '';
      </div>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script>
+     // Function to show SweetAlert if there's a login error
      function showLoginErrorAlert() {
-          let error = '<?php echo $error; ?>';
+          let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';
           if (error === 'true') {
                Swal.fire({
                     icon: 'error',
@@ -107,24 +102,11 @@ $login_success = isset($_GET['login_success']) ? $_GET['login_success'] : '';
           }
      }
 
-     function showLoginSuccessAlert() {
-          let loginSuccess = '<?php echo $login_success; ?>';
-          if (loginSuccess === 'true') {
-               Swal.fire({
-                    title: "Good job!",
-                    text: "You clicked the button!",
-                    icon: "success"
-               });
-          }
-     }
-
      // Show SweetAlert when page loads
      window.onload = function() {
           showLoginErrorAlert();
-          showLoginSuccessAlert();
      };
      </script>
-
 </body>
 
 </html>
