@@ -21,7 +21,7 @@
 
      .post-content {
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+      
           -webkit-box-orient: vertical;
           overflow: hidden;
      }
@@ -30,6 +30,7 @@
 
 <body>
      <div class="container mt-5">
+     <h1 class="text-center d-block">Lah.com</h1><hr>
           <div class="row">
                <?php
                     // Koneksi ke database
@@ -50,8 +51,9 @@
                     ?>
                <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
+                      
                          <div class="position-relative">
-                              <img src="blogs/uploads/<?php echo $row['image']; ?>" class="card-img-top"
+                              <img src="blogs/uploads/<?php echo $row['image']; ?>" class="card-img-top "
                                    alt="<?php echo $row['title']; ?>">
                               <div class="overlay"></div> <!-- overlay untuk efek bayangan -->
                          </div>
@@ -89,7 +91,7 @@
                ?>
           </div>
      </div>
-     <?php include('footer/footer.php'); ?>
+     <!-- <?php include('footer/footer.php'); ?> -->
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous">

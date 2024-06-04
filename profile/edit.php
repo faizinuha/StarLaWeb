@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data yang dikirimkan dari formulir
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    // $email = $_POST['email'];
     $TikTok = $_POST['TikTok'];
     $instagram = $_POST['instagram'];
     $Twitter = $_POST['Twitter'];

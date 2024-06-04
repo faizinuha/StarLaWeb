@@ -81,7 +81,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
      <!-- Navbar -->
-     <nav class="navbar navbar-expand-lg">
+     <nav class="navbar navbar-expand-lg sticky-top ">
           <div class="container-fluid">
                <a class="navbar-brand" href="#">Bloger</a>
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -102,7 +102,7 @@ if (isset($_SESSION['username'])) {
                               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                    <li><a class="dropdown-item" href="profile/profile_user.php"><i
                                                   class="bi bi-person"></i> Your Profile</a></li>
-                                   <a href="blogs/upload.php" class="nav-link"><i class="bi bi-plus-circle"></i>
+                                   <a href="blogs/upload.php" class="nav-link m-2"><i class="bi bi-plus-circle"></i>
                                         Upload</a>
 
                                    <li>
@@ -123,7 +123,7 @@ if (isset($_SESSION['username'])) {
                          </li>
                          <?php } ?>
                          <li class="nav-item">
-                              <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i
+                              <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary hover"><i
                                         class="bi bi-discord"></i> Join Discord</a>
                          </li>
                     </ul>
@@ -131,7 +131,19 @@ if (isset($_SESSION['username'])) {
           </div>
      </nav>
      <!-- End Navbar -->
-
+                              <style>
+                                   .hover{
+                                        border-radius: 50px;
+                                   }
+                                   .hover:hover{
+                                        border-radius: 20px;
+                                        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+                                        transition: 0.5s;
+                                        background-color: rgba(0, 0, 0, 0.1);
+                                        color: white;
+                                       
+                                   }
+                              </style>
      <!-- Bootstrap JS (Optional) -->
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
           integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
