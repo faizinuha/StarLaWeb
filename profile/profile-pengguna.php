@@ -12,108 +12,81 @@ if (isset($_GET['username'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $name = $row['name'];
-        $email = $row['email'];
+        // Hapus bagian email
         $TikTok = $row['TikTok'];
         $instagram = $row['instagram'];
         $Twitter = $row['Twitter'];
         $about_me = $row['about_me'];
-        $profile_image_path = !empty($row['profile_image_path']) ? $row['profile_image_path'] : 
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s";
+        $profile_image_path = !empty($row['profile_image_path']) ? $row['profile_image_path'] :
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s";
 ?>
 
-        <!DOCTYPE html>
-        <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-            <title>Profil Pengguna</title>
-        </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Pengguna</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
 
-        <body>
-            <div class="container py-5">
-
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="card mb-4">
-                            <button onclick="back()"><i class="bi bi-arrow-90deg-left"></i></button>
-                            <button onclick="logout()"><i class="bi bi-pencil-square"></i></button>
-                            <div class="card-body text-center">
-
-                                <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="img-thumbnail rounded w-50%" style="width: 100px;">
-                                <h5 class="my-3"><?php echo htmlspecialchars($name); ?></h5>
-                                <p class="text-muted mb-1"><?php echo htmlspecialchars($username); ?></p>
-                            </div>
-
-                        </div>
-                        <script>
-                            function back() {
-                                window.history.back();
-                              
-                            }
-
-                            function logout() {
-                                // Redirect ke halaman upload.php saat logout
-                                window.location.href = 'profile_user.php';
-                            }
-                        </script>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Nama Lengkap</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0"><?php echo htmlspecialchars($name); ?></p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Email</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0"><?php echo htmlspecialchars($email); ?></p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Tentang Saya</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0"><?php echo htmlspecialchars($about_me); ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body p-0">
-                                <h3 class="card mb-2 text-bg-danger text-center">Media Sosial</h3>
-                                <ul class="list-group list-group-flush rounded-3">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fa fa-instagram" style="color: #C13584;"></i>
-                                        <p class="mb-0"><a href="<?php echo htmlspecialchars($instagram); ?>" class="text-primary" target="_blank"><?php echo htmlspecialchars($instagram); ?></a></p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fa fa-tiktok" style="color: #000000;"></i>
-                                        <p class="mb-0"><a href="<?php echo htmlspecialchars($TikTok); ?>" class="text-primary" target="_blank"><?php echo htmlspecialchars($TikTok); ?></a></p>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                        <i class="fa fa-twitter" style="color: #1DA1F2;"></i>
-                                        <p class="mb-0"><a href="<?php echo htmlspecialchars($Twitter); ?>" class="text-primary" target="_blank"><?php echo htmlspecialchars($Twitter); ?></a></p>
-                                    </li>
-                                </ul>
-                            </div>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body text-center">
+                        <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="rounded-circle mb-3" style="width: 150px;">
+                        <h5 class="card-title"><?php echo htmlspecialchars($name); ?></h5>
+                        <p class="text-muted">@<?php echo htmlspecialchars($username); ?></p>
+                        <div class="d-flex justify-content-center mb-3">
+                            <button onclick="back()" class="btn btn-secondary me-2"><i class="bi bi-arrow-left"></i> Back</button>
+                            <button onclick="logout()" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</button>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Nama Lengkap</h6>
+                        <p class="card-text"><?php echo htmlspecialchars($name); ?></p>
+                        <h6 class="card-subtitle mb-2 text-muted">Tentang Saya</h6>
+                        <p class="card-text"><?php echo htmlspecialchars($about_me); ?></p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Media Sosial</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="bi bi-instagram text-danger me-2"></i>
+                                <a href="<?php echo htmlspecialchars($instagram); ?>" class="text-decoration-none"><?php echo htmlspecialchars($instagram); ?></a>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="bi bi-tiktok text-dark me-2"></i>
+                                <a href="<?php echo htmlspecialchars($TikTok); ?>" class="text-decoration-none"><?php echo htmlspecialchars($TikTok); ?></a>
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="bi bi-twitter text-info me-2"></i>
+                                <a href="<?php echo htmlspecialchars($Twitter); ?>" class="text-decoration-none"><?php echo htmlspecialchars($Twitter); ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                   
                 </div>
             </div>
-        </body>
+        </div>
+    </div>
 
-        </html>
+    <script>
+        function back() {
+            window.history.back();
+        }
+
+        function logout() {
+            window.location.href = 'profile_user.php';
+        }
+    </script>
+</body>
+
+</html>
 <?php
     } else {
         echo "Informasi pengguna tidak ditemukan.";
