@@ -20,7 +20,14 @@
      <div class="content">
           <div id="alert" onclick="valida()"></div>
           <div class="container main">
-               <!-- <h1 class="text-center">Selamat Datang di Blog Kami</h1> -->
+               <?php
+              
+               if (isset($_SESSION['message'])) {
+                    echo '<div class="alert alert-info" role="alert" id="time">' . $_SESSION['message'] . '</div>';
+                    
+                    unset($_SESSION['message']);
+               }
+               ?>
                <hr>
                <div class="row">
                     <?php
@@ -33,7 +40,6 @@
                     }
 
                     // Memeriksa apakah ada pengguna yang login
-                  
                     $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
                     // Query untuk mengambil data posting
