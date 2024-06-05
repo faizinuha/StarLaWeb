@@ -74,7 +74,8 @@
                                 <div class="card-body mb-4">
                                     <h2 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h2>
                                     <p class="card-text post-content" style="font:200;">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
-                                </div>
+                                    <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
+                                   </div>
                                 <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                 <div class="overlay">
                                     <?php if ($current_user == $row['uploaded_by']) { ?>

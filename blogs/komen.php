@@ -115,6 +115,7 @@ if (isset($_SESSION['user_id'])) {
             background-color: #f0f2f5;
             padding: 10px;
             margin-top: 5px;
+            flex-grow: 1;
         }
 
         .comment-actions {
@@ -139,6 +140,35 @@ if (isset($_SESSION['user_id'])) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
+
+        .comment-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .comment-row img {
+            margin-right: 10px;
+        }
+
+        .comment-content a {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .comment-content p {
+            margin-bottom: 0.25rem;
+        }
+
+        .comment-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .comment-actions .btn {
+            margin-left: 5px;
+        }
     </style>
 </head>
 
@@ -156,8 +186,6 @@ if (isset($_SESSION['user_id'])) {
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                     <p><strong>Tags:</strong> <?php echo htmlspecialchars($post['Tags']); ?></p>
-                    <p><small class="text-muted">Posted by <?php echo htmlspecialchars($post['uploaded_by']); ?>
-                     on <?php echo htmlspecialchars($post['created_at']); ?></small></p>
                 </div>
 
                 <!-- Form untuk menambah komentar -->
@@ -176,20 +204,18 @@ if (isset($_SESSION['user_id'])) {
                 <div class="scroll-container">
                     <?php if ($result->num_rows > 0) : ?>
                         <?php while ($row = $result->fetch_assoc()) : ?>
-                            <div class="card mb-3 comment-card">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <a href="../profile/profile-pengguna.php?username=<?php echo htmlspecialchars($row['author']); ?>">
-                                                <h6 class="card-title mb-0 btn btn-outline-primary"><?php echo htmlspecialchars($row['author']); ?></h6>
-                                            </a>
-                                            <p class="card-text mb-0">Chat: <?php echo htmlspecialchars($row['content']); ?></p>
-                                            <p class="text-muted mb-0">Date: <?php echo htmlspecialchars($row['created_at']); ?></p>
-                                        </div>
-                                        <div class="ms-auto comment-actions">
-                                            <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
+                            <div class="comment-row">
+                            
+                                <div class="comment-content">
+                                   Name: <a href="../profile/profile-pengguna.php?username=<?php echo htmlspecialchars($row['author']); ?>">
+                                   <?php echo htmlspecialchars($row['author']); ?>
+                                    
+                                </a>
+                                    <p><?php echo htmlspecialchars($row['content']); ?></p>
+                                    <p class="text-muted"><?php echo isset($row['created_at']) ? htmlspecialchars($row['created_at']) : 'N/A'; ?></p>
+                                </div>
+                                <div class="comment-actions">
+                                    <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
                         <?php endwhile; ?>
@@ -200,6 +226,10 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <?php
+    include('../footer/footer.php'); 
+?>
     <!-- Bootstrap JS (Optional) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
