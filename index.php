@@ -9,8 +9,6 @@
      <title>Document</title>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
      <link href="styles.css" rel="stylesheet">
      <style>
           .post-image {
@@ -79,17 +77,26 @@
                                              <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                         </div>
                                         <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                        <div class="overlay">
+                                        <div class="overlay position-absolute top-0 end-0 m-2 ">
                                              <?php if ($current_user == $row['uploaded_by']) { ?>
-                                                  <a href="edit_user.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                                       </svg></a>
-                                                  <a href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');"><i class="bi bi-trash"></i></a>
+                                                  <div class="dropdown">
+                                                       <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            ...
+                                                       </button>
+                                                       <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                                                            <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
+                                                       </ul>
+                                                  </div>
                                              <?php } ?>
                                         </div>
-                                   </div>
 
+
+                                        <!-- <a href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?> " class="btn btn-warning btn-sm position-absolute top-0 end-0 m-5">Edit<i class="bi bi-pencil-square"></i></a>
+                                                  <a href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');"><i class="bi bi-trash"></i></a> -->
+
+
+                                   </div>
                                    <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                                         <div>
                                              Diposting oleh: <?php echo htmlspecialchars($row['uploaded_by']); ?> pada <?php echo htmlspecialchars($row['upload_date']); ?>
