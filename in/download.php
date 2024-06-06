@@ -5,7 +5,7 @@ if (isset($_GET['gambar'])) {
     $nama_file = $_GET['gambar'];
 
     // Lokasi folder uploads
-    $lokasi_folder = 'blogs/uploads/';
+    $lokasi_folder = '../blogs/uploads/';
 
     // Tentukan path lengkap file gambar
     $path_gambar = $lokasi_folder . $nama_file;

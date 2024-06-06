@@ -1,23 +1,23 @@
 <?php
 session_start();
 
-// Database connection
+// Koneksi database
 $host = "localhost";
 $user = "root";
 $password = "";
 $database = "users";
 $conn = mysqli_connect($host, $user, $password, $database);
 
-// Check connection
+// Cek koneksi
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("Koneksi gagal: " . mysqli_connect_error());
 }
 
-// Retrieve data from login form
+// Mengambil data dari form login
 $emailOrUsername = $_POST['emailOrUsername'];
 $password = $_POST['password'];
 
-// Fetch user data from the database based on the provided email or username
+// Persiapan dan eksekusi statement untuk mengambil data pengguna berdasarkan email atau username
 $stmt = $conn->prepare("SELECT id, name, username, password FROM users WHERE email=? OR username=?");
 $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
 $stmt->execute();
@@ -30,21 +30,21 @@ if ($result && $result->num_rows > 0) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['user_name'] = $row['name'];
-        // Redirect to dashboard or home page
+        // Redirect ke halaman dashboard atau home
         header("Location: ../index.php");
         exit();
     } else {
-        $_SESSION['login_error'] = "Invalid username or password";
-        // Redirect to login page with error message
+        $_SESSION['login_error'] = "Username atau password salah";
+        // Redirect ke halaman login dengan pesan error
         header("Location: login.php?login_error=true");
         exit();
     }
 } else {
-    // User not found
-    $_SESSION['login_error'] = "User not found";
-    // Redirect to register page
+    // Pengguna tidak ditemukan
+    $_SESSION['login_error'] = "Pengguna tidak ditemukan";
+    // Redirect ke halaman register
     header("Location: register.php?login_error=true");
-    exit(); // Exit to prevent further execution
+    exit(); // Keluar untuk mencegah eksekusi lebih lanjut
 }
 
 $stmt->close();

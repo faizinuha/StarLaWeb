@@ -76,6 +76,9 @@ if (isset($_SESSION['username'])) {
      .btn-discord:hover {
           background-color: #4752C4;
      }
+     .cursor{
+          cursor: cell;
+     }
      </style>
 </head>
 
@@ -102,7 +105,7 @@ if (isset($_SESSION['username'])) {
                               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                    <li><a class="dropdown-item" href="profile/profile_user.php"><i
                                                   class="bi bi-person"></i> Your Profile</a></li>
-                                   <a href="blogs/upload.php" class="nav-link m-2"><i class="bi bi-plus-circle"></i>
+                                   <a href="blogs/upload.php" class="nav-link m-2 cursor"><i class="bi bi-plus-circle"></i>
                                         Upload</a>
 
                                    <li>
@@ -133,6 +136,7 @@ if (isset($_SESSION['username'])) {
      <!-- End Navbar -->
                               <style>
                                    .hover{
+                                        
                                         border-radius: 50px;
                                    }
                                    .hover:hover{

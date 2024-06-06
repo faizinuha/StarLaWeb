@@ -46,6 +46,10 @@
 
      <div class="content">
           <div id="alert" onclick="valida()"></div>
+          <div class="text-center">
+               <h1 class="text-center">Wii Lose</h1>
+          </div>
+
           <div class="container main">
                <hr>
                <div class="row">
@@ -93,9 +97,7 @@
 
 
                                         <!-- <a href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?> " class="btn btn-warning btn-sm position-absolute top-0 end-0 m-5">Edit<i class="bi bi-pencil-square"></i></a>
-                                                  <a href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');"><i class="bi bi-trash"></i></a> -->
-
-
+                                         <a href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');"><i class="bi bi-trash"></i></a> -->
                                    </div>
                                    <div class="card-footer text-muted d-flex justify-content-between align-items-center">
                                         <div>
