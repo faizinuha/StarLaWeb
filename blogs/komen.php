@@ -196,8 +196,8 @@ if (isset($_SESSION['user_id'])) {
                         <textarea class="form-control" id="comment" name="content" rows="3" required></textarea>
                     </div>
                     <div class="m-1">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Kirim</button>
-                        <a href="../index.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        <a href="../index.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a>
                     </div>
                 </form>
 

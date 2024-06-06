@@ -23,38 +23,41 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
         die("Koneksi gagal: " . $koneksi->connect_error);
     }
 
-    // Ambil parameter hapus dari URL
+    // Ambil parameter hapus dari URL dan validasi
     $hapus_id = intval($_GET['hapus']);
 
-    // Ambil informasi pengguna yang sedang login
-    $pengguna_login = $_SESSION['username'];
+    if ($hapus_id > 0) {
+        // Ambil informasi pengguna yang sedang login
+        $pengguna_login = $_SESSION['username'];
 
-    // Ambil nama pengguna yang menulis komentar yang akan dihapus
-    $query = $koneksi->prepare("SELECT author FROM comments WHERE id = ?");
-    $query->bind_param("i", $hapus_id);
-    $query->execute();
-    $query->bind_result($nama_pengguna_komentar);
-    $query->fetch();
-    $query->close();
+        // Ambil nama pengguna yang menulis komentar yang akan dihapus
+        $query = $koneksi->prepare("SELECT author FROM comments WHERE id = ?");
+        $query->bind_param("i", $hapus_id);
+        $query->execute();
+        $query->bind_result($nama_pengguna_komentar);
+        $query->fetch();
+        $query->close();
 
-    // Periksa apakah pengguna yang sedang login adalah pemilik komentar
-    if ($nama_pengguna_komentar === $pengguna_login) {
-        // Eksekusi query untuk menghapus komentar berdasarkan id
-        $query_hapus = $koneksi->prepare("DELETE FROM comments WHERE id = ?");
-        $query_hapus->bind_param("i", $hapus_id);
-        $query_hapus->execute();
+        // Periksa apakah pengguna yang sedang login adalah pemilik komentar
+        if ($nama_pengguna_komentar === $pengguna_login) {
+            // Eksekusi query untuk menghapus komentar berdasarkan id
+            $query_hapus = $koneksi->prepare("DELETE FROM comments WHERE id = ?");
+            $query_hapus->bind_param("i", $hapus_id);
+            $query_hapus->execute();
 
-        // Periksa apakah query berhasil dijalankan
-        if ($query_hapus->affected_rows > 0) {
-            echo "<script>alert('Komentar berhasil dihapus.'); window.history.back();</script>";
-            exit;
+            // Periksa apakah query berhasil dijalankan
+            if ($query_hapus->affected_rows > 0) {
+                echo "<script>alert('Komentar berhasil dihapus.'); window.history.back();</script>";
+            } else {
+                echo "<script>alert('Gagal menghapus komentar.'); window.history.back();</script>";
+            }
+
+            $query_hapus->close();
         } else {
-            echo "<script>alert('Gagal menghapus komentar.'); window.history.back();</script>";
+            echo "<script>alert('Anda tidak memiliki izin untuk menghapus komentar ini.'); window.history.back();</script>";
         }
-
-        $query_hapus->close();
     } else {
-        echo "<script>alert('Anda tidak memiliki izin untuk menghapus komentar ini.'); window.history.back();</script>";
+        echo "<script>alert('ID komentar tidak valid.'); window.history.back();</script>";
     }
 
     $koneksi->close();
