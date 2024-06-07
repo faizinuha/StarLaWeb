@@ -30,8 +30,9 @@ if ($result && $result->num_rows > 0) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['user_name'] = $row['name'];
+        $_SESSION['login_success'] = "Berhasil login";
         // Redirect ke halaman dashboard atau home
-        header("Location: ../index.php");
+        header("Location: ../index.php?login_success=true");
         exit();
     } else {
         $_SESSION['login_error'] = "Username atau password salah";
@@ -44,8 +45,9 @@ if ($result && $result->num_rows > 0) {
     $_SESSION['login_error'] = "Pengguna tidak ditemukan";
     // Redirect ke halaman register
     header("Location: register.php?login_error=true");
-    exit(); // Keluar untuk mencegah eksekusi lebih lanjut
+    exit();
 }
 
 $stmt->close();
 mysqli_close($conn);
+?>

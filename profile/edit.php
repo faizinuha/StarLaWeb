@@ -13,22 +13,21 @@ if (isset($_SESSION['user_id'])) {
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data yang dikirimkan dari formulir
     $name = $_POST['name'];
-    $email = $_POST['email'];
     $TikTok = $_POST['TikTok'];
     $instagram = $_POST['instagram'];
     $Twitter = $_POST['Twitter'];
     $about_me = $_POST['about_me'];
 
     // Validasi input
-    if (empty($name) || empty($email) || empty($TikTok) || empty($instagram) || empty($Twitter)) {
+    if (empty($name) || empty($TikTok) || empty($instagram) || empty($Twitter)) {
       echo "Semua kolom harus diisi.";
     } else {
       // Menghindari SQL Injection dengan menggunakan parameterized query
-      $query = "UPDATE users SET name=?, email=?, instagram=?, TikTok=?, Twitter=?, about_me=? WHERE id=?";
+      $query = "UPDATE users SET name=?, instagram=?, TikTok=?, Twitter=?, about_me=? WHERE id=?";
       $stmt = mysqli_prepare($koneksi, $query);
 
       // Binding parameters
-      mysqli_stmt_bind_param($stmt, "ssssssi", $name, $email, $instagram, $TikTok, $Twitter, $about_me, $user_id);
+      mysqli_stmt_bind_param($stmt, "sssssi", $name, $instagram, $TikTok, $Twitter, $about_me, $user_id);
 
       // Eksekusi statement
       if (mysqli_stmt_execute($stmt)) {
@@ -45,11 +44,11 @@ if (isset($_SESSION['user_id'])) {
     }
   } else {
     // Jika data formulir tidak dikirimkan, ambil data dari database
-    $query = "SELECT name, email, instagram, TikTok, Twitter, about_me FROM users WHERE id=?";
+    $query = "SELECT name, instagram, TikTok, Twitter, about_me FROM users WHERE id=?";
     $stmt = mysqli_prepare($koneksi, $query);
     mysqli_stmt_bind_param($stmt, "i", $user_id);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $name, $email, $instagram, $TikTok, $Twitter, $about_me);
+    mysqli_stmt_bind_result($stmt, $name, $instagram, $TikTok, $Twitter, $about_me);
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
   }
@@ -61,6 +60,7 @@ if (isset($_SESSION['user_id'])) {
 // Tutup koneksi ke database (jika tidak menggunakan koneksi persistent)
 mysqli_close($koneksi);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,11 +126,11 @@ mysqli_close($koneksi);
             <input type="text" class="form-control" id="name" name="name"
               value="<?php echo isset($name) ? $name : ''; ?>">
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" id="email" name="email"
               value="<?php echo isset($email) ? $email : ''; ?>">
-          </div>
+          </div> -->
           <div class="col-md-4">
             <label for="instagram" class="form-label">Instagram:</label>
             <input type="text" class="form-control" id="instagram" name="instagram"

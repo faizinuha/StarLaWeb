@@ -80,6 +80,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="scss/styles.scss">
 </head>
 
 <body>
@@ -104,10 +106,56 @@ $conn->close();
                 <input type="file" class="form-control" id="image" name="image">
                 <img src="blogs/uploads/<?php echo htmlspecialchars($post['image']); ?>" class="img-fluid mt-2" alt="Current Image">
             </div>
-            <button type="submit" class="btn btn-primary">Update Post</button>
+            <button type="submit" class="btn btn-primary yell">Update Post</button>
+            <a href="index.php" onclick="backer()" class="btn btn-danger ori">Kembali</a>
         </form>
     </div>
+    <style>
+        .yell{
+            position: relative;
+            top: -7px;
+        }
+        .ori{
+            position: relative;
+            top: -7px;
+        }
+        .yell:hover{
+            border-radius: 40px;
+            background-color: blue;
+            transition: 0.5s;
+        }
+        .ori:hover{
+            background-color: aliceblue;
+            border-radius: 40px;
+            transition: 0.6s;
+        }
+    </style>
+    <script>
+        function backer() {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Anda tidak akan dapat mengembalikannya!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, keluar!"
+            }).then((result) => {
+                // Jika pengguna mengonfirmasi, tampilkan pesan berhasil (Anda bisa melakukan redirect di sini)
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        text: "Anda telah keluar.",
+                        icon: "success"
+                    });
 
+                    // Arahkan pengguna ke halaman logout setelah beberapa waktu
+                    setTimeout(function() {
+                        window.location.href = "index.php";
+                    }, 2000); // 2000 milidetik = 2 detik
+                }
+            });
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
