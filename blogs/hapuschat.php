@@ -51,15 +51,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
             } else {
                 echo "<script>alert('Gagal menghapus komentar.'); window.history.back();</script>";
             }
+
+            $query_hapus->close();
         } else {
             echo "<script>alert('Anda tidak memiliki izin untuk menghapus komentar ini.'); window.history.back();</script>";
         }
-    } 
+    } else {
+        echo "<script>alert('ID komentar tidak valid.'); window.history.back();</script>";
+    }
 
+    $koneksi->close();
 } else {
     // Jika request method bukan GET, atau parameter hapus tidak ada, tampilkan pesan kesalahan
     echo "<script>alert('Metode request tidak valid atau parameter hapus tidak ditemukan.'); window.history.back();</script>";
 }
-$query_hapus->close();
-$koneksi->close();
 ?>

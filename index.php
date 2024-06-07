@@ -81,7 +81,7 @@
                                              <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                         </div>
                                         <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                        <div class="overlay position-absolute top-0 end-0 m-2 ">
+                                        <div class="overlay position-absolute top-0 end-0 m-2 btn btn-warning">
                                              <?php if ($current_user == $row['uploaded_by']) { ?>
                                                   <div class="dropdown">
                                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

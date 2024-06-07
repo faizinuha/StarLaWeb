@@ -95,13 +95,13 @@ if (isset($_SESSION['username'])) {
                <div class="collapse navbar-collapse" id="navbarNav">
 
                     <ul class="navbar-nav ms-auto">
-                         <button type="button" class=" transparan position-relative">
+                         <!-- <button type="button" class=" transparan position-relative">
                          <i class="bi bi-app-indicator"></i>
                               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                    99+
                                    <span class="visually-hidden">unread messages</span>
                               </span>
-                         </button>
+                         </button> -->
 
                          <?php if (isset($_SESSION['username'])) { ?>
                               <li class="nav-item">
@@ -118,7 +118,7 @@ if (isset($_SESSION['username'])) {
                                         <li>
                                              <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="in/logout.php"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
+                                        <li><a class="dropdown-item oke" href="in/logout.php"><i class="bi bi-box-arrow-right"  ></i> Sign out</a></li>
                                    </ul>
                               </li>
                          <?php } else { ?>
@@ -152,6 +152,9 @@ if (isset($_SESSION['username'])) {
                background-color: rgba(0, 0, 0, 0.1);
                color: white;
 
+          }
+          .oke{
+               cursor:not-allowed;
           }
      </style>
      <!-- Bootstrap JS (Optional) -->
