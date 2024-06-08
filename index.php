@@ -80,12 +80,16 @@
                                              <p class="card-text post-content" style="font:200;">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                              <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                         </div>
-                                        <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                        <div class="overlay position-absolute top-0 end-0 m-2 btn btn-warning">
+                                        <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" 
+                                        class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
+
+                                        <!-- <video src="blogs/uploads/<?php echo htmlspecialchars($row['video']); ?>" class="card-img-top post-image mt-4 m-7"></video> -->
+                              
+                                        <div class="overlay position-absolute top-0 end-0 m-2">
                                              <?php if ($current_user == $row['uploaded_by']) { ?>
                                                   <div class="dropdown">
                                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            ...
+                                                       <i class="bi bi-gear-wide"></i>
                                                        </button>
                                                        <ul class="dropdown-menu">
                                                             <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>

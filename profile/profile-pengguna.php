@@ -38,8 +38,8 @@ if (isset($_GET['username'])) {
             <div class="col-md-8">
                 <div class="card shadow-sm mb-4">
                     <div class="card-body text-center">
-                        <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="rounded-circle mb-3" style="width: 150px;">
-                        <h5 class="card-title"><?php echo htmlspecialchars($name); ?></h5>
+                        <img src="<?php echo $profile_image_path; ?>" alt="avatar" class="rounded-5 mb-3" style="width: 150px;">
+                        <h5 class="card-title">Name:<?php echo htmlspecialchars($name); ?></h5>
                         <p class="text-muted">@<?php echo htmlspecialchars($username); ?></p>
                         <div class="d-flex justify-content-center mb-3">
                             <button onclick="back()" class="btn btn-secondary me-2"><i class="bi bi-arrow-left"></i> Back</button>
