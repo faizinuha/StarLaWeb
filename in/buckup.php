@@ -89,5 +89,40 @@
           integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous">
      </script>
 </body>
+<!-- js login -->
+  <!-- <script>
+     function validateForm() {
+          const emailOrUsername = document.getElementById('emailOrUsername').value;
+          const password = document.getElementById('password').value;
 
+          if (emailOrUsername === '' || password === '') {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill in both the email/username and password fields.',
+               });
+               return false;
+          }
+
+          return true;
+     }
+
+     // Function to show SweetAlert if there's a login error
+     function showLoginErrorAlert() {
+          let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';
+          if (error === 'true') {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '<?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?>',
+                    footer: '<a href="forgot_reset_password.php">Forgot your password?</a>'
+               });
+          }
+     }
+
+     // Show SweetAlert when page loads
+     window.onload = function() {
+          showLoginErrorAlert();
+     };
+     </script> -->
 </html>
