@@ -48,6 +48,6 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
     $_SESSION['message'] = "Anda harus login untuk menghapus postingan.";
 }
 
-header("Location: ../index.php");
+header("Location: index.php");
 exit();
 ?>

@@ -10,6 +10,7 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
      <link href="styles.css" rel="stylesheet">
+
      <style>
           .post-image {
                max-width: 100%;
@@ -43,7 +44,6 @@
 </head>
 
 <body>
-
      <div class="content">
           <div id="alert" onclick="valida()"></div>
           <div class="text-center">
@@ -80,16 +80,15 @@
                                              <p class="card-text post-content" style="font:200;">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                              <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                         </div>
-                                        <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" 
-                                        class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                        <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 m-7" alt="<?php echo htmlspecialchars($row['title']); ?>">
 
                                         <!-- <video src="blogs/uploads/<?php echo htmlspecialchars($row['video']); ?>" class="card-img-top post-image mt-4 m-7"></video> -->
-                              
+
                                         <div class="overlay position-absolute top-0 end-0 m-2">
                                              <?php if ($current_user == $row['uploaded_by']) { ?>
                                                   <div class="dropdown">
                                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                       <i class="bi bi-gear-wide"></i>
+                                                            <i class="bi bi-gear-wide"></i>
                                                        </button>
                                                        <ul class="dropdown-menu">
                                                             <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
@@ -129,8 +128,9 @@
                </div>
           </div>
      </div>
-
+     
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
+   
 </body>
 
 </html>

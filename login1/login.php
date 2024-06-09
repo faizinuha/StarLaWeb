@@ -104,41 +104,41 @@
           </div>
      </div>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-     <script>
-     // function validateForm() {
-     //      const emailOrUsername = document.getElementById('emailOrUsername').value;
-     //      const password = document.getElementById('password').value;
+     <!-- <script>
+     function validateForm() {
+          const emailOrUsername = document.getElementById('emailOrUsername').value;
+          const password = document.getElementById('password').value;
 
-     //      if (emailOrUsername === '' || password === '') {
-     //           Swal.fire({
-     //                icon: 'error',
-     //                title: 'Validation Error',
-     //                text: 'Please fill in both the email/username and password fields.',
-     //           });
-     //           return false;
-     //      }
+          if (emailOrUsername === '' || password === '') {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: 'Please fill in both the email/username and password fields.',
+               });
+               return false;
+          }
 
-     //      return true;
-     // }
+          return true;
+     }
 
-     // // Function to show SweetAlert if there's a login error
-     // function showLoginErrorAlert() {
-     //      let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';
-     //      if (error === 'true') {
-     //           Swal.fire({
-     //                icon: 'error',
-     //                title: 'Oops...',
-     //                text: '<?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?>',
-     //                footer: '<a href="forgot_reset_password.php">Forgot your password?</a>'
-     //           });
-     //      }
-     // }
+     // Function to show SweetAlert if there's a login error
+     function showLoginErrorAlert() {
+          let error = '<?php echo isset($_GET['login_error']) ? $_GET['login_error'] : ''; ?>';
+          if (error === 'true') {
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '<?php echo isset($_SESSION['login_error']) ? $_SESSION['login_error'] : ''; ?>',
+                    footer: '<a href="forgot_reset_password.php">Forgot your password?</a>'
+               });
+          }
+     }
 
-     // // Show SweetAlert when page loads
-     // window.onload = function() {
-     //      showLoginErrorAlert();
-     // };
-     </script>
+     // Show SweetAlert when page loads
+     window.onload = function() {
+          showLoginErrorAlert();
+     };
+     </script> -->
 </body>
 
 </html>
