@@ -115,3 +115,18 @@ input {
   height: 100%;
   z-index: 1;
 }
+
+.btn-primary {
+  background-color: #337ab7; /* change this to your desired color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #23527c; /* change this to your desired hover color */
+}

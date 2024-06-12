@@ -29,7 +29,15 @@ const words = [
   'feeble',
   'admit',
   'drag',
-  'loving'
+  'loving',
+  'aku sayang kamu',
+  'Lovers',
+  'aku kamu',
+  'Darg',
+  'awas stres',
+  'aku tidal yai',
+  'hari ini sangat cerah ya',
+  'hari ini besok kayak apa'
 ];
 
 // Init word
@@ -39,7 +47,8 @@ let randomWord;
 let score = 0;
 
 // Init time
-let time = 10;
+let time = 60;
+
 
 // Set difficulty to value in ls or medium
 let difficulty =
@@ -92,7 +101,7 @@ function updateTime() {
 function gameOver() {
   endgameEl.innerHTML = `
     <h1>Time ran out</h1>
-    <p>Your final score is ${score}</p>
+    <p class="alert-danger">Your final score is ${score}</p>
     <button onclick="location.reload()">Reload</button>
   `;
 
@@ -115,10 +124,10 @@ text.addEventListener('input', e => {
     e.target.value = '';
 
     if (difficulty === 'hard') {
-      time += 2;
+      time += 1;
     } else if (difficulty === 'medium') {
       time += 3;
-    } else {
+    } else if(difficulty === 'easy') {
       time += 5;
     }
 

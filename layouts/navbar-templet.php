@@ -167,7 +167,8 @@ if (isset($_SESSION['username'])) {
             <div class="modal-body">
                 <h4 class="text-underline-danger text-center">Update sudah ada 2024</h4>
                 <h5>New</h5>
-                <p>1. Latihan Ngetik(sourceCodes)</p>
+                <p>1. Latihan Ngetik(sourceCodes->Profile)</p>
+                
                 <p>2. halaman Berbahaya</p>
             </div>
             <div class="modal-body">

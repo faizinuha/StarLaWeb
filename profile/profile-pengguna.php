@@ -44,15 +44,15 @@ if (isset($_GET['username'])) {
                                 <div class="d-flex justify-content-center mb-3">
                                     <button onclick="back()" class="btn btn-secondary me-2"><i class="bi bi-arrow-left"></i> Back</button>
                                     <button onclick="logout()" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Edit</button>
-                                    <!-- <div class="col-md-auto left ">
-                                        <a href="../message-player/index.php" type="button" class="btn btn-outline-danger"><i class="bi bi-chat-right-text"></i></a>
-                                    </div> -->
+                                    <div class="col-md-auto left ">
+                                        <!-- <a href="../message-player/index.php" type="button" class="btn btn-outline-danger"><i class="bi bi-chat-right-text"></i></a> -->
+                                      
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h6 class="card-subtitle mb-2 text-muted">Nama Lengkap</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($name); ?></p>
-                                <p class="card-text"><a href="../SpeedTyping/index.html">Latihan Ngetik</a></p>
                                 <h6 class="card-subtitle mb-2 text-muted">Tentang Saya</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($about_me); ?></p>
                             </div>
