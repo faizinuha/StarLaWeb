@@ -15,10 +15,12 @@
 
     <style>
         .post-image {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 10px;
             margin-bottom: 15px;
+            max-height: 300px;
+            object-fit: cover;
         }
 
         .card {
@@ -52,6 +54,11 @@
             top: 0;
             left: 0;
             z-index: -1;
+        }
+        .zoom{
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -95,13 +102,12 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="card mb-3">
                                 <div class="position-relative">
+                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image zoom" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                     <div class="card-body">
-                                        <h2 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h2>
+                                        <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
                                         <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                         <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                     </div>
-                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image" alt="<?php echo htmlspecialchars($row['title']); ?>">
-
                                     <div class="overlay position-absolute top-0 end-0 m-2">
                                         <?php if ($current_user == $row['uploaded_by']) { ?>
                                             <div class="dropdown">
@@ -150,7 +156,7 @@
         });
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -22,7 +22,6 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title text-center font-monospace mb-4">Registrasi Pengguna</h2>
-      
         <form id="registerForm" action="proses_register.php" method="post" novalidate>
           <div class="row g-3">
             <div class="col-md-6">

@@ -79,6 +79,9 @@ if (isset($_SESSION['username'])) {
           .cursor {
                cursor: cell;
           }
+          .color{
+               background-color:white;
+          }
      </style>
 </head>
 
@@ -88,21 +91,17 @@ if (isset($_SESSION['username'])) {
           <div class="container-fluid">
 
                <a class="navbar-brand" href="#">Bloger</a>
-               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+               <button class="navbar-toggler color " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                </button>
 
                <div class="collapse navbar-collapse" id="navbarNav">
 
                     <ul class="navbar-nav ms-auto">
-                         <!-- <button type="button" class=" transparan position-relative">
-                         <i class="bi bi-app-indicator"></i>
-                              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                   99+
-                                   <span class="visually-hidden">unread messages</span>
-                              </span>
-                         </button> -->
-
+                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                              <i class="bi bi-info"></i>
+                         </button>
                          <?php if (isset($_SESSION['username'])) { ?>
                               <li class="nav-item">
                               </li>
@@ -118,7 +117,7 @@ if (isset($_SESSION['username'])) {
                                         <li>
                                              <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item oke" href="in/logout.php"><i class="bi bi-box-arrow-right"  ></i> Sign out</a></li>
+                                        <li><a class="dropdown-item oke" href="in/logout.php"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
                                    </ul>
                               </li>
                          <?php } else { ?>
@@ -153,10 +152,40 @@ if (isset($_SESSION['username'])) {
                color: white;
 
           }
-          .oke{
-               cursor:not-allowed;
+
+          .oke {
+               cursor: not-allowed;
           }
      </style>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Informasi Update</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-underline-danger text-center">Update sudah ada 2024</h4>
+                <h5>New</h5>
+                <p>1. Latihan Ngetik(sourceCodes)</p>
+                <p>2. halaman Berbahaya</p>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-underline-danger text-center">Update yang akan datang 2024</h4>
+                <h5>Halaman Vip</h5>
+                <p>1. Halaman Private</p>
+                <p>2. Halaman Berbahaya</p>
+                <p>3. Fitur Perlindungan Accounta</p>
+            </div>
+           
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
      <!-- Bootstrap JS (Optional) -->
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
      </script>

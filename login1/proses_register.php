@@ -34,8 +34,8 @@ if ($result->num_rows > 0) {
 }
 
 // Memeriksa panjang password
-if (strlen($password) < 2) {
-    echo '<script>alert("Password harus memiliki minimal 5 karakter."); window.location.href = "register.php";</script>';
+if (strlen($password) < 8) {
+    echo '<script>alert("Password harus memiliki minimal 8 karakter."); window.location.href = "register.php";</script>';
     exit();
 }
 

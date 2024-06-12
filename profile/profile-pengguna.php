@@ -52,6 +52,7 @@ if (isset($_GET['username'])) {
                             <div class="card-body">
                                 <h6 class="card-subtitle mb-2 text-muted">Nama Lengkap</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($name); ?></p>
+                                <p class="card-text"><a href="../SpeedTyping/index.html">Latihan Ngetik</a></p>
                                 <h6 class="card-subtitle mb-2 text-muted">Tentang Saya</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($about_me); ?></p>
                             </div>
