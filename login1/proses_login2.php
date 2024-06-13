@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/koneksi.php';
+require_once __DIR__ . "/koneksi.php";
 
 // Start session
 session_start();
@@ -7,6 +7,9 @@ session_start();
 // Tangkap ID pengguna dan kata sandi dari formulir
 $user_id = $_POST['user_id']; // Ambil dari input tersembunyi di password.php
 $password = $_POST['password'];
+
+error_log("User ID: $user_id");
+error_log("Password: $password");
 
 // Query untuk mendapatkan data pengguna berdasarkan ID
 $sql = "SELECT * FROM users WHERE id = ?";
@@ -17,7 +20,8 @@ $result = $stmt->get_result();
 
 if ($result->num_rows === 1) {
     $row = $result->fetch_assoc();
-
+    error_log("Database Password: " . $row['password']);
+    
     // Lakukan otentikasi berdasarkan kata sandi
     if (password_verify($password, $row['password'])) {
         // Otentikasi berhasil, simpan sesi dan alihkan ke halaman beranda atau dashboard
@@ -35,7 +39,7 @@ if ($result->num_rows === 1) {
 } else {
     // Pengguna tidak ditemukan, kembalikan ke halaman login dengan pesan kesalahan
     $_SESSION['login_error'] = "User not found";
-    header("Location: password.php?id=$user_id&login_error=true");
+    header("Location: password.php?id=$user_id&login_error=false");
     exit();
-}
+} 
 ?>

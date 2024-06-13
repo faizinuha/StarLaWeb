@@ -3,8 +3,8 @@ session_start();
 
 // Jika tidak ada ID pengguna yang diberikan, alihkan kembali ke halaman logout
 if (!isset($_GET['id'])) {
-    header("Location: ../profile/tampilan-logout.php");
-    exit();
+     header("Location: ../profile/tampilan-logout.php");
+     exit();
 }
 
 // Tangkap ID pengguna dari URL
@@ -19,7 +19,7 @@ $user_id = $_GET['id'];
      <title>Login</title>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
      <style>
-     /* CSS styling */
+          /* CSS styling */
      </style>
 </head>
 
@@ -38,8 +38,7 @@ $user_id = $_GET['id'];
                                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                                    <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                             placeholder="Enter your password" required>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
                                         <div class="invalid-feedback">Please enter your password.</div>
                                    </div>
                                    <button type="submit" class="btn btn-primary w-100">Login</button>
@@ -49,13 +48,16 @@ $user_id = $_GET['id'];
                                         <span class="mx-2">|</span>
                                    </div>
                               </form>
-                              <!-- Pengaturan lain -->
+                              <!-- #region -->
                          </div>
                     </div>
                </div>
           </div>
      </div>
-     <!-- Pengaturan lain -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script>
+          
+     </script>
 </body>
 
 </html>

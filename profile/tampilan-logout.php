@@ -47,6 +47,8 @@ $koneksi->close();
             top: 20px;
             width: 100px;
             height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -61,8 +63,12 @@ $koneksi->close();
             <?php foreach ($users as $user) : ?>
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <a href="../login1/proses_login2.php">
-                            <img src="<?php echo htmlspecialchars($user['profile_image_path']); ?>" alt="avatar" class="card-img-top mx-auto d-block avatar">
+                        <a href="../login1/password.php">
+                            <?php if (!empty($user['profile_image_path'])) : ?>
+                                <img src="<?php echo htmlspecialchars($user['profile_image_path']); ?>" alt="avatar" class="card-img-top mx-auto d-block avatar">
+                            <?php else : ?>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="card-img-top mx-auto d-block avatar">
+                            <?php endif; ?>
                         </a>
                         <div class="card-body text-center m-2">
                             <p class="card-text font-weight-bold"><?php echo htmlspecialchars($user['name']); ?></p>
@@ -74,6 +80,39 @@ $koneksi->close();
         <div class="text-center mt-5">
             <a href="../login1/login.php" class="btn btn-primary"><i class='bx bx-log-in'></i> Login Lagi</a>
         </div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+               <div class="col-md-6">
+                    <div class="card">
+                         <div class="card-header">
+                              <h2 class="mb-0">Login</h2>
+                         </div>
+                         <div class="card-body">
+                              <form id="loginForm" action="../login1/proses_login.php" method="post" onsubmit="return validateForm()">
+                                   <div class="mb-3">
+                                        <label for="emailOrUsername" class="form-label">Username or Email</label>
+                                        <input type="text" class="form-control" name="emailOrUsername"
+                                             id="emailOrUsername" placeholder="Enter your Email or Username" required>
+                                        <div class="invalid-feedback">Please enter your email or username.</div>
+                                   </div>
+                                   <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                             placeholder="Enter your password" required>
+                                        <div class="invalid-feedback">Please enter your password.</div>
+                                   </div>
+                                   <button type="submit" class="btn btn-primary w-100">Login</button>
+                              </form>
+                              <div class="mt-3 text-center">
+                                   <a href="../login1/register.php" class="btn-link">Register</a>
+                                   <span class="mx-2">|</span>
+                                   <a href="../login1/forgot_reset_password.php" class="btn-link">Forgot Password?</a>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>

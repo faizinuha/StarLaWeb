@@ -26,15 +26,23 @@
         .card {
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .card-body {
             padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .card-footer {
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .btn-sm {
@@ -55,10 +63,25 @@
             left: 0;
             z-index: -1;
         }
-        .zoom{
+
+        .zoom {
             width: 100%;
             height: 300px;
             object-fit: cover;
+        }
+
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -99,11 +122,19 @@
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card mb-3">
+                        <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+                            <div class="card w-100">
                                 <div class="position-relative">
                                     <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image zoom" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                     <div class="card-body">
+                                        <div class="profile-container">
+                                            <?php if (!empty($row['profile_image_path'])) : ?>
+                                                <img src="profile/upload/<?php echo $row['profile_image_path']; ?>" alt="avatar" class="profile-image">
+                                            <?php else : ?>
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
+                                            <?php endif; ?>
+                                            <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
+                                        </div>
                                         <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
                                         <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                         <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
@@ -122,9 +153,9 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                                <div class="card-footer">
                                     <div>
-                                        Diposting oleh: <?php echo htmlspecialchars($row['uploaded_by']); ?> pada <?php echo htmlspecialchars($row['upload_date']); ?>
+                                        Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
                                     </div>
 
                                     <div class="button-container">
