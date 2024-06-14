@@ -39,7 +39,7 @@ if ($result->num_rows === 1) {
 } else {
     // Pengguna tidak ditemukan, kembalikan ke halaman login dengan pesan kesalahan
     $_SESSION['login_error'] = "User not found";
-    header("Location: password.php?id=$user_id&login_error=false");
+    header("Location: password.php?id=$user_id&login_error=true");
     exit();
 } 
 ?>

@@ -92,7 +92,7 @@
                                              placeholder="Enter your password" required>
                                         <div class="invalid-feedback">Please enter your password.</div>
                                    </div>
-                                   <button type="submit" class="btn btn-primary w-100">Login</button>
+                                   <button type="submit" class="btn btn-primary w-100"U+0271F>Login</button>
                               </form>
                               <div class="mt-3 text-center">
                                    <a href="register.php" class="btn-link">Register</a>

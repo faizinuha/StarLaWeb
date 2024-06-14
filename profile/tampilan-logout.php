@@ -63,7 +63,7 @@ $koneksi->close();
             <?php foreach ($users as $user) : ?>
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <a href="../login1/password.php">
+                        <a href="../login1/password.php?id=<?php echo $user['id']; ?>">
                             <?php if (!empty($user['profile_image_path'])) : ?>
                                 <img src="<?php echo htmlspecialchars($user['profile_image_path']); ?>" alt="avatar" class="card-img-top mx-auto d-block avatar">
                             <?php else : ?>
@@ -75,44 +75,43 @@ $koneksi->close();
                         </div>
                     </div>
                 </div>
+
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-5">
             <a href="../login1/login.php" class="btn btn-primary"><i class='bx bx-log-in'></i> Login Lagi</a>
         </div>
         <div class="container mt-5">
-          <div class="row justify-content-center">
-               <div class="col-md-6">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
                     <div class="card">
-                         <div class="card-header">
-                              <h2 class="mb-0">Login</h2>
-                         </div>
-                         <div class="card-body">
-                              <form id="loginForm" action="../login1/proses_login.php" method="post" onsubmit="return validateForm()">
-                                   <div class="mb-3">
-                                        <label for="emailOrUsername" class="form-label">Username or Email</label>
-                                        <input type="text" class="form-control" name="emailOrUsername"
-                                             id="emailOrUsername" placeholder="Enter your Email or Username" required>
-                                        <div class="invalid-feedback">Please enter your email or username.</div>
-                                   </div>
-                                   <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                             placeholder="Enter your password" required>
-                                        <div class="invalid-feedback">Please enter your password.</div>
-                                   </div>
-                                   <button type="submit" class="btn btn-primary w-100">Login</button>
-                              </form>
-                              <div class="mt-3 text-center">
-                                   <a href="../login1/register.php" class="btn-link">Register</a>
-                                   <span class="mx-2">|</span>
-                                   <a href="../login1/forgot_reset_password.php" class="btn-link">Forgot Password?</a>
-                              </div>
-                         </div>
+                        <div class="card-header">
+                            <h2 class="mb-0">Login</h2>
+                        </div>
+                        <div class="card-body">
+                            <form id="loginForm" action="../login1/proses_login.php" method="post" onsubmit="return validateForm()">
+                                <div class="mb-3">
+                                    <label for="emailOrUsername" class="form-label">Username or Email</label>
+                                    <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter your Email or Username" required>
+                                    <div class="invalid-feedback">Please enter your email or username.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+                                    <div class="invalid-feedback">Please enter your password.</div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </form>
+                            <div class="mt-3 text-center">
+                                <a href="../login1/register.php" class="btn-link">Register</a>
+                                <span class="mx-2">|</span>
+                                <a href="../login1/forgot_reset_password.php" class="btn-link">Forgot Password?</a>
+                            </div>
+                        </div>
                     </div>
-               </div>
-          </div>
-     </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
