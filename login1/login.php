@@ -9,6 +9,7 @@
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <style>
+    
      body {
           background-color: #e9ecef;
      }
@@ -92,7 +93,7 @@
                                              placeholder="Enter your password" required>
                                         <div class="invalid-feedback">Please enter your password.</div>
                                    </div>
-                                   <button type="submit" class="btn btn-primary w-100"U+0271F>Login</button>
+                                   <button type="submit" class="btn btn-primary w-100"&#10015;>Login</button>
                               </form>
                               <div class="mt-3 text-center">
                                    <a href="register.php" class="btn-link">Register</a>
