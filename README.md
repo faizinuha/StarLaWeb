@@ -14,3 +14,10 @@ We have done our best for our blog website and you can support us with our contr
 =========================≠
 Arigatou Gozaimas Watashi wa Ureshi ne 
 ありがとうございます私は嬉しいですね 
+
+1. english:This website will be published if the features are running, I will not add a like feature because this website was created just for 
+
+2. indonesia:website ini akan di publish jika seperjalan fitur sudah berjalan saya tidak akan menambahkan fitur like karena website ini di buat hanya untuk senang
+
+3. japan:この Web サイトは機能が実行されていれば公開されます。この Web サイトはただ楽しむために作成されたものであるため、「いいね！」機能は追加しません
+Kono u~ebu saito wa kinō ga jikkō sa rete ireba kōkai sa remasu. Kono u~ebu saito wa tada tanoshimu tame ni sakusei sa reta monodearu tame,`ī ne!' Kinō wa tsuika shimasen
