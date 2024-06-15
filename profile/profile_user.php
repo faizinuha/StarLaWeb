@@ -109,12 +109,8 @@ if (mysqli_num_rows($result) > 0) {
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="rounded float-start" style="width: 150px;">
               <?php endif; ?>
             </a>
-            <!-- akhir -->
-
-            <!-- akhir -->
             <h5 class="my-3"><?php echo $name ?></h5>
             <p class="text-muted mb-1"><?php echo $username ?></p>
-
             <div class="row justify-content-center mt-lg-5">
               <div class="col-md-auto">
                 <a href="edit.php" type="button" class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i></a>
@@ -162,10 +158,46 @@ if (mysqli_num_rows($result) > 0) {
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0"><?php echo $username ?></p>
+                <p class="text-muted mb-0"><?php echo $username; ?></p>
               </div>
             </div>
             <hr>
+            <form>
+              <div class="row">
+                <div class="col-sm-9">
+                  <p class="mb-0">Hapus Akun:</p>
+                </div>
+                <div class="col-sm-9">
+                  <!-- <button type="button" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus Akun</button> -->
+                  <a href="delete_account.php" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus akun</a>
+                </div>
+              </div>
+            </form>
+            <hr>
+            <script>
+              function deleteAccount() {
+                if (confirm("Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.")) {
+                  var xhr = new XMLHttpRequest();
+                  xhr.open("POST", "delete_account.php", true);
+                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                      if (xhr.status === 200) {
+                        alert(xhr.responseText);
+                        if (xhr.responseText === "Akun berhasil dihapus.") {
+                          window.location.href = "../login1/login.php"; // Mengarahkan ke halaman login
+                        }
+                      } else {
+                        alert("Terjadi kesalahan saat menghapus akun. Silakan coba lagi.");
+                      }
+                    }
+                  };
+                  xhr.send(); // Kirim permintaan tanpa data karena sesi digunakan di sisi server
+                }
+              }
+            </script>
+
+
 
             <!-- <div class="row">
               <div class="col-sm-3">

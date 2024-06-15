@@ -129,7 +129,7 @@
                                     <div class="card-body">
                                         <div class="profile-container">
                                             <?php if (!empty($row['profile_image_path'])) : ?>
-                                                <img src="profile/upload/<?php echo $row['profile_image_path']; ?>" alt="avatar" class="profile-image">
+                                                <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="profile-image">
                                             <?php else : ?>
                                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
                                             <?php endif; ?>

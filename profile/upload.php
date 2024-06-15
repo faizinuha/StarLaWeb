@@ -18,14 +18,14 @@ if (isset($_SESSION['user_id'])) {
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         // Memeriksa ukuran file
-        if ($_FILES["profile_image_path"]["size"] > 900000) {
+        if ($_FILES["profile_image_path"]["size"] > 900000000000000) {
             echo "Maaf, file Anda terlalu besar.";
             $uploadOk = 0;
         }
 
         // Izinkan hanya format gambar tertentu
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif") {
+            && $imageFileType != "gif" && $imageFileType != "webp" && $imageFileType && $imageFileType != "mkv" && $imageFileType ) {
             echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
             $uploadOk = 0;
         }
@@ -42,6 +42,7 @@ if (isset($_SESSION['user_id'])) {
                 mysqli_stmt_close($stmt);
 
                 echo "File " . basename($_FILES["profile_image_path"]["name"]) . " telah diunggah.";
+                header("Location: profile_user.php");
             } else {
                 echo "Maaf, terjadi kesalahan saat mengunggah file Anda.";
             }
