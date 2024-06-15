@@ -171,13 +171,13 @@ if (isset($_SESSION['username'])) {
                 
                 <p>2. halaman Berbahaya</p>
             </div>
-            <div class="modal-body">
+            <!-- <div class="modal-body">
                 <h4 class="text-underline-danger text-center">Update yang akan datang 2024</h4>
                 <h5>Halaman Vip</h5>
                 <p>1. Halaman Private</p>
                 <p>2. Halaman Berbahaya</p>
                 <p>3. Fitur Perlindungan Accounta</p>
-            </div>
+            </div> -->
            
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

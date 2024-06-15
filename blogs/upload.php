@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="image" class="form-group">Gambar:</label>
                 <input type="file" id="image" name="image" class="form-control-file" onchange="previewImage(this)" required>
-                <img id="imagePreview" class="preview-image" src="#" alt="Preview Image" style="display: none;">
+                <img id="imagePreview" class="img-fluid mt-2" src="#" alt="Preview Image" style="display: none;">
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Unggah</button>
             <a href="../index.php" class="btn btn-danger ryu">Kembali</a>

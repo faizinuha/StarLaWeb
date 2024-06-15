@@ -1,49 +1,29 @@
 <?php
 session_start();
-
-
-
-
-// Membuat koneksi ke database
-
-
-// Periksa koneksi
-
+include_once "koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Mendapatkan ID pengguna dari sesi
-  $server = "localhost";
-  $username = "root";
-  $password = "";
-  $database = "users";
+    // Pastikan user sudah login dan sesi user_id tersedia
+    if (isset($_SESSION['user_id'])) {
+        $userId = $_SESSION['user_id'];
 
-  $koneksi = mysqli_connect($server, $username, $password, $database);
-  if (!$koneksi) {
-    die("Koneksi gagal: " . mysqli_connect_error());
-  }
-  if (isset($_SESSION['id'])) {
-    $userId = $_SESSION['id'];
+        // Lakukan query untuk menghapus akun
+        $query = "DELETE FROM users WHERE id = $userId";
+        $result = mysqli_query($koneksi, $query);
 
-    // Debug: menampilkan ID pengguna
-    error_log("User ID: " . $userId);
-
-    // Menyiapkan pernyataan SQL untuk menghapus pengguna berdasarkan ID
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-    $stmt->bindParam('i', $userId);
-    $stmt->execute();
-
-    if ($stmt->execute()) {
-      // Jika akun berhasil dihapus, hancurkan sesi
-      session_destroy();
-      unset($_SESSION['id']); // Hapus variabel sesi spesifik jika diperlukan
-      echo "Akun berhasil dihapus.";
+        if ($result) {
+            // Jika penghapusan berhasil, kembalikan respons yang sesuai
+            echo "Akun berhasil dihapus.";
+        } else {
+            // Jika terjadi kesalahan dalam penghapusan akun
+            echo "Terjadi kesalahan saat menghapus akun. Silakan coba lagi.";
+        }
     } else {
-      echo "Terjadi kesalahan saat menghapus akun. Silakan coba lagi.";
+        // Jika user belum login atau sesi user_id tidak tersedia
+        echo "Sesi tidak valid. Silakan login kembali.";
     }
-  } else {
-    echo "ID pengguna tidak ditemukan.";
-  }
-  $koneksi->close();
 } else {
-  echo "Metode permintaan tidak valid.";
+    // Jika metode permintaan tidak valid
+    echo "Metode permintaan tidak valid.";
 }
+?>

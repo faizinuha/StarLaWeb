@@ -104,7 +104,8 @@ $conn->close();
             <div class="mb-3">
                 <label for="image" class="form-label">Gambar</label>
                 <input type="file" class="form-control" id="image" name="image">
-                <img src="blogs/uploads/<?php echo htmlspecialchars($post['image']); ?>" class="img-fluid mt-2" alt="Current Image">
+                <img src="blogs/uploads/<?php echo htmlspecialchars($post['image']); ?>
+                " class="img-fluid mt-2" alt="Current Image">
             </div>
             <button type="submit" class="btn btn-primary yell">Update Post</button>
             <a href="index.php" onclick="backer()" class="btn btn-danger ori">Kembali</a>
