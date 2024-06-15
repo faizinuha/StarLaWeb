@@ -168,8 +168,7 @@ if (mysqli_num_rows($result) > 0) {
                   <p class="mb-0">Hapus Akun:</p>
                 </div>
                 <div class="col-sm-9">
-                  <!-- <button type="button" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus Akun</button> -->
-                  <a href="delete_account.php" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus akun</a>
+                  <button type="button" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus Akun</button>
                 </div>
               </div>
             </form>
@@ -178,17 +177,13 @@ if (mysqli_num_rows($result) > 0) {
               function deleteAccount() {
                 if (confirm("Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.")) {
                   var xhr = new XMLHttpRequest();
-                  xhr.open("POST", "delete_account.php", true);
+                  xhr.open("POST", "../login1/delete_account.php", true);
                   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                   xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                      if (xhr.status === 200) {
-                        alert(xhr.responseText);
-                        if (xhr.responseText === "Akun berhasil dihapus.") {
-                          window.location.href = "../login1/login.php"; // Mengarahkan ke halaman login
-                        }
-                      } else {
-                        alert("Terjadi kesalahan saat menghapus akun. Silakan coba lagi.");
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                      alert(xhr.responseText);
+                      if (xhr.responseText === "Akun berhasil dihapus.") {
+                        window.location.href = "../login1/login.php"; // Mengarahkan ke halaman login
                       }
                     }
                   };
@@ -196,8 +191,6 @@ if (mysqli_num_rows($result) > 0) {
                 }
               }
             </script>
-
-
 
             <!-- <div class="row">
               <div class="col-sm-3">
