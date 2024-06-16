@@ -177,7 +177,7 @@ if (mysqli_num_rows($result) > 0) {
               function deleteAccount() {
                 if (confirm("Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.")) {
                   var xhr = new XMLHttpRequest();
-                  xhr.open("POST", "../login1/delete_account.php", true);
+                  xhr.open("POST", "../login1/proses_data/delete_account.php", true);
                   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                   xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4 && xhr.status === 200) {

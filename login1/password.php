@@ -36,7 +36,7 @@ $login_error = isset($_GET['login_error']) ? $_GET['login_error'] : '';
                         <?php if ($login_error): ?>
                             <div class="alert alert-danger">Invalid username or password.</div>
                         <?php endif; ?>
-                        <form id="loginForm" action="proses_login2.php" method="post">
+                        <form id="loginForm" action="proses_data/proses_login2.php" method="post">
                             <!-- Action menuju proses_login2.php -->
                             <!-- Menyertakan ID pengguna sebagai input tersembunyi -->
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">

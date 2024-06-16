@@ -97,7 +97,7 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title">Registrasi Pengguna</h2>
-        <form id="registerForm" action="proses_register.php" method="post" novalidate>
+        <form id="registerForm" action="proses_data/proses_register.php" method="post" novalidate>
           <div class="mb-3">
             <label for="nama" class="form-label">Nama:</label>
             <input type="text" class="form-control" name="nama" required placeholder="Masukkan Nama">

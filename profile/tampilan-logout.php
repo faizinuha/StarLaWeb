@@ -89,7 +89,7 @@ $koneksi->close();
                             <h2 class="mb-0">Login</h2>
                         </div>
                         <div class="card-body">
-                            <form id="loginForm" action="../login1/proses_login.php" method="post" onsubmit="return validateForm()">
+                            <form id="loginForm" action="../login1/proses_data/proses_login.php" method="post" onsubmit="return validateForm()">
                                 <div class="mb-3">
                                     <label for="emailOrUsername" class="form-label">Username or Email</label>
                                     <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter your Email or Username" required>
@@ -99,6 +99,11 @@ $koneksi->close();
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
                                     <div class="invalid-feedback">Please enter your password.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="verification_code" class="form-label">Kode Verifikasi:</label>
+                                    <input type="text" class="form-control" name="verification_code" required placeholder="Masukkan Kode Verifikasi">
+                                    <div class="invalid-feedback">Masukkan Kode Verifikasi.</div>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Login</button>
                             </form>

@@ -58,7 +58,7 @@
             <div id="alert" class="alert"></div>
 
             <!-- Form untuk "Reset Password" -->
-            <form id="resetForm" method="post" action="proses_reset.php">
+            <form id="resetForm" method="post" action="proses_data/proses_reset.php">
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-semibold mb-2">Email:</label>
                     <input type="email" name="email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
@@ -66,6 +66,11 @@
                 <div class="mb-4">
                     <label for="new_password" class="block text-sm font-semibold mb-2">Kata Sandi Baru:</label>
                     <input type="password" name="new_password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+                </div>
+                <div class="mb-3">
+                    <label for="verification_code" class="form-label">Kode Verifikasi:</label>
+                    <input type="text" class="form-control" name="verification_code" required placeholder="Masukkan Kode Verifikasi">
+                    <div class="invalid-feedback">Masukkan Kode Verifikasi.</div>
                 </div>
                 <button type="submit" name="reset_password" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Atur Ulang
                     Kata Sandi</button>

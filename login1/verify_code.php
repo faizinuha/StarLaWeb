@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Verifikasi Kode</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -95,27 +95,16 @@
   <div class="container">
     <div class="card">
       <div class="card-body">
-        <h2 class="card-title">Login Pengguna</h2>
-        <form id="loginForm" action="proses_data/proses_login.php" method="post" novalidate>
-          <div class="mb-3">
-            <label for="emailOrUsername" class="form-label">Email atau Username:</label>
-            <input type="text" class="form-control" name="emailOrUsername" required placeholder="Masukkan Email atau Username">
-            <div class="invalid-feedback">Masukkan Email atau Username yang valid.</div>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" name="password" required placeholder="Masukkan Password">
-            <div class="invalid-feedback">Masukkan Password.</div>
-          </div>
+        <h2 class="card-title">Verifikasi Kode</h2>
+        <form id="verifyForm" action="proses_data/proses_verifikasi.php" method="post" novalidate>
           <div class="mb-3">
             <label for="verification_code" class="form-label">Kode Verifikasi:</label>
             <input type="text" class="form-control" name="verification_code" required placeholder="Masukkan Kode Verifikasi">
-            <div class="invalid-feedback">Masukkan Kode Verifikasi.</div>
+            <div class="invalid-feedback">Masukkan Kode Verifikasi yang valid.</div>
           </div>
           <div class="d-grid gap-2 mt-4">
-            <button id="loginBtn" type="submit" class="btn btn-primary">Login</button>
-            <a href="register.php" class="btn btn-secondary">Register</a>
-            <a href="forgot_reset_password.php" class="btn btn-danger" >Reset Password</a>
+            <button id="verifyBtn" type="submit" class="btn btn-primary">Verifikasi</button>
+            <a href="register.php" class="btn btn-secondary">Kembali</a>
           </div>
         </form>
         <div id="spinner" class="spinner-border text-primary" role="status">
@@ -126,7 +115,7 @@
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    document.getElementById('verifyForm').addEventListener('submit', function(event) {
       var form = this;
       if (form.checkValidity() === false) {
         event.preventDefault();
