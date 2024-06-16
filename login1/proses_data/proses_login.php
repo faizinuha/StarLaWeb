@@ -41,14 +41,14 @@ if ($result && $result->num_rows > 0) {
     } else {
         $_SESSION['login_error'] = "Username, password, atau kode verifikasi salah";
         // Redirect ke halaman login dengan pesan error
-        header("Location: login.php?login_error=true");
+        header("Location: ../login.php?login_error=true");
         exit();
     }
 } else {
     // Pengguna tidak ditemukan
     $_SESSION['login_error'] = "Pengguna tidak ditemukan";
     // Redirect ke halaman register
-    header("Location: register.php?login_error=true");
+    header("Location: ../register.php?login_error=true");
     exit();
 }
 

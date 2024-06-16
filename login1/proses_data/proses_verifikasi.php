@@ -21,7 +21,7 @@ if ($result && $result->num_rows > 0) {
     $_SESSION['user_id'] = $row['id'];
     $_SESSION['login_success'] = "Berhasil verifikasi dan login";
     // Redirect ke halaman dashboard atau home
-    header("Location: ../index.php?login_success=true");
+    header("Location: /index.php?login_success=true");
     exit();
 } else {
     $_SESSION['verification_error'] = "Kode verifikasi salah";
