@@ -96,7 +96,7 @@
     <div class="card">
       <div class="card-body">
         <h2 class="card-title">Verifikasi Kode</h2>
-        <form id="verifyForm" action="proses_data/proses_verifikasi.php" method="post" novalidate>
+        <form id="verifyForm" action="proses_verify.php" method="post" novalidate>
           <div class="mb-3">
             <label for="verification_code" class="form-label">Kode Verifikasi:</label>
             <input type="text" class="form-control" name="verification_code" required placeholder="Masukkan Kode Verifikasi">

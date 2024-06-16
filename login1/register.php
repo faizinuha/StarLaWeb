@@ -131,42 +131,47 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
-  <script>
-    emailjs.init("user_yourEmailJSUserID");
+<script>
+    (function(){
+        emailjs.init("kvsky5c4Es4-4iGzr"); // Ganti YOUR_USER_ID dengan ID pengguna EmailJS Anda
+    })();
+</script>
 
+  <script>
+  // Gantilah YOUR_USER_ID dengan ID pengguna EmailJS Anda
+  // emailjs.init('kvsky5c4Es4-4iGzr'); 
     document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
       var form = this;
+      var btn = document.getElementById('registerBtn');
+
       if (form.checkValidity() === false) {
-        event.preventDefault();
         event.stopPropagation();
         form.classList.add('was-validated');
       } else {
-        document.getElementById('registerBtn').setAttribute('disabled',
-        true);
+        btn.disabled = true;
         document.getElementById('spinner').style.display = 'block';
 
-        // Mengambil kode verifikasi dari session PHP
-        var verification_code = "<?php echo isset($_SESSION['verification_code']) ? $_SESSION['verification_code'] : ''; ?>";
-
-        // Mengirim data registrasi menggunakan EmailJS
-        emailjs.send("service_vmomjnv", "template_ao3h699", {
-            to_name: form.nama.value,
-            from_name: "Verification Email",
-            verification_code: verification_code
-          })
+        // Mengirim form menggunakan EmailJS
+        emailjs.sendForm('service_aic6p9j', 'template_1yu5gv2', form)
           .then(function(response) {
             console.log('Email terkirim!', response);
-            window.location.href = "../verify_code.php";
+            Swal.fire({
+              icon: 'success',
+              title: 'Email Terkirim',
+              text: 'Email verifikasi telah terkirim. Silakan periksa email Anda untuk melanjutkan proses verifikasi.'
+            }).then(function() {
+              window.location.href = "verify_code.php";
+            });
           }, function(error) {
             console.error('Gagal mengirim email', error);
             Swal.fire({
               icon: 'error',
-              title: 'Oops...',
+              title: 'Gagal Mengirim Email',
               text: 'Gagal mengirim email verifikasi. Mohon coba lagi.'
-            }).then(() => {
-              document.getElementById('registerBtn').removeAttribute('disabled');
-              document.getElementById('spinner').style.display = 'none';
             });
+            btn.disabled = false;
+            document.getElementById('spinner').style.display = 'none';
           });
       }
     });

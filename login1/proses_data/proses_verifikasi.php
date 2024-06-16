@@ -26,7 +26,7 @@ if ($result && $result->num_rows > 0) {
 } else {
     $_SESSION['verification_error'] = "Kode verifikasi salah";
     // Redirect ke halaman verifikasi dengan pesan error
-    header("Location: verify_code.php?verification_error=true");
+    header("Location: ../verify_code.php?verification_error=true");
     exit();
 }
 
