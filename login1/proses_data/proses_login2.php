@@ -28,7 +28,7 @@ if ($result->num_rows === 1) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['user_name'] = $row['name'];
-        header("Location: ../index.php"); // Ganti dengan halaman beranda atau dashboard
+        header("Location: /index.php"); // Ganti dengan halaman beranda atau dashboard
         exit();
     } else {
         // Password salah, kembalikan ke halaman login dengan pesan kesalahan

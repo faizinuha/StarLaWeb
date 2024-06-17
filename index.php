@@ -169,7 +169,7 @@
                     }
                 } else {
                     ?>
-                    <p class="alert alert-dark mr-3">Tidak ada gambar</p>
+                    <p class="alert alert-dark mr-3 text-center underline-danger" >Tidak ada gambar</p>
                     <a href="blogs/upload.php" class="alert alert-dark me-1">Klik di sini untuk post</a>
                 <?php
                 }
