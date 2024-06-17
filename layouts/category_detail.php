@@ -1,19 +1,24 @@
 <?php
-// Ambil nilai Tags dari query string
+// Start session
+session_start();
+
+// Establish database connection
+$conn = new mysqli("localhost", "root", "", "blog");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Fetch tag from query string
 if (isset($_GET['Tags'])) {
     $Tags = $_GET['Tags'];
 
-    // Anda perlu melakukan sanitasi pada nilai $Tags sesuai kebutuhan
-    // Misalnya, validasi jenis Tags atau pembersihan karakter tidak diinginkan
+    // Sanitize the tag
+    $Tags = htmlspecialchars($Tags, ENT_QUOTES, 'UTF-8');
 
-    // Query untuk mendapatkan gambar berdasarkan Tags
-    $conn = new mysqli("localhost", "root", "", "blog");
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Query untuk mendapatkan gambar berdasarkan Tags
-    $sql_images = "SELECT * FROM posts WHERE Tags = ?";
+    // Query to get two images based on tag
+    $sql_images = "SELECT * FROM posts WHERE FIND_IN_SET(?, Tags) LIMIT 2";
     $stmt = $conn->prepare($sql_images);
     $stmt->bind_param("s", $Tags);
     $stmt->execute();
@@ -24,7 +29,6 @@ if (isset($_GET['Tags'])) {
     $conn->close();
 } else {
     // Handle case where tag parameter is not provided
-    // For example, redirect to a default page or show an error message
     header("Location: index.php"); // Redirect to home page or other default page
     exit;
 }
@@ -46,9 +50,9 @@ if (isset($_GET['Tags'])) {
         <h2 class="mb-4">Category: <?php echo htmlspecialchars($Tags); ?></h2>
         <div class="row">
             <?php
-            // Tampilkan gambar sesuai dengan hasil query
+            // Display images based on the query result
             while ($row = $result_images->fetch_assoc()) {
-                echo '<div class="col-md-3 mb-4">';
+                echo '<div class="col-md-6 mb-4">';
                 echo '<div class="card">';
                 echo '<img src="' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
                 echo '<div class="card-body">';
