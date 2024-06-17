@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // echo '<script>alert("Registrasi berhasil. Kode konfirmasi Anda adalah:.Mohon di Jaga Kode Ya ' . $verification_code . '"); window.location.href = "../login.php";</script>';
         echo '<script>alert("Registrasi berhasil. Kode konfirmasi Anda adalah:.Mohon di Jaga Kode Ya ' . $verification_code . '"); window.location.href = "../login.php";</script>';
+        echo '<script>alert("Silakan Customer Jika Anda Lupa ");</script>';
         // Debug log
         error_log("Confirmation email simulated for $email.");
     } else {

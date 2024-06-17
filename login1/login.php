@@ -39,17 +39,13 @@
                         <form id="loginForm" action="proses_data/proses_login.php" method="post">
                             <div class="mb-3">
                                 <label for="emailOrUsername" class="form-label">Username or Email</label>
-                                <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Masukan Email" required >
+                                <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter Email or Username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Masukan Kode:" required>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="verification_code" class="form-label">Verification Code</label>
-                                <input type="text" class="form-control" name="verification_code" id="verification_code" placeholder="Masukan Kode" required>
-                            </div>
-                            <p class="text-center">Jika Lupa kode Hubungi Saja Customer</p>
+                            <p class="text-center">Forgot code? Contact Customer Service</p>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <div class="mt-3 text-center">
@@ -57,9 +53,7 @@
                             <span class="mx-2">|</span>
                             <a href="forgot_reset_password.php" class="btn-link">Forgot Password?</a>
                             <span class="mx-2">|</span>
-                            <form action="javascript/kontak.php">
-                                <a href="javascript/kontak.php">Customer Service</a>
-                            </form>
+                            <a href="javascript/kontak.php">Customer Service</a>
                         </div>
                     </div>
                 </div>
@@ -85,7 +79,9 @@
         }
 
         // Show appropriate alert based on login error
-
+        if (loginError) {
+            showAlert('error', 'Login Error', 'Invalid email/username or password.');
+        }
     </script>
 </body>
 </html>
