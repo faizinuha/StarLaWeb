@@ -123,56 +123,17 @@
             <a href="login.php" class="btn btn-secondary">Login</a>
           </div>
         </form>
-        <div id="spinner" class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
-<script>
-    (function(){
-        emailjs.init("kvsky5c4Es4-4iGzr"); // Ganti YOUR_USER_ID dengan ID pengguna EmailJS Anda
-    })();
-</script>
-
   <script>
-  // Gantilah YOUR_USER_ID dengan ID pengguna EmailJS Anda
-  // emailjs.init('kvsky5c4Es4-4iGzr'); 
-    document.getElementById('registerForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+    document.getElementById('registerForm').addEventListener('submit', function (event) {
       var form = this;
-      var btn = document.getElementById('registerBtn');
-
       if (form.checkValidity() === false) {
+        event.preventDefault();
         event.stopPropagation();
         form.classList.add('was-validated');
-      } else {
-        btn.disabled = true;
-        document.getElementById('spinner').style.display = 'block';
-
-        // Mengirim form menggunakan EmailJS
-        emailjs.sendForm('service_aic6p9j', 'template_1yu5gv2', form)
-          .then(function(response) {
-            console.log('Email terkirim!', response);
-            Swal.fire({
-              icon: 'success',
-              title: 'Email Terkirim',
-              text: 'Email verifikasi telah terkirim. Silakan periksa email Anda untuk melanjutkan proses verifikasi.'
-            }).then(function() {
-              window.location.href = "verify_code.php";
-            });
-          }, function(error) {
-            console.error('Gagal mengirim email', error);
-            Swal.fire({
-              icon: 'error',
-              title: 'Gagal Mengirim Email',
-              text: 'Gagal mengirim email verifikasi. Mohon coba lagi.'
-            });
-            btn.disabled = false;
-            document.getElementById('spinner').style.display = 'none';
-          });
       }
     });
   </script>

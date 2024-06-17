@@ -1,57 +1,44 @@
 <?php
 session_start();
-
-// Koneksi database
 $host = "localhost";
 $user = "root";
 $password = "";
 $database = "users";
-$conn = mysqli_connect($host, $user, $password, $database);
+$conn = new mysqli($host, $user, $password, $database);
 
-// Cek koneksi
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Mengambil data dari form login
-$emailOrUsername = $_POST['emailOrUsername'];
-$password = $_POST['password'];
-$verification_code = $_POST['verification_code'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $emailOrUsername = $_POST['emailOrUsername'];
+    $password = $_POST['password'];
+    $verification_code = $_POST['verification_code'];
 
-// Persiapan dan eksekusi statement untuk mengambil data pengguna berdasarkan email atau username
-$stmt = $conn->prepare("SELECT id, name, username, password, verification_code FROM users WHERE email=? OR username=?");
-$stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT id, name, username, password, verification_code FROM users WHERE email=? OR username=?");
+    $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+    $stmt->execute();
+    $stmt->bind_result($id, $name, $username, $hashed_password, $stored_code);
+    $stmt->fetch();
+    $stmt->close();
 
-if ($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-
-    // Verifikasi password dan kode verifikasi
-    if (password_verify($password, $row['password']) && $verification_code == $row['verification_code']) {
-        // Mulai session
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['user_name'] = $row['name'];
-        $_SESSION['login_success'] = "Berhasil login";
-
-        // Redirect ke halaman dashboard atau home
-        header("Location: /index.php?login_success=true");
-        exit();
+    if ($id && password_verify($password, $hashed_password)) {
+        if ($verification_code == $stored_code) {
+            $_SESSION['username'] = $username;
+            $_SESSION['user_id'] = $id;
+            $_SESSION['user_name'] = $name;
+            header("Location: /index.php?login_success=true");
+            exit();
+        } else {
+            $_SESSION['login_error'] = "Invalid verification code.";
+            header("Location: ../login.php?login_error=true");
+            exit();
+        }
     } else {
-        $_SESSION['login_error'] = "Username, password, atau kode verifikasi salah";
-        // Redirect ke halaman login dengan pesan error
+        $_SESSION['login_error'] = "Invalid email/username or password.";
         header("Location: ../login.php?login_error=true");
         exit();
     }
-} else {
-    // Pengguna tidak ditemukan
-    $_SESSION['login_error'] = "Pengguna tidak ditemukan";
-    // Redirect ke halaman register
-    header("Location: ../register.php?login_error=true");
-    exit();
 }
-
-$stmt->close();
-mysqli_close($conn);
+$conn->close();
 ?>
