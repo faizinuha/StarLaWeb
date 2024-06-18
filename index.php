@@ -122,10 +122,10 @@
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                 ?>
-                        <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-                            <div class="card w-100">
+                        <div class="card mb-5">
+                            <div class=" w-100">
                                 <div class="position-relative">
-                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image zoom" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class=" card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                     <div class="card-body">
                                         <div class="profile-container">
                                             <?php if (!empty($row['profile_image_path'])) : ?>
@@ -148,6 +148,7 @@
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
                                                     <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
+                                                    <li> <a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
                                                 </ul>
                                             </div>
                                         <?php } ?>
@@ -160,7 +161,8 @@
 
                                     <div class="button-container">
                                         <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="btn btn-primary"><i class="bi bi-download"></i></a>
+                                        <!-- <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> Like (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
+                                        <a href="layouts/like.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> Dislike (<span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span>)</a> -->
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +171,7 @@
                     }
                 } else {
                     ?>
-                    <p class="alert alert-dark mr-3 text-center underline-danger" >Tidak ada gambar</p>
+                    <p class="alert alert-dark mr-3 text-center underline-danger">Tidak ada gambar</p>
                     <a href="blogs/upload.php" class="alert alert-dark me-1">Klik di sini untuk post</a>
                 <?php
                 }
