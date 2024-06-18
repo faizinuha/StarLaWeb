@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Post berhasil diperbarui!');</script>";
-        echo "<script>location.href = 'index.php';</script>";
+        echo "<script>location.href = '/index.php';</script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
