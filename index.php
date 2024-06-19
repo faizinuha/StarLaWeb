@@ -114,8 +114,10 @@
                 // Memeriksa apakah ada pengguna yang login
                 $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-                // Query untuk mengambil data posting
-                $sql = "SELECT * FROM posts ORDER BY upload_date DESC LIMIT 9999";
+                https://saweria.co/C02V
+                $sql = "SELECT posts.*, users.profile_image_path FROM posts 
+                        JOIN users ON posts.uploaded_by = users.username 
+                        ORDER BY upload_date DESC LIMIT 9999";
                 
                 $result = $conn->query($sql);
 
@@ -130,7 +132,8 @@
                                     <div class="card-body">
                                         <div class="profile-container">
                                             <?php if (!empty($row['profile_image_path'])) : ?>
-                                                <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="profile-image">
+                                                <!-- <img src="<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image"> -->
+                                                <img src="profile/upload/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
                                             <?php else : ?>
                                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
                                             <?php endif; ?>
@@ -162,8 +165,8 @@
 
                                     <div class="button-container">
                                         <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <!-- <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> Like (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
-                                        <a href="layouts/like.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> Dislike (<span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span>)</a> -->
+                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> Like (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
+                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> Dislike (<span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span>)</a>
                                     </div>
                                 </div>
                             </div>

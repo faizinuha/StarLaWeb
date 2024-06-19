@@ -24,6 +24,14 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
         // Ambil data postingan dari hasil query
         $row = $result->fetch_assoc();
 
+        // Hapus baris terkait di tabel dislikes
+        $stmt = $conn->prepare("DELETE FROM dislikes WHERE post_id=?");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $stmt = $conn->prepare("DELETE FROM likes WHERE post_id=?");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+
         // Hapus postingan dari database
         $stmt = $conn->prepare("DELETE FROM posts WHERE id=?");
         $stmt->bind_param("i", $post_id);
@@ -43,8 +51,13 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
     } else {
         $_SESSION['message'] = "Anda tidak memiliki izin untuk menghapus postingan ini.";
     }
+
+    // Tutup statement dan koneksi
+    $stmt->close();
+    $conn->close();
 }    
 
-header("Location: index.php");
+// Redirect dengan menggunakan JavaScript
+echo "<script>window.location.href='/index.php';</script>";
 exit();
 ?>
