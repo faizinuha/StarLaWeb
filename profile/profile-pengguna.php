@@ -61,15 +61,15 @@ if (isset($_GET['username'])) {
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex align-items-center">
                                         <i class="bi bi-instagram text-danger me-2"></i>
-                                        <a href="<?php echo htmlspecialchars($instagram); ?>" class="text-decoration-none"><?php echo htmlspecialchars($instagram); ?></a>
+                                        <a href="<?php echo $instagram ?>" target="_blank" class="text-decoration-none"><?php echo $instagram ?></a>
                                     </li>
                                     <li class="list-group-item d-flex align-items-center">
                                         <i class="bi bi-tiktok text-dark me-2"></i>
-                                        <a href="<?php echo htmlspecialchars($TikTok); ?>" class="text-decoration-none"><?php echo htmlspecialchars($TikTok); ?></a>
+                                        <a href="<?php echo $TikTok; ?>" target="_blank" class="text-decoration-none"><?php echo $TikTok; ?></a>
                                     </li>
                                     <li class="list-group-item d-flex align-items-center">
                                         <i class="bi bi-twitter text-info me-2"></i>
-                                        <a href="<?php echo htmlspecialchars($Twitter); ?>" class="text-decoration-none"><?php echo htmlspecialchars($Twitter); ?></a>
+                                        <a href="<?php echo $Twitter ?>" target="_blank" class="text-decoration-none"><?php echo $Twitter ?></a>
                                     </li>
                                 </ul>
                             </div>

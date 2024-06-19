@@ -111,11 +111,12 @@ mysqli_close($koneksi);
                 <?php if (isset($_SESSION['username'])) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i> <?php echo $name; ?>
+                           Halo<i class="bi bi-person-circle"></i> <?php echo $name; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                             <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
+                            <li><a class="dropdown-item cursor1" href="blogs/setting.php">  <i class="bi bi-gear-wide"></i> Setting</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="in/logout.php"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
                         </ul>
