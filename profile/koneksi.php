@@ -3,7 +3,7 @@
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "users";
+$database = "blog";
 
 
 // Membuat koneksi ke database

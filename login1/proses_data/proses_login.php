@@ -3,7 +3,7 @@ session_start();
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "users";
+$database = "blog";
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {

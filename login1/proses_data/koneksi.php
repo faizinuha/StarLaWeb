@@ -3,7 +3,7 @@
 $server = "localhost";
 $ussername = "root";
 $pasword = "";
-$database = "users";
+$database = "blog";
 
 $koneksi = mysqli_connect($server,$ussername,$pasword,$database);
 

@@ -4,7 +4,7 @@ session_start();
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "users";
+$database = "blog";
 
 // Create connection to database
 $koneksi = mysqli_connect($server, $username, $password, $database);
