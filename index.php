@@ -114,7 +114,6 @@
                 // Memeriksa apakah ada pengguna yang login
                 $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-                https: //saweria.co/C02V
                 $sql = "SELECT posts.*, users.profile_image_path FROM posts 
                         JOIN users ON posts.uploaded_by = users.username 
                         ORDER BY upload_date DESC LIMIT 9999";
@@ -143,18 +142,19 @@
                                         <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                     </div>
                                     <div class="overlay position-absolute top-0 end-0 m-2">
-                                        <?php if ($current_user == $row['uploaded_by']) { ?>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bi bi-gear-wide"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="bi bi-gear-wide"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <?php if ($current_user == $row['uploaded_by']) { ?>
                                                     <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
                                                     <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
-                                                    <li> <a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        <?php } ?>
+                                                <?php } ?>
+                                                <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
+                                                <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -163,8 +163,8 @@
                                     </div>
                                     <div class="button-container">
                                         <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> Like (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
-                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> Dislike (<span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span>)</a>
+                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i>  (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
+                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i>  (<span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span>)</a>
                                     </div>
                                 </div>
                             </div>
