@@ -44,11 +44,14 @@
         <div class="bg-dark text-white sidebar" id="sidebar-wrapper">
            
             <div class="list-group list-group-flush">
-                <a href="" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-cog"></i> Change Password
+                <a href="/index.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-envelope"></i> Home 
                 </a>
-                <a href="" class="list-group-item list-group-item-action bg-dark text-white">
-                    <i class="fas fa-envelope"></i> Change Email
+                <a href="setting.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-envelope"></i> Beranda 
+                </a>
+                <a href="changepassword.php" class="list-group-item list-group-item-action bg-dark text-white">
+                    <i class="fas fa-cog"></i> Change Password
                 </a>
                 <a href="bhs.php" class="list-group-item list-group-item-action bg-dark text-white">
                     <i class="fas fa-globe"></i> Change Language
@@ -59,10 +62,9 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper" class="content">
-           
             <div class="container-fluid">
-                <h1 class="mt-4">Settings Page</h1>
-                <p>Ini adalah halaman pengaturan dengan fitur Change Password, Change Email, dan navigasi sidebar.</p>
+                <h1 class="mt-4 font-bold ">Settings Page</h1>
+                <p class="font-bold">Ini adalah halaman pengaturan dengan fitur Change Password, Change Email, dan navigasi sidebar.</p>
                 <!-- Content here -->
             </div>
         </div>

@@ -11,10 +11,11 @@ if ($conn->connect_error) {
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 $post_id = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 
-$current_user_id = $_SESSION['user_id'];
+$current_user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (!$current_user_id) {
-    die("Anda harus login untuk melakukan like/dislike.");
+    // die("Anda harus login untuk melakukan like/dislike.");
+    echo "<script>window.location.href='../login1/login.php';</script>";
 }
 
 if ($action == 'like' || $action == 'dislike') {
@@ -29,7 +30,7 @@ if ($action == 'like' || $action == 'dislike') {
 
         if ($result_check_action->num_rows > 0) {
             // echo "Anda sudah memberikan " . ($action == 'like' ? 'like' : 'dislike') . " pada posting ini.";
-      echo "<script>window.location.href= '/index.php';</script>";
+            echo "<script>window.location.href= '../index.php';</script>";
         } else {
             // Update tabel posts
             $update_posts_query = "UPDATE posts SET " . ($action == 'like' ? 'likes = likes + 1' : 'dislikes = dislikes + 1') . " WHERE id = $post_id";

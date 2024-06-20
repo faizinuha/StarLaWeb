@@ -114,11 +114,11 @@
                 // Memeriksa apakah ada pengguna yang login
                 $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-                https://saweria.co/C02V
+                https: //saweria.co/C02V
                 $sql = "SELECT posts.*, users.profile_image_path FROM posts 
                         JOIN users ON posts.uploaded_by = users.username 
                         ORDER BY upload_date DESC LIMIT 9999";
-                
+
                 $result = $conn->query($sql);
 
                 // Cek apakah ada postingan
@@ -126,14 +126,13 @@
                     while ($row = $result->fetch_assoc()) {
                 ?>
                         <div class="card mb-5">
-                            <div class=" w-100">
+                            <div class="w-100">
                                 <div class="position-relative">
-                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class=" card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                     <div class="card-body">
                                         <div class="profile-container">
                                             <?php if (!empty($row['profile_image_path'])) : ?>
-                                                <!-- <img src="<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image"> -->
-                                                <img src="profile/upload/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
+                                                <img src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
                                             <?php else : ?>
                                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
                                             <?php endif; ?>
@@ -162,7 +161,6 @@
                                     <div>
                                         Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
                                     </div>
-
                                     <div class="button-container">
                                         <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
                                         <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> Like (<span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span>)</a>
