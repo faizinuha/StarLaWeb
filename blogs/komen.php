@@ -2,82 +2,79 @@
 session_start();
 
 // Check if user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: ../login1/login.php");
-    exit();
-}
+$is_logged_in = isset($_SESSION['username']);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+}
 
-    // Connect to database
-    $conn = new mysqli("localhost", "root", "", "blog");
+// Connect to database
+$conn = new mysqli("localhost", "root", "", "blog");
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-    // Get the post_id from the URL
-    if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
-        $post_id = intval($_GET['post_id']);
-    } else {
-        die("Invalid post_id.");
-    }
+// Get the post_id from the URL
+if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
+    $post_id = intval($_GET['post_id']);
+} else {
+    die("Invalid post_id.");
+}
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Validate and sanitize input
-        $content = trim($_POST['content']);
-        $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
+    // Validate and sanitize input
+    $content = trim($_POST['content']);
+    $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
 
-        // Debug output
-        echo "post_id: " . htmlspecialchars($post_id) . "<br>";
+    // Debug output
+    echo "post_id: " . htmlspecialchars($post_id) . "<br>";
 
-        // Check if the post_id exists in the posts table
-        $check_post_sql = "SELECT id FROM posts WHERE id = ?";
-        $check_stmt = $conn->prepare($check_post_sql);
-        $check_stmt->bind_param("i", $post_id);
-        $check_stmt->execute();
-        $check_stmt->store_result();
+    // Check if the post_id exists in the posts table
+    $check_post_sql = "SELECT id FROM posts WHERE id = ?";
+    $check_stmt = $conn->prepare($check_post_sql);
+    $check_stmt->bind_param("i", $post_id);
+    $check_stmt->execute();
+    $check_stmt->store_result();
 
-        if ($check_stmt->num_rows > 0) {
-            // Prepare the SQL statement
-            $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
+    if ($check_stmt->num_rows > 0) {
+        // Prepare the SQL statement
+        $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
 
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
 
-            if ($stmt->execute()) {
-                // Redirect to prevent form resubmission
-                header("Location: " . $_SERVER['REQUEST_URI']);
-                exit();
-            } else {
-                echo "Error: " . $stmt->error;
-            }
-
-            $stmt->close();
+        if ($stmt->execute()) {
+            // Redirect to prevent form resubmission
+            header("Location: " . $_SERVER['REQUEST_URI']);
+            exit();
         } else {
-            echo "Invalid post_id.";
+            echo "Error: " . $stmt->error;
         }
 
-        $check_stmt->close();
+        $stmt->close();
+    } else {
+        echo "Invalid post_id.";
     }
 
-    // Fetch the post details
-    $post_sql = "SELECT * FROM posts WHERE id = ?";
-    $post_stmt = $conn->prepare($post_sql);
-    $post_stmt->bind_param("i", $post_id);
-    $post_stmt->execute();
-    $post_result = $post_stmt->get_result();
-    $post = $post_result->fetch_assoc();
-
-    // Fetch comments from database
-    $sql = "SELECT * FROM comments WHERE post_id = ? ORDER BY created_at DESC";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $post_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $check_stmt->close();
 }
+
+// Fetch the post details
+$post_sql = "SELECT * FROM posts WHERE id = ?";
+$post_stmt = $conn->prepare($post_sql);
+$post_stmt->bind_param("i", $post_id);
+$post_stmt->execute();
+$post_result = $post_stmt->get_result();
+$post = $post_result->fetch_assoc();
+
+// Fetch comments from database
+$sql = "SELECT * FROM comments WHERE post_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $post_id);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -188,24 +185,27 @@ if (isset($_SESSION['user_id'])) {
                     <p><strong>Tags:</strong> <?php echo htmlspecialchars($post['Tags']); ?></p>
                 </div>
 
-                <!-- Form untuk menambah komentar -->
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . htmlspecialchars($post_id); ?>" method="POST">
-                    <div class="form-group">
-                        <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
-                        <label for="comment" class="form-label">Tambah Komentar:</label>
-                        <textarea class="form-control" id="comment" name="content" rows="3" required></textarea>
-                    </div>
-                    <div class="m-1">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
-                        <a href="../index.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a>
-                    </div>
-                </form>
+                <!-- Form untuk menambah komentar, hanya jika user login -->
+                <?php if ($is_logged_in): ?>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . htmlspecialchars($post_id); ?>" method="POST">
+                        <div class="form-group">
+                            <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+                            <label for="comment" class="form-label">Tambah Komentar:</label>
+                            <textarea class="form-control" id="comment" name="content" rows="3" required></textarea>
+                        </div>
+                        <div class="m-1">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+                            <a href="../index.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </form>
+                <?php else: ?>
+                    <p>Silakan <a href="../login1/login.php">login</a> untuk menambahkan komentar.</p>
+                <?php endif; ?>
 
                 <div class="scroll-container">
                     <?php if ($result->num_rows > 0) : ?>
                         <?php while ($row = $result->fetch_assoc()) : ?>
                             <div class="comment-row">
-                            
                                 <div class="comment-content">
                                    Name: <a href="../profile/profile-pengguna.php?username=<?php echo htmlspecialchars($row['author']); ?>">
                                    <?php echo htmlspecialchars($row['author']); ?>
@@ -214,9 +214,11 @@ if (isset($_SESSION['user_id'])) {
                                     <p><?php echo htmlspecialchars($row['content']); ?></p>
                                     <p class="text-muted"><?php echo isset($row['created_at']) ? htmlspecialchars($row['created_at']) : 'N/A'; ?></p>
                                 </div>
-                                <div class="comment-actions">
-                                    <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                                </div>
+                                <?php if ($is_logged_in && $_SESSION['username'] == $row['author']) : ?>
+                                    <div class="comment-actions">
+                                        <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         <?php endwhile; ?>
                     <?php else : ?>

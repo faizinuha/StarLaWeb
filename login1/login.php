@@ -49,6 +49,8 @@
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                         </form>
                         <div class="mt-3 text-center">
+                            <a href="/index.php">Not Loggin</a>
+                            <span class="mx-2">|</span>
                             <a href="register.php" class="btn-link">Register</a>
                             <span class="mx-2">|</span>
                             <a href="forgot_reset_password.php" class="btn-link">Forgot Password?</a>

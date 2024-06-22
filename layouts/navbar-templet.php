@@ -15,7 +15,7 @@ if (!$koneksi) {
 }
 
 // Default name if not logged in
-$name = "Guest";
+$name = "Not Loggin";
 
 // Fetch user's name if logged in
 if (isset($_SESSION['username'])) {
