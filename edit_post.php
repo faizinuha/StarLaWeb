@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Post berhasil diperbarui!');</script>";
-        echo "<script>location.href = '/index.php';</script>";
+        echo "<script>location.href = 'index.php';</script>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -80,8 +80,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="scss/styles.scss">
+    <!-- <script src="sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="scss/styles.scss"> -->
 </head>
 
 <body>
