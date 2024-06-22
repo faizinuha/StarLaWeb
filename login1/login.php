@@ -63,6 +63,34 @@
 
     <!-- SweetAlert Script -->
     <script>
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Display response in console
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Error',
+                        text: data.message,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
         // Check if there's an error message passed via URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const loginError = urlParams.get('login_error');

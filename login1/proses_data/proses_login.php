@@ -7,7 +7,7 @@ $database = "blog";
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(["success" => false, "message" => "Connection failed: " . $conn->connect_error]));
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,12 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $id;
         $_SESSION['user_name'] = $name;
-        header("Location: /index.php?login_success=true");
-        exit();
+        echo json_encode(["success" => true, "redirect" => "../index.php"]);
     } else {
-        $_SESSION['login_error'] = "Invalid email/username or password.";
-        header("Location: ../login.php?login_error=true");
-        exit();
+        echo json_encode(["success" => false, "message" => "Invalid email/username or password."]);
     }
 }
 $conn->close();
