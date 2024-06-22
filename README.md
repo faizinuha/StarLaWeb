@@ -21,3 +21,11 @@ Arigatou Gozaimas Watashi wa Ureshi ne
 
 3. japan:この Web サイトは機能が実行されていれば公開されます。この Web サイトはただ楽しむために作成されたものであるため、「いいね！」機能は追加しません
 Kono u~ebu saito wa kinō ga jikkō sa rete ireba kōkai sa remasu. Kono u~ebu saito wa tada tanoshimu tame ni sakusei sa reta monodearu tame,`ī ne!' Kinō wa tsuika shimasen
+# Step & Step Add Website 
+1.First, you can upload the database to the .i blog.sql folder
+
+2.Go to phpmyadmin, create a blog folder, then upload the blog that has been downloaded or in the project folder
+
+3.If the database has an error or cannot be used, you can contact us at
+here->rtxalham@gmail.com ========================================================
+if you like Donate me: https://saweria.co/C02V
