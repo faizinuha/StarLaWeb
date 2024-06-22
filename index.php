@@ -123,35 +123,23 @@
                 // Cek apakah ada postingan
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $image = htmlspecialchars($row['image'] ?? '');
-                        $title = htmlspecialchars($row['title'] ?? '');
-                        $content = htmlspecialchars($row['content'] ?? '');
-                        $tags = htmlspecialchars($row['Tags'] ?? '');
-                        $profile_image_path = htmlspecialchars($row['profile_image_path'] ?? '');
-                        $uploaded_by = htmlspecialchars($row['uploaded_by'] ?? '');
-                        $upload_date = htmlspecialchars($row['upload_date'] ?? '');
-                        $id = htmlspecialchars($row['id'] ?? '');
-                        $likes = htmlspecialchars($row['likes'] ?? '');
-                        $dislikes = htmlspecialchars($row['dislikes'] ?? '');
                 ?>
                         <div class="card mb-5">
                             <div class="w-100">
                                 <div class="position-relative">
-                                    <img src="blogs/uploads/<?php echo $image; ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo $title; ?>">
+                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                     <div class="card-body">
                                         <div class="profile-container">
-                                            <a href="profile/profile-pengguna.php?name=<?php echo urlencode($uploaded_by); ?>">
-                                            <?php if (!empty($profile_image_path)) : ?>
-                                                <img src="profile/<?php echo $profile_image_path; ?>" alt="avatar" class="profile-image">
+                                            <?php if (!empty($row['profile_image_path'])) : ?>
+                                                <img src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
                                             <?php else : ?>
                                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
                                             <?php endif; ?>
-                                            </a>
-                                            <span><?php echo $uploaded_by; ?></span>
+                                            <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
                                         </div>
-                                        <h5 class="card-title">Judul: <?php echo $title; ?></h5>
-                                        <p class="card-text">Deskripsi: <?php echo $content; ?></p>
-                                        <p><strong>Tags:</strong> <?php echo $tags; ?></p>
+                                        <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
+                                        <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
+                                        <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                     </div>
                                     <div class="overlay position-absolute top-0 end-0 m-2">
                                         <div class="dropdown">
@@ -159,11 +147,11 @@
                                                 <i class="bi bi-gear-wide"></i>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <?php if ($current_user == $uploaded_by) { ?>
-                                                    <li><a class="dropdown-item" href="edit_post.php?id=<?php echo $id; ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
-                                                    <li><a class="dropdown-item" href="delete_post.php?id=<?php echo $id; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
+                                                <?php if ($current_user == $row['uploaded_by']) { ?>
+                                                    <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                                                    <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
                                                 <?php } ?>
-                                                <li><a href="in/download.php?gambar=<?php echo $image; ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
+                                                <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
                                                 <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
                                             </ul>
                                         </div>
@@ -171,12 +159,15 @@
                                 </div>
                                 <div class="card-footer">
                                     <div>
-                                        Diposting pada <?php echo $upload_date; ?>
+                                        Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
                                     </div>
                                     <div class="button-container">
-                                        <a href="blogs/komen.php?post_id=<?php echo $id; ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <a href="layouts/like.php?action=like&post_id=<?php echo $id; ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i>  <span id="likeCount<?php echo $id; ?>"><?php echo $likes; ?></span></a>
-                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo $id; ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $id; ?>"><?php echo $dislikes; ?></span></a>
+                                        <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" 
+                                        class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
+                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" 
+                                        class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i>  <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
+                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike"
+                                         class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +194,7 @@
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+pP6BLjT0ZjMh8/3xOJdx6Nd6f5D8eYFf3yDwpD9uZfs6V5Dk5z1GY2Bjf5Tg" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
 </body>
 
 </html>
