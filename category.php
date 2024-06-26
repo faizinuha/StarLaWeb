@@ -54,7 +54,7 @@ if (isset($_GET['Tags'])) {
             while ($row = $result_images->fetch_assoc()) {
                 echo '<div class="col-md-6 mb-4">';
                 echo '<div class="card">';
-                echo '<img src="' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
+                echo '<img src="../blogs/' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">' . htmlspecialchars($row['title']) . '</h5>';
                 echo '<p class="card-text">' . htmlspecialchars($row['description']) . '</p>';

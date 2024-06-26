@@ -187,7 +187,7 @@ mysqli_close($koneksi);
                     foreach ($tags as $tag) {
                         $tag = htmlspecialchars(trim($tag), ENT_QUOTES, 'UTF-8');
                         // Prepare the URL with query string
-                        $url = 'category.php?tag=' . urlencode($tag);
+                        $url = '/category.php?tag=' . urlencode($tag);
                         echo '<li class="list-group-item"><a href="' . $url . '">' . $tag . '</a></li>';
                     }
                 }
