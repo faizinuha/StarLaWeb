@@ -163,7 +163,7 @@ mysqli_close($koneksi);
     </div>
 
     <!-- Categories -->
-    <!-- <div class="container">
+    <div class="container">
         <ul class="list-group list-group-flush">
             <h3 class="alert alert-danger">Category</h3>
             <?php
@@ -187,7 +187,7 @@ mysqli_close($koneksi);
                     foreach ($tags as $tag) {
                         $tag = htmlspecialchars(trim($tag), ENT_QUOTES, 'UTF-8');
                         // Prepare the URL with query string
-                        $url = 'category_detail.php?tag=' . urlencode($tag);
+                        $url = 'category.php?tag=' . urlencode($tag);
                         echo '<li class="list-group-item"><a href="' . $url . '">' . $tag . '</a></li>';
                     }
                 }
@@ -199,7 +199,7 @@ mysqli_close($koneksi);
             $conn->close();
             ?>
         </ul>
-    </div> -->
+    </div>
 
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

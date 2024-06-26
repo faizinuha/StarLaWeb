@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         $_SESSION['login_error'] = "Invalid email/username or password.";
-        header("Location: /login.php?login_error=true");
+        header("Location: ../login.php?login_error=true");
         exit();
     }
 }
