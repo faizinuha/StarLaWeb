@@ -104,11 +104,13 @@
             <div class="row">
                 <?php
                 // Koneksi ke database
-                $conn = new mysqli("localhost", "root", "", "blog");
+                include 'allkoneksi/koneksi.php';
+                // Buat koneksi ke database
+                $koneksi = new mysqli($host, $username, $password, $database);
 
                 // Periksa koneksi
-                if ($conn->connect_error) {
-                    die("Koneksi gagal: " . $conn->connect_error);
+                if ($koneksi->connect_error) {
+                    die("Koneksi gagal: " . $koneksi->connect_error);
                 }
 
                 // Memeriksa apakah ada pengguna yang login
@@ -118,7 +120,7 @@
                         JOIN users ON posts.uploaded_by = users.username 
                         ORDER BY upload_date DESC LIMIT 9999";
 
-                $result = $conn->query($sql);
+                $result = $koneksi->query($sql);
 
                 // Cek apakah ada postingan
                 if ($result->num_rows > 0) {
@@ -162,12 +164,9 @@
                                         Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
                                     </div>
                                     <div class="button-container">
-                                        <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" 
-                                        class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" 
-                                        class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i>  <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
-                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike"
-                                         class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
+                                        <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
+                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
+                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +181,7 @@
                 }
 
                 // Tutup koneksi
-                $conn->close();
+                $koneksi->close();
                 ?>
             </div>
         </div>

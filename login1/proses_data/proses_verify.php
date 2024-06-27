@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('koneksi.php'); // Memasukkan file koneksi.php yang berisi konfigurasi database
+require_once __DIR__ . '/../../allkoneksi/koneksi.php'; // Memasukkan file koneksi.php yang berisi konfigurasi database
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];

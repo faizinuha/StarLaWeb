@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('koneksi.php');
+require_once __DIR__ . '/../../allkoneksi/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['nama'];

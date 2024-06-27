@@ -6,22 +6,22 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../login1/login.php");
     exit();
 }
-
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Pastikan hanya request method GET yang diizinkan
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
     // Definisikan informasi koneksi ke database
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $database = "blog";
+    // $host = "localhost";
+    // $user = "root";
+    // $password = "";
+    // $database = "blog";
 
-    // Buat koneksi
-    $koneksi = new mysqli($host, $user, $password, $database);
+    // // Buat koneksi
+    // $koneksi = new mysqli($host, $user, $password, $database);
 
-    // Periksa koneksi
-    if ($koneksi->connect_error) {
-        die("Koneksi gagal: " . $koneksi->connect_error);
-    }
+    // // Periksa koneksi
+    // if ($koneksi->connect_error) {
+    //     die("Koneksi gagal: " . $koneksi->connect_error);
+    // }
 
     // Ambil parameter hapus dari URL dan validasi
     $hapus_id = intval($_GET['hapus']);

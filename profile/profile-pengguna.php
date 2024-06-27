@@ -1,5 +1,6 @@
 <?php
-include_once "koneksi.php"; // Menggunakan file koneksi.php
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
+// Menggunakan file koneksi.php
 
 if (isset($_GET['username'])) {
     $username = $_GET['username'];

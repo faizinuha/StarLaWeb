@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once "koneksi.php";
+include_once "../../allkoneksi/koneksi.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pastikan user sudah login dan sesi user_id tersedia

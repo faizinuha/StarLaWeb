@@ -1,12 +1,6 @@
 <?php
+require_once __DIR__ . '/allkoneksi/koneksi.php';
 // Koneksi ke database
-$conn = new mysqli("localhost", "root", "", "blog");
-
-// Periksa koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
-
 // Memeriksa apakah ada pengguna yang login
 session_start();
 $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
@@ -28,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             // Menghapus gambar lama
             $sql = "SELECT image FROM posts WHERE id='$id'";
-            $result = $conn->query($sql);
+            $result = $koneksi->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $old_image = $row['image'];
@@ -45,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "UPDATE posts SET title='$title', content='$content', Tags='$Tags' WHERE id='$id'";
     }
 
-    if ($conn->query($sql) === TRUE) {
+    if ($koneksi->query($sql) === TRUE) {
         echo "<script>alert('Post berhasil diperbarui!');</script>";
         echo "<script>location.href = 'index.php';</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $sql . "<br>" . $koneksi->error;
     }
 }
 
@@ -57,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT * FROM posts WHERE id='$id' AND uploaded_by='$current_user'";
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
 
     if ($result->num_rows > 0) {
         $post = $result->fetch_assoc();
@@ -69,7 +63,7 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-$conn->close();
+$koneksi->close();
 ?>
 
 <!DOCTYPE html>

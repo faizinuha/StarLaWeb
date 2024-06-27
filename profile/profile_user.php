@@ -9,7 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Sambungkan ke database Anda
-include_once "koneksi.php";
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
+
 
 // Ambil informasi pengguna dari database
 $user_id = $_SESSION['user_id'];

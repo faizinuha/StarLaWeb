@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "/koneksi.php";
+require_once __DIR__ . '/../../allkoneksi/koneksi.php';
 
 // Function to clean input
 function cleanInput($data) {

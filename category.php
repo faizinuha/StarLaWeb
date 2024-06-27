@@ -3,12 +3,7 @@
 session_start();
 
 // Establish database connection
-$conn = new mysqli("localhost", "root", "", "blog");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/allkoneksi/koneksi.php';
 
 // Fetch tag from query string
 if (isset($_GET['Tags'])) {

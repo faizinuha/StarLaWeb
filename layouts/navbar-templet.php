@@ -1,22 +1,10 @@
 <?php
 session_start();
 
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "blog";
-
-// Create connection to database
-$koneksi = mysqli_connect($server, $username, $password, $database);
-
-// Check connection
-if (!$koneksi) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
 // Default name if not logged in
 $name = "Not Loggin";
 
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Fetch user's name if logged in
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -161,46 +149,6 @@ mysqli_close($koneksi);
             </div>
         </div>
     </div>
-
-    <!-- Categories -->
-    <div class="container">
-        <ul class="list-group list-group-flush">
-            <h3 class="alert alert-danger">Category</h3>
-            <?php
-            // Establish database connection
-            $conn = new mysqli("localhost", "root", "", "blog");
-
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // Query to fetch unique tag categories
-            $sql_tags = "SELECT DISTINCT Tags FROM posts";
-            $result_tags = $conn->query($sql_tags);
-
-            // Display tags if available
-            if ($result_tags->num_rows > 0) {
-                while ($row_tags = $result_tags->fetch_assoc()) {
-                    // Get the tag name
-                    $tags = explode(',', $row_tags['Tags']);
-                    foreach ($tags as $tag) {
-                        $tag = htmlspecialchars(trim($tag), ENT_QUOTES, 'UTF-8');
-                        // Prepare the URL with query string
-                        $url = '/category.php?tag=' . urlencode($tag);
-                        echo '<li class="list-group-item"><a href="' . $url . '">' . $tag . '</a></li>';
-                    }
-                }
-            } else {
-                echo '<li class="list-group-item">No tags available</li>';
-            }
-
-            // Close database connection
-            $conn->close();
-            ?>
-        </ul>
-    </div>
-
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>

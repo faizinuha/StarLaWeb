@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['username'])) {
     header('Location: ../login1/login.php');
@@ -48,25 +48,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            // Koneksi ke database
-            $conn = new mysqli("localhost", "root", "", "blog");
-
-            // Periksa koneksi
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
+          
 
             // Simpan posting ke database
             $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by) 
                     VALUES ('$title', '$content', '$tags', '" . basename($_FILES["image"]["name"]) . "', '$uploaded_by')";
-            if ($conn->query($sql) === TRUE) {
+            if ($koneksi->query($sql) === TRUE) {
                 header("Location: ../index.php");
                 echo "Posting berhasil ditambahkan.";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "Error: " . $sql . "<br>" . $koneksi->error;
             }
 
-            $conn->close();
+            $koneksi->close();
         } else {
             echo "Sorry, there was an error uploading your file.";
         }

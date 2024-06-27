@@ -1,21 +1,12 @@
 <?php
 session_start();
-
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Check if user is logged in
 $is_logged_in = isset($_SESSION['username']);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
-
-// Connect to database
-$conn = new mysqli("localhost", "root", "", "blog");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Get the post_id from the URL
 if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
     $post_id = intval($_GET['post_id']);
@@ -33,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
 
     // Check if the post_id exists in the posts table
     $check_post_sql = "SELECT id FROM posts WHERE id = ?";
-    $check_stmt = $conn->prepare($check_post_sql);
+    $check_stmt = $koneksi->prepare($check_post_sql);
     $check_stmt->bind_param("i", $post_id);
     $check_stmt->execute();
     $check_stmt->store_result();
@@ -42,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
         // Prepare the SQL statement
         $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
 
-        $stmt = $conn->prepare($sql);
+        $stmt = $koneksi->prepare($sql);
         $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
 
         if ($stmt->execute()) {
@@ -63,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
 
 // Fetch the post details
 $post_sql = "SELECT * FROM posts WHERE id = ?";
-$post_stmt = $conn->prepare($post_sql);
+$post_stmt = $koneksi->prepare($post_sql);
 $post_stmt->bind_param("i", $post_id);
 $post_stmt->execute();
 $post_result = $post_stmt->get_result();
@@ -71,7 +62,7 @@ $post = $post_result->fetch_assoc();
 
 // Fetch comments from database
 $sql = "SELECT * FROM comments WHERE post_id = ? ORDER BY created_at DESC";
-$stmt = $conn->prepare($sql);
+$stmt = $koneksi->prepare($sql);
 $stmt->bind_param("i", $post_id);
 $stmt->execute();
 $result = $stmt->get_result();

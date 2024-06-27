@@ -1,6 +1,7 @@
 <?php
 // Termasuk file koneksi
-include_once "koneksi.php";
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
+
 
 // Memulai sesi
 session_start();

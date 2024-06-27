@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/koneksi.php';
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
 
 // Memulai sesi dan menghancurkannya
 session_start();
