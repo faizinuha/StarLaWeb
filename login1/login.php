@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,22 +12,26 @@
         body {
             background-color: #e9ecef;
         }
+
         .card {
             border: none;
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+
         .card-header {
             background-color: #17a2b8;
             border-radius: 15px 15px 0 0;
             color: white;
             text-align: center;
         }
+
         .card-body {
             padding: 40px;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -50,7 +55,7 @@
                         </form>
                         <div class="mt-3 text-center">
                             <a href="../index.php" class="btn-link">Not Regi</a>
-                        <span class="mx-2">|</span>
+                            <span class="mx-2">|</span>
                             <a href="register.php" class="btn-link">Register</a>
                             <span class="mx-2">|</span>
                             <a href="forgot_reset_password.php" class="btn-link">Forgot Password?</a>
@@ -62,7 +67,7 @@
             </div>
         </div>
     </div>
-
+   
     <!-- SweetAlert Script -->
     <script>
         // Check if there's an error message passed via URL parameters
@@ -86,4 +91,5 @@
         }
     </script>
 </body>
+
 </html>
