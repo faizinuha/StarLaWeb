@@ -27,7 +27,8 @@ mysqli_close($koneksi);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar Design</title>
+    <title>Twiiter</title>
+    <link rel="icon" href="../assets/back_arrow_icon.png">
     <!-- Bootstrap CSS -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
     <!-- Bootstrap Icons -->
@@ -102,8 +103,8 @@ mysqli_close($koneksi);
                            <i class="bi bi-person-circle"></i> <?php echo $name; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                             <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
+                            <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                             <li><a class="dropdown-item cursor1" href="Private/setting.php">  <i class="bi bi-gear-wide"></i> Setting</a></li>
                             <li><a class="dropdown-item cursor1" href="Private/contant.php">  <i class="bi bi-gear-wide"></i> Akses Contct</a></li>
                             <li><hr class="dropdown-divider"></li>

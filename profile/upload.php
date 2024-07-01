@@ -25,8 +25,10 @@ if (isset($_SESSION['user_id'])) {
         }
 
         // Izinkan hanya format gambar tertentu
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" && $imageFileType != "webp" && $imageFileType && $imageFileType != "mkv" && $imageFileType ) {
+        if (
+            $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" && $imageFileType != "webp" && $imageFileType && $imageFileType != "mkv" && $imageFileType
+        ) {
             echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
             $uploadOk = 0;
         }
@@ -74,10 +76,18 @@ mysqli_close($koneksi);
         }
 
         /* Styling untuk tombol "Back" */
-        .btn-back{
+        .btn-back {
             background-color: #dc3545;
             border-color: #dc3545;
-            margin-left: 10px; /* Menambahkan margin agar tidak terlalu rapat dengan tombol "Upload Image" */
+            margin-left: 10px;
+            /* Menambahkan margin agar tidak terlalu rapat dengan tombol "Upload Image" */
+        }
+
+        .profile_image_path{
+            max-width: 100%;
+            max-height: 100px;
+            /* atur ketinngian */
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -91,7 +101,8 @@ mysqli_close($koneksi);
                 <form action="#" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="profile_image_path" class="form-label">Pilih foto baru:</label>
-                        <input type="file" class="form-control" id="profile_image_path" name="profile_image_path">
+                        <input type="file" class="form-control" id="profile_image_path" alt="profile_image_path" name="profile_image_path" onchange="previewImage(this)">
+                        <img src="#" id="profile_image_path" alt="profile_image_path" style="display:none;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-upload" name="submit">Upload Image</button>
                     <a href="profile_user.php" class="btn btn-danger btn-back">Back</a>
@@ -99,7 +110,24 @@ mysqli_close($koneksi);
             </div>
         </div>
     </div>
+    <script>
+        function profile_image_path(input) {
+            var preview = document.getElementById('imagePreview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(input.files[0]); // Convert to base64 string
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 </html>
- 
