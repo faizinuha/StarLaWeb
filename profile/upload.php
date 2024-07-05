@@ -2,7 +2,6 @@
 // Termasuk file koneksi
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 
-
 // Memulai sesi
 session_start();
 
@@ -27,7 +26,7 @@ if (isset($_SESSION['user_id'])) {
         // Izinkan hanya format gambar tertentu
         if (
             $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-            && $imageFileType != "gif" && $imageFileType != "webp" && $imageFileType && $imageFileType != "mkv" && $imageFileType
+            && $imageFileType != "gif" && $imageFileType != "webp" && $imageFileType != "mkv"
         ) {
             echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
             $uploadOk = 0;
@@ -82,13 +81,10 @@ mysqli_close($koneksi);
             margin-left: 10px;
             /* Menambahkan margin agar tidak terlalu rapat dengan tombol "Upload Image" */
         }
-
-        .profile_image_path{
-            max-width: 100%;
-            max-height: 100px;
-            /* atur ketinngian */
-            margin-top: 10px;
-        }
+/* 
+        .profile_image_path {
+          margin: top 5px;
+        } */
     </style>
 </head>
 
@@ -101,8 +97,8 @@ mysqli_close($koneksi);
                 <form action="#" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="profile_image_path" class="form-label">Pilih foto baru:</label>
-                        <input type="file" class="form-control" id="profile_image_path" alt="profile_image_path" name="profile_image_path" onchange="previewImage(this)">
-                        <img src="#" id="profile_image_path" alt="profile_image_path" style="display:none;">
+                        <input type="file" class="form-control" id="profile_image_path" name="profile_image_path" onchange="previewImage(this)">
+                        <img src="#" id="imagePreview" class="mt-4" alt="profile_image_path" style="display:none;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-upload" name="submit">Upload Image</button>
                     <a href="profile_user.php" class="btn btn-danger btn-back">Back</a>
@@ -111,7 +107,7 @@ mysqli_close($koneksi);
         </div>
     </div>
     <script>
-        function profile_image_path(input) {
+        function previewImage(input) {
             var preview = document.getElementById('imagePreview');
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

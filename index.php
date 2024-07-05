@@ -100,89 +100,117 @@
         </div> -->
 
         <div class="container main">
-            <hr>
             <div class="row">
-                <?php
-                // Koneksi ke database
-                include 'allkoneksi/koneksi.php';
-                // Buat koneksi ke database
-                $koneksi = new mysqli($host, $username, $password, $database);
-
-                // Periksa koneksi
-                if ($koneksi->connect_error) {
-                    die("Koneksi gagal: " . $koneksi->connect_error);
-                }
-
-                // Memeriksa apakah ada pengguna yang login
-                $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-
-                $sql = "SELECT posts.*, users.profile_image_path FROM posts 
-                        JOIN users ON posts.uploaded_by = users.username 
-                        ORDER BY upload_date DESC LIMIT 9999";
-
-                $result = $koneksi->query($sql);
-
-                // Cek apakah ada postingan
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                ?>
-                        <div class="card mb-5">
-                            <div class="w-100">
-                                <div class="position-relative">
-                                    <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                    <div class="card-body">
-                                        <div class="profile-container">
-                                            <?php if (!empty($row['profile_image_path'])) : ?>
-                                                <img src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
-                                            <?php else : ?>
-                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
-                                            <?php endif; ?>
-                                            <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
-                                        </div>
-                                        <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
-                                        <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
-                                        <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
-                                    </div>
-                                    <div class="overlay position-absolute top-0 end-0 m-2">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="bi bi-gear-wide"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <?php if ($current_user == $row['uploaded_by']) { ?>
-                                                    <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
-                                                    <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
-                                                <?php } ?>
-                                                <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
-                                                <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div>
-                                        Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
-                                    </div>
-                                    <div class="button-container">
-                                        <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
-                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
-                                    </div>
-                                </div>
-                            </div>
+                <!-- Sidebar -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Categories
                         </div>
-                    <?php
-                    }
-                } else {
-                    ?>
-                    <p class="alert alert-dark mr-3 text-center underline-danger">Tidak ada gambar</p>
-                    <a href="blogs/upload.php" class="alert alert-dark me-1">Klik di sini untuk post</a>
-                <?php
-                }
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <?php
+                                include 'allkoneksi/koneksi.php';
+                                $sql = "SELECT DISTINCT Tags FROM posts";
+                                $result = $koneksi->query($sql);
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<li class="list-group-item"><a href="category.php?Tags=' . $row['Tags']. '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                // Tutup koneksi
-                $koneksi->close();
-                ?>
+                <!-- Main Content -->
+                <div class="col-md-9">
+                    <hr>
+                    <div class="row">
+                        <?php
+                        // Koneksi ke database
+                        include 'allkoneksi/koneksi.php';
+                        // Buat koneksi ke database
+                        $koneksi = new mysqli($host, $username, $password, $database);
+
+                        // Periksa koneksi
+                        if ($koneksi->connect_error) {
+                            die("Koneksi gagal: " . $koneksi->connect_error);
+                        }
+
+                        // Memeriksa apakah ada pengguna yang login
+                        $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+                        $sql = "SELECT posts.*, users.profile_image_path FROM posts 
+                                JOIN users ON posts.uploaded_by = users.username 
+                                ORDER BY upload_date DESC LIMIT 9999";
+
+                        $result = $koneksi->query($sql);
+
+                        // Cek apakah ada postingan
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                        ?>
+                                <div class="card mb-5">
+                                    <div class="w-100">
+                                        <div class="position-relative">
+                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                            <div class="card-body">
+                                                <div class="profile-container">
+                                                    <?php if (!empty($row['profile_image_path'])) : ?>
+                                                        <img src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
+                                                    <?php else : ?>
+                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
+                                                    <?php endif; ?>
+                                                    <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
+                                                </div>
+                                                <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
+                                                <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
+                                                <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
+                                            </div>
+                                            <div class="overlay position-absolute top-0 end-0 m-2">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bi bi-gear-wide"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <?php if ($current_user == $row['uploaded_by']) { ?>
+                                                            <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                                                            <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
+                                                        <?php } ?>
+                                                        <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
+                                                        <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div>
+                                                    Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
+                                                </div>
+                                                <div class="button-container">
+                                                    <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
+                                                    <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
+                                                    <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id'] ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        } else {
+                            ?>
+                            <p class="alert alert-dark mr-3 text-center underline-danger">Tidak ada gambar</p>
+                            <a href="blogs/upload.php" class="alert alert-dark me-1">Klik di sini untuk post</a>
+                        <?php
+                        }
+
+                        // Tutup koneksi
+                        $koneksi->close();
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -193,7 +221,7 @@
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7pL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -106,7 +106,7 @@ mysqli_close($koneksi);
                             <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
                             <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                             <li><a class="dropdown-item cursor1" href="Private/setting.php">  <i class="bi bi-gear-wide"></i> Setting</a></li>
-                            <li><a class="dropdown-item cursor1" href="Private/contant.php">  <i class="bi bi-gear-wide"></i> Akses Contct</a></li>
+                            <!-- <li><a class="dropdown-item cursor1" href="Private/contant.php">  <i class="bi bi-gear-wide"></i> Akses Contct</a></li> -->
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="in/logout.php"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
                         </ul>

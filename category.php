@@ -9,19 +9,17 @@ require_once __DIR__ . '/allkoneksi/koneksi.php';
 if (isset($_GET['Tags'])) {
     $Tags = $_GET['Tags'];
 
+    // var_dump($_GET);
+    // exit;
     // Sanitize the tag
     $Tags = htmlspecialchars($Tags, ENT_QUOTES, 'UTF-8');
 
-    // Query to get two images based on tag
-    $sql_images = "SELECT * FROM posts WHERE FIND_IN_SET(?, Tags) LIMIT 2";
-    $stmt = $conn->prepare($sql_images);
-    $stmt->bind_param("s", $Tags);
+    // Query to get posts based on tag
+    $sql_images = "SELECT * FROM posts WHERE posts.Tags = '$Tags'";
+    $stmt = $koneksi->prepare($sql_images);
+    // $stmt->bind_param("s", $Tags); 
     $stmt->execute();
     $result_images = $stmt->get_result();
-
-    // Close statement and connection
-    $stmt->close();
-    $conn->close();
 } else {
     // Handle case where tag parameter is not provided
     header("Location: index.php"); // Redirect to home page or other default page
@@ -46,17 +44,25 @@ if (isset($_GET['Tags'])) {
         <div class="row">
             <?php
             // Display images based on the query result
-            while ($row = $result_images->fetch_assoc()) {
-                echo '<div class="col-md-6 mb-4">';
-                echo '<div class="card">';
-                echo '<img src="../blogs/' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">' . htmlspecialchars($row['title']) . '</h5>';
-                echo '<p class="card-text">' . htmlspecialchars($row['description']) . '</p>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
+            if ($result_images->num_rows > 0) {
+                while ($row = $result_images->fetch_assoc()) {
+                    echo '<div class="col-md-6 mb-4">';
+                    echo '<div class="card">';
+                    echo '<img src="blogs/uploads/' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . htmlspecialchars($row['title']) . '</h5>';
+                    echo '<p class="card-text">' . htmlspecialchars($row['content']) . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<p class="alert alert-dark text-center">No posts found in this category</p>';
             }
+
+            // Close statement and connection
+            $stmt->close();
+            $koneksi->close();
             ?>
         </div>
     </div>
