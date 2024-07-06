@@ -2,11 +2,11 @@
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Menggunakan file koneksi.php
 
-if (isset($_GET['username'])) {
-    $username = $_GET['username'];
-    $query = "SELECT * FROM users WHERE username = ?";
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $query = "SELECT * FROM users WHERE id = ?";
     $stmt = $koneksi->prepare($query);
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
 

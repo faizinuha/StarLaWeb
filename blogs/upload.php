@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = $_POST['content'];
     $tags = $_POST['tags'];
     $uploaded_by = $_SESSION['username'];
+    $user_id = $_SESSION['user_id'];
 
     // Upload gambar
     $target_dir = "uploads/";
@@ -50,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             // Simpan posting ke database
-            $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by) 
-                    VALUES ('$title', '$content', '$tags', '$unique_name', '$uploaded_by')";
+            $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by, user_id) 
+                    VALUES ('$title', '$content', '$tags', '$unique_name', '$uploaded_by', '$user_id')";
             if ($koneksi->query($sql) === TRUE) {
                 header("Location: ../index.php");
                 echo "Posting berhasil ditambahkan.";
