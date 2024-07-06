@@ -1,4 +1,4 @@
-<?php include('layouts/navbar-templet.php'); ?>
+<?php include('../layouts/navbar-templet.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 

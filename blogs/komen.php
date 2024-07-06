@@ -15,24 +15,34 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 } else {
     die("Invalid post_id.");
 }
+// edit Pesan 
+// Verify if the post_id exists in the database
+$post_sql = "SELECT * FROM posts WHERE id = ?";
+$post_stmt = $koneksi->prepare($post_sql);
+$post_stmt->bind_param("i", $post_id);
+$post_stmt->execute();
+$post_result = $post_stmt->get_result();
+
+if ($post_result->num_rows == 0) {
+    die("Invalid post_id.");
+}
+
+$post = $post_result->fetch_assoc();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
     // Validate and sanitize input
     $content = trim($_POST['content']);
-    $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
+    // edit pesan Users
+    if (isset($_POST['comment_id'])) {
+        $comment_id = intval($_POST['comment_id']);
+    }
 
-    // Check if the post_id exists in the posts table
-    $check_post_sql = "SELECT id FROM posts WHERE id = ?";
-    $check_stmt = $koneksi->prepare($check_post_sql);
-    $check_stmt->bind_param("i", $post_id);
-    $check_stmt->execute();
-    $check_stmt->store_result();
-
-    if ($check_stmt->num_rows > 0) {
-        // Prepare the SQL statement
-        $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
-        $stmt = $koneksi->prepare($sql);
-        $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
+    // Check if it's a new comment or an edit
+    if (isset($comment_id)) {
+        // Edit the comment
+        $edit_sql = "UPDATE comments SET content = ? WHERE id = ? AND author = ?";
+        $stmt = $koneksi->prepare($edit_sql);
+        $stmt->bind_param("sis", $content, $comment_id, $_SESSION['username']);
 
         if ($stmt->execute()) {
             // Redirect to prevent form resubmission
@@ -44,19 +54,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
 
         $stmt->close();
     } else {
-        echo "Invalid post_id.";
+        // New comment logic
+        $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
+// mengcheck peesan post_id
+        // Check if the post_id exists in the posts table
+        $check_post_sql = "SELECT id FROM posts WHERE id = ?";
+        $check_stmt = $koneksi->prepare($check_post_sql);
+        $check_stmt->bind_param("i", $post_id);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            // Prepare the SQL statement
+            $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
+            $stmt = $koneksi->prepare($sql);
+            $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
+
+            if ($stmt->execute()) {
+                // Redirect to prevent form resubmission
+                header("Location: " . $_SERVER['REQUEST_URI']);
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+
+            $stmt->close();
+        } else {
+            echo "Invalid post_id.";
+        }
+
+        $check_stmt->close();
     }
-
-    $check_stmt->close();
 }
-
-// Fetch the post details
-$post_sql = "SELECT * FROM posts WHERE id = ?";
-$post_stmt = $koneksi->prepare($post_sql);
-$post_stmt->bind_param("i", $post_id);
-$post_stmt->execute();
-$post_result = $post_stmt->get_result();
-$post = $post_result->fetch_assoc();
 
 // Fetch comments from database
 $sql = "SELECT c.*, u.profile_image_path FROM comments c LEFT JOIN users u ON c.author = u.username WHERE c.post_id = ? ORDER BY c.created_at DESC";
@@ -231,7 +260,7 @@ $result = $stmt->get_result();
     <div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="editCommentForm" action="komen.php" method="POST">
+                <form id="editCommentForm" action="#" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

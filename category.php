@@ -9,15 +9,13 @@ require_once __DIR__ . '/allkoneksi/koneksi.php';
 if (isset($_GET['Tags'])) {
     $Tags = $_GET['Tags'];
 
-    // var_dump($_GET);
-    // exit;
     // Sanitize the tag
     $Tags = htmlspecialchars($Tags, ENT_QUOTES, 'UTF-8');
 
     // Query to get posts based on tag
-    $sql_images = "SELECT * FROM posts WHERE posts.Tags = '$Tags'";
+    $sql_images = "SELECT * FROM posts WHERE posts.Tags = ?";
     $stmt = $koneksi->prepare($sql_images);
-    // $stmt->bind_param("s", $Tags); 
+    $stmt->bind_param("s", $Tags); 
     $stmt->execute();
     $result_images = $stmt->get_result();
 } else {
@@ -36,6 +34,13 @@ if (isset($_GET['Tags'])) {
     <title>Category Detail - <?php echo htmlspecialchars($Tags); ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,7 +64,9 @@ if (isset($_GET['Tags'])) {
             } else {
                 echo '<p class="alert alert-dark text-center">No posts found in this category</p>';
             }
-
+            
+            echo '<div class="text-center"><a href="index.php" class="btn btn-primary">Kembali</a></div>';
+            
             // Close statement and connection
             $stmt->close();
             $koneksi->close();

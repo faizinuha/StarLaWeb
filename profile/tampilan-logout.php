@@ -56,7 +56,7 @@ $koneksi->close();
 <body class="py-5">
     <div class="container">
         <header class="d-flex justify-content-between align-items-center py-3">
-            <img src="../assets/img/com.nexon.bluearchive.png" class="kpi" alt="Logo">
+            <!-- <img src="../assets/img/com.nexon.bluearchive.png" class="kpi" alt="Logo"> -->
             <h3 class="text-center">Good Bye!</h3>
         </header>
         <div class="row mt-5">
@@ -75,53 +75,19 @@ $koneksi->close();
                         </div>
                     </div>
                 </div>
-
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-5">
             <a href="../login1/login.php" class="btn btn-primary"><i class='bx bx-log-in'></i> Login Lagi</a>
         </div>
-        <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="mb-0">Login</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="loginForm" action="../login1/proses_data/proses_login.php" method="post">
-                            <div class="mb-3">
-                                <label for="emailOrUsername" class="form-label">Username or Email</label>
-                                <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter Email or Username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" required>
-                            </div>
-                            <p class="text-center">Forgot code? Contact Customer Service</p>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
-                        </form>
-                        <div class="mt-3 text-center">
-                            <a href="/index.php">Not Loggin</a>
-                            <span class="mx-2">|</span>
-                            <a href="register.php" class="btn-link">Register</a>
-                            <span class="mx-2">|</span>
-                            <a href="forgot_reset_password.php" class="btn-link">Forgot Password?</a>
-                            <span class="mx-2">|</span>
-                            <a href="javascript/kontak.php">Customer Service</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <!-- Boxicons JS -->
     <script src="https://cdn.jsdelivr.net/boxicons/2.0.7/js/boxicons.min.js"></script>
-    
 </body>
 
 </html>
