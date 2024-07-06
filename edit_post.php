@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/allkoneksi/koneksi.php';
 // Koneksi ke database
+
 // Memeriksa apakah ada pengguna yang login
 session_start();
 $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
@@ -74,8 +75,6 @@ $koneksi->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Post</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <script src="sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="scss/styles.scss"> -->
 </head>
 
 <body>
@@ -98,28 +97,30 @@ $koneksi->close();
             <div class="mb-3">
                 <label for="image" class="form-label">Gambar</label>
                 <input type="file" class="form-control" id="image" name="image">
-                <img src="blogs/uploads/<?php echo htmlspecialchars($post['image']); ?>
-                " class="img-fluid mt-2" alt="Current Image">
+                <img src="blogs/uploads/<?php echo htmlspecialchars($post['image']); ?>" class="img-fluid mt-2" alt="Current Image">
             </div>
             <button type="submit" class="btn btn-primary yell">Update Post</button>
-            <a href="index.php" onclick="backer()" class="btn btn-danger ori">Kembali</a>
+            <a href="index.php" class="btn btn-danger ori">Kembali</a>
         </form>
     </div>
     <style>
-        .yell{
+        .yell {
             position: relative;
             top: -7px;
         }
-        .ori{
+
+        .ori {
             position: relative;
             top: -7px;
         }
-        .yell:hover{
+
+        .yell:hover {
             border-radius: 40px;
             background-color: blue;
             transition: 0.5s;
         }
-        .ori:hover{
+
+        .ori:hover {
             background-color: aliceblue;
             border-radius: 40px;
             transition: 0.6s;
@@ -136,17 +137,15 @@ $koneksi->close();
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Ya, keluar!"
             }).then((result) => {
-                // Jika pengguna mengonfirmasi, tampilkan pesan berhasil (Anda bisa melakukan redirect di sini)
                 if (result.isConfirmed) {
                     Swal.fire({
                         text: "Anda telah keluar.",
                         icon: "success"
                     });
 
-                    // Arahkan pengguna ke halaman logout setelah beberapa waktu
                     setTimeout(function() {
                         window.location.href = "index.php";
-                    }, 2000); // 2000 milidetik = 2 detik
+                    }, 2000);
                 }
             });
         }

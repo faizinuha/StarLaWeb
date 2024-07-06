@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
+
 // Periksa apakah pengguna sudah login
 if (!isset($_SESSION['username'])) {
     header('Location: ../login1/login.php');
@@ -16,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Upload gambar
     $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $unique_name = uniqid() . '_' . basename($_FILES["image"]["name"]);
+    $target_file = $target_dir . $unique_name;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
@@ -36,23 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType 
-    != "gif" && $imageFileType && $imageFileType != "webp" && $imageFileType && $imageFileType != "anvi" && $imageFileType ) {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $allowedFormats = ['jpg', 'png', 'jpeg', 'gif', 'webp', 'anvi'];
+    if (!in_array($imageFileType, $allowedFormats)) {
+        echo "Sorry, only JPG, JPEG, PNG, GIF, and WEBP files are allowed.";
         $uploadOk = 0;
     }
 
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-          
-
             // Simpan posting ke database
             $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by) 
-                    VALUES ('$title', '$content', '$tags', '" . basename($_FILES["image"]["name"]) . "', '$uploaded_by')";
+                    VALUES ('$title', '$content', '$tags', '$unique_name', '$uploaded_by')";
             if ($koneksi->query($sql) === TRUE) {
                 header("Location: ../index.php");
                 echo "Posting berhasil ditambahkan.";
@@ -78,12 +77,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Tambahan gaya kustom di sini jika diperlukan */
         .preview-image {
             max-width: 100%;
             max-height: 200px;
-            /* Atur tinggi maksimum sesuai kebutuhan */
             margin-top: 10px;
+        }
+        .btn-kembali {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .alert-custom {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -96,6 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- end sidebar -->
     <div class="container">
+        <a href="../index.php" class="btn btn-danger btn-kembali">Kembali</a>
+        <div class="alert alert-danger text-center alert-custom" role="alert">
+            Mohon Upload gambar yang Positif
+        </div>
         <h1 class="mt-4">Tambah Posting Baru</h1>
         <form action="" method="post" enctype="multipart/form-data" class="mt-4">
             <div class="form-group">
@@ -116,10 +125,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img id="imagePreview" class="img-fluid mt-2" src="#" alt="Preview Image" style="display: none;">
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Unggah</button>
-            <a href="../index.php" class="btn btn-danger ryu">Kembali</a>
-            <div class="alert alert-danger text-center mt-1" role="alert">
-                Mohon Upload gambar yang Positif
-            </div>
         </form>
     </div>
     <style>

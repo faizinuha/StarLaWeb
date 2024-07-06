@@ -163,7 +163,7 @@ if (mysqli_num_rows($result) > 0) {
               </div>
             </div>
             <hr>
-            <form>
+            <!-- <form>
               <div class="row">
                 <div class="col-sm-9">
                   <p class="mb-0">Hapus Akun:</p>
@@ -172,7 +172,7 @@ if (mysqli_num_rows($result) > 0) {
                   <button type="button" class="btn btn-outline-danger mb-0" onclick="deleteAccount()">Hapus Akun</button>
                 </div>
               </div>
-            </form>
+            </form> -->
             <hr>
             <script>
               function deleteAccount() {

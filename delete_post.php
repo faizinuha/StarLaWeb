@@ -18,7 +18,7 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
         // Ambil data postingan dari hasil query
         $row = $result->fetch_assoc();
 
-        // Hapus baris terkait di tabel dislikes
+        // Hapus baris terkait di tabel dislikes dan likes
         $stmt = $koneksi->prepare("DELETE FROM dislikes WHERE post_id=?");
         $stmt->bind_param("i", $post_id);
         $stmt->execute();
@@ -35,10 +35,14 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
             // Hapus file gambar dari direktori
             $image_path = "blogs/uploads/" . $row['image'];
             if (file_exists($image_path)) {
-                unlink($image_path);
+                if (unlink($image_path)) {
+                    $_SESSION['message'] = "Postingan dan gambar berhasil dihapus.";
+                } else {
+                    $_SESSION['message'] = "Postingan dihapus, tetapi gagal menghapus gambar.";
+                }
+            } else {
+                $_SESSION['message'] = "Postingan dihapus. Gambar tidak ditemukan.";
             }
-
-            $_SESSION['message'] = "Postingan berhasil dihapus.";
         } else {
             $_SESSION['message'] = "Gagal menghapus postingan.";
         }
@@ -49,7 +53,7 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
     // Tutup statement dan koneksi
     $stmt->close();
     $koneksi->close();
-}    
+}
 
 // Redirect dengan menggunakan JavaScript
 echo "<script>window.location.href='/index.php';</script>";
