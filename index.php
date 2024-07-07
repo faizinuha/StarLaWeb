@@ -83,6 +83,10 @@
             align-items: center;
             margin-bottom: 10px;
         }
+        /* cursor */
+        .cursor{
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -157,7 +161,7 @@
                                         <div class="position-relative">
                                             <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                             <div class="card-body">
-                                                <div class="profile-container">
+                                                <div class="profile-container cursor " >
                                                     <?php if (!empty($row['profile_image_path'])) : ?>
                                                         <img onclick="window.location = './profile/profile-pengguna.php?id=<?= htmlspecialchars($row['user_id']); ?>'" src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
                                                     <?php else : ?>

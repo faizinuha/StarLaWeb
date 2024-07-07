@@ -15,7 +15,7 @@ if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
 } else {
     die("Invalid post_id.");
 }
-// edit Pesan 
+
 // Verify if the post_id exists in the database
 $post_sql = "SELECT * FROM posts WHERE id = ?";
 $post_stmt = $koneksi->prepare($post_sql);
@@ -32,7 +32,7 @@ $post = $post_result->fetch_assoc();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
     // Validate and sanitize input
     $content = trim($_POST['content']);
-    // edit pesan Users
+
     if (isset($_POST['comment_id'])) {
         $comment_id = intval($_POST['comment_id']);
     }
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
     } else {
         // New comment logic
         $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
-// mengcheck peesan post_id
+
         // Check if the post_id exists in the posts table
         $check_post_sql = "SELECT id FROM posts WHERE id = ?";
         $check_stmt = $koneksi->prepare($check_post_sql);
@@ -227,8 +227,8 @@ $result = $stmt->get_result();
                             <div class="comment-row">
                                 <div class="comment-content">
                                     <img src="../profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" class="comment-avatar" alt="Avatar">
-                                    <a href="../profile/profile-pengguna.php?username=<?php echo htmlspecialchars($row['author']); ?>">
-                                        <?php echo htmlspecialchars($row['author']); ?>
+                                    <a href="../profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        <?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>
                                     </a>
                                     <p>Pesan: <?php echo htmlspecialchars($row['content']); ?></p>
                                     <p class="text-muted"><?php echo isset($row['created_at']) ? htmlspecialchars($row['created_at']) : 'N/A'; ?></p>
@@ -253,9 +253,7 @@ $result = $stmt->get_result();
             </div>
         </div>
     </div>
-    </div>
 
-    </div>
     <!-- Edit Comment Modal -->
     <div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -282,11 +280,6 @@ $result = $stmt->get_result();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var editCommentModal = document.getElementById('editCommentModal');
@@ -303,7 +296,5 @@ $result = $stmt->get_result();
             });
         });
     </script>
-
 </body>
-
 </html>
