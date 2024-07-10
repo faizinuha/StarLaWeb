@@ -2,21 +2,21 @@
 session_start();
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 
-// Check if user is logged in
+// Cek apakah user sudah login
 $is_logged_in = isset($_SESSION['username']);
 
-if (isset($_SESSION['user_id'])) {
+if ($is_logged_in) {
     $user_id = $_SESSION['user_id'];
 }
 
-// Get the post_id from the URL
+// Mendapatkan post_id dari URL
 if (isset($_GET['post_id']) && is_numeric($_GET['post_id'])) {
     $post_id = intval($_GET['post_id']);
 } else {
-    die("Invalid post_id.");
+    die("post_id tidak valid.");
 }
 
-// Verify if the post_id exists in the database
+// Verifikasi apakah post_id ada di database
 $post_sql = "SELECT * FROM posts WHERE id = ?";
 $post_stmt = $koneksi->prepare($post_sql);
 $post_stmt->bind_param("i", $post_id);
@@ -24,71 +24,73 @@ $post_stmt->execute();
 $post_result = $post_stmt->get_result();
 
 if ($post_result->num_rows == 0) {
-    die("Invalid post_id.");
+    die("post_id tidak valid.");
 }
 
 $post = $post_result->fetch_assoc();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
-    // Validate and sanitize input
+    // Validasi dan sanitasi input
     $content = trim($_POST['content']);
 
-    if (isset($_POST['comment_id'])) {
-        $comment_id = intval($_POST['comment_id']);
-    }
-
-    // Check if it's a new comment or an edit
-    if (isset($comment_id)) {
-        // Edit the comment
-        $edit_sql = "UPDATE comments SET content = ? WHERE id = ? AND author = ?";
-        $stmt = $koneksi->prepare($edit_sql);
-        $stmt->bind_param("sis", $content, $comment_id, $_SESSION['username']);
-
-        if ($stmt->execute()) {
-            // Redirect to prevent form resubmission
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit();
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-        $stmt->close();
-    } else {
-        // New comment logic
-        $post_id = intval($_POST['post_id']); // Assuming post_id is passed as a hidden input
-
-        // Check if the post_id exists in the posts table
-        $check_post_sql = "SELECT id FROM posts WHERE id = ?";
-        $check_stmt = $koneksi->prepare($check_post_sql);
-        $check_stmt->bind_param("i", $post_id);
-        $check_stmt->execute();
-        $check_stmt->store_result();
-
-        if ($check_stmt->num_rows > 0) {
-            // Prepare the SQL statement
-            $sql = "INSERT INTO comments (post_id, author, content, created_at) VALUES (?, ?, ?, NOW())";
-            $stmt = $koneksi->prepare($sql);
-            $stmt->bind_param("iss", $post_id, $_SESSION['username'], $content);
-
+    if (!empty($content)) {
+        // Periksa apakah ini komentar baru atau edit
+        if (isset($_POST['comment_id']) && is_numeric($_POST['comment_id'])) {
+            // Edit komentar
+            $comment_id = intval($_POST['comment_id']);
+            $edit_sql = "UPDATE comments SET content = ? WHERE id = ? AND user_id = ?";
+            $stmt = $koneksi->prepare($edit_sql);
+            $stmt->bind_param("sis", $content, $comment_id, $_SESSION['user_id']);
+        
             if ($stmt->execute()) {
-                // Redirect to prevent form resubmission
+                // Redirect untuk mencegah resubmission form
                 header("Location: " . $_SERVER['REQUEST_URI']);
                 exit();
             } else {
                 echo "Error: " . $stmt->error;
             }
-
+        
             $stmt->close();
+                
         } else {
-            echo "Invalid post_id.";
-        }
+            // Logika komentar baru
+            $post_id = intval($_POST['post_id']); // Asumsi post_id dikirimkan sebagai input tersembunyi
 
-        $check_stmt->close();
+            // Periksa apakah post_id ada di tabel posts
+            $check_post_sql = "SELECT id FROM posts WHERE id = ?";
+            $check_stmt = $koneksi->prepare($check_post_sql);
+            $check_stmt->bind_param("i", $post_id);
+            $check_stmt->execute();
+            $check_stmt->store_result();
+
+            if ($check_stmt->num_rows > 0) {
+                // Siapkan pernyataan SQL
+                $sql = "INSERT INTO comments (post_id, user_id, content, created_at) VALUES (?, ?, ?, NOW())";
+                $stmt = $koneksi->prepare($sql);
+                $stmt->bind_param("iss", $post_id, $_SESSION['user_id'], $content);
+
+                if ($stmt->execute()) {
+                    // Redirect untuk mencegah resubmission form
+                    header("Location: " . $_SERVER['REQUEST_URI']);
+                    exit();
+                } else {
+                    echo "Error: " . $stmt->error;
+                }
+
+                $stmt->close();
+            } else {
+                echo "post_id tidak valid.";
+            }
+
+            $check_stmt->close();
+        }
+    } else {
+        echo "Isi komentar tidak boleh kosong.";
     }
 }
 
-// Fetch comments from database
-$sql = "SELECT c.*, u.profile_image_path FROM comments c LEFT JOIN users u ON c.author = u.username WHERE c.post_id = ? ORDER BY c.created_at DESC";
+// Mengambil komentar dari database
+$sql = "SELECT c.*, u.profile_image_path, u.username FROM comments c LEFT JOIN users u ON c.user_id = u.id WHERE c.post_id = ? ORDER BY c.created_at DESC";
 $stmt = $koneksi->prepare($sql);
 $stmt->bind_param("i", $post_id);
 $stmt->execute();
@@ -191,13 +193,13 @@ $result = $stmt->get_result();
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-4">
-                <!-- Display the post image -->
+                <!-- Menampilkan gambar post -->
                 <?php if (!empty($post['image'])) : ?>
                     <img src="uploads/<?php echo htmlspecialchars($post['image']); ?>" class="post-image" alt="Post Image">
                 <?php endif; ?>
             </div>
             <div class="col-md-8">
-                <!-- Display the post details -->
+                <!-- Menampilkan detail post -->
                 <div class="post-details">
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
@@ -227,74 +229,80 @@ $result = $stmt->get_result();
                             <div class="comment-row">
                                 <div class="comment-content">
                                     <img src="../profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" class="comment-avatar" alt="Avatar">
-                                    <a href="../profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>">
-                                        <?php echo htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8'); ?>
+                                    <a href="../profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['user_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                                        <?php echo htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?>
                                     </a>
                                     <p>Pesan: <?php echo htmlspecialchars($row['content']); ?></p>
                                     <p class="text-muted"><?php echo isset($row['created_at']) ? htmlspecialchars($row['created_at']) : 'N/A'; ?></p>
                                 </div>
-                                <?php if ($is_logged_in && $_SESSION['username'] == $row['author']) : ?>
+                                <?php if ($is_logged_in && $row['user_id'] == $user_id) : ?>
                                     <div class="comment-actions">
-                                        <!-- Edit button triggers the modal -->
-                                        <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editCommentModal" data-comment-id="<?php echo htmlspecialchars($row['id']); ?>" data-comment-content="<?php echo htmlspecialchars($row['content']); ?>">
+                                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editCommentModal" data-comment-id="<?php echo htmlspecialchars($row['id']); ?>" data-comment-content="<?php echo htmlspecialchars($row['content']); ?>">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <a href="hapuschat.php?hapus=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        <form action="hapuschat.php" method="POST" style="display:inline;">
+                                            <input type="hidden" name="comment_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?')"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </div>
                                 <?php endif; ?>
                             </div>
                         <?php endwhile; ?>
                     <?php else : ?>
-                        <p>Tidak ada komentar.</p>
+                        <p>Belum ada komentar.</p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Edit Comment Modal -->
+    <!-- Modal untuk mengedit komentar -->
     <div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="editCommentForm" action="#" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCommentModalLabel">Edit Komentar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?post_id=' . htmlspecialchars($post_id); ?>" method="POST">
                     <div class="modal-body">
-                        <input type="hidden" name="comment_id" id="edit-comment-id">
-                        <div class="mb-3">
-                            <label for="edit-comment-content" class="form-label">Comment</label>
-                            <textarea class="form-control" id="edit-comment-content" name="content" rows="3" required></textarea>
+                        <input type="hidden" name="comment_id" id="editCommentId">
+                        <div class="form-group">
+                            <label for="editCommentContent">Edit Komentar:</label>
+                            <textarea class="form-control" id="editCommentContent" name="content" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var editCommentModal = document.getElementById('editCommentModal');
-            editCommentModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var commentId = button.getAttribute('data-comment-id');
-                var commentContent = button.getAttribute('data-comment-content');
+        // Pass data ke modal edit komentar
+        var editCommentModal = document.getElementById('editCommentModal');
+        editCommentModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var commentId = button.getAttribute('data-comment-id');
+            var commentContent = button.getAttribute('data-comment-content');
 
-                var modalCommentIdInput = editCommentModal.querySelector('#edit-comment-id');
-                var modalCommentContentTextarea = editCommentModal.querySelector('#edit-comment-content');
+            var modalCommentId = editCommentModal.querySelector('#editCommentId');
+            var modalCommentContent = editCommentModal.querySelector('#editCommentContent');
 
-                modalCommentIdInput.value = commentId;
-                modalCommentContentTextarea.value = commentContent;
-            });
+            modalCommentId.value = commentId;
+            modalCommentContent.value = commentContent;
         });
     </script>
+    <!-- Penjelasan Perubahan:
+Perubahan Query SQL: Query SQL diubah untuk menggabungkan tabel comments dan users sehingga dapat mengambil username dari tabel users.
+Perubahan di Looping Komentar: Dalam while loop untuk menampilkan komentar, kita sekarang menggunakan username dari tabel users sebagai pengganti user_id.
+Edit dan Hapus Komentar: Aksi edit dan hapus masih tersedia, dan ditampilkan hanya jika pengguna yang login adalah pemilik komentar.
+Sekarang, komentar akan menampilkan username dari pengguna yang memberikan komentar, bukan user_id. Jika ada hal lain yang perlu diperbaiki atau ditambahkan, beri tahu saya! -->
 </body>
+
 </html>
