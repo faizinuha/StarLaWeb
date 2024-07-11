@@ -3,6 +3,7 @@ session_start();
 
 // Koneksi ke database
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
+
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 $post_id = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 
@@ -24,6 +25,8 @@ if ($action == 'like' || $action == 'dislike') {
         $check_dislike_query = "SELECT * FROM dislikes WHERE post_id = $post_id AND user_id = $current_user_id";
         $result_check_dislike = $koneksi->query($check_dislike_query);
 
+        $notif_message = "";
+
         if ($result_check_like->num_rows > 0) {
             if ($action == 'like') {
                 // Hapus like
@@ -39,6 +42,8 @@ if ($action == 'like' || $action == 'dislike') {
 
                 $insert_action_query = "INSERT INTO dislikes (post_id, user_id) VALUES ($post_id, $current_user_id)";
                 $koneksi->query($insert_action_query);
+
+                $notif_message = "User $current_user_id dislike foto Anda.";
             }
         } elseif ($result_check_dislike->num_rows > 0) {
             if ($action == 'dislike') {
@@ -55,6 +60,8 @@ if ($action == 'like' || $action == 'dislike') {
 
                 $insert_action_query = "INSERT INTO likes (post_id, user_id) VALUES ($post_id, $current_user_id)";
                 $koneksi->query($insert_action_query);
+
+                $notif_message = "User $current_user_id like foto Anda.";
             }
         } else {
             // Tambahkan like atau dislike baru
@@ -63,6 +70,19 @@ if ($action == 'like' || $action == 'dislike') {
 
             $insert_action_query = "INSERT INTO " . ($action == 'like' ? 'likes' : 'dislikes') . " (post_id, user_id) VALUES ($post_id, $current_user_id)";
             $koneksi->query($insert_action_query);
+
+            $notif_message = "User $current_user_id " . ($action == 'like' ? 'like' : 'dislike') . " foto Anda.";
+        }
+
+        if ($notif_message !== "") {
+            // Dapatkan user_id dari pemilik posting
+            $post_owner_query = "SELECT user_id FROM posts WHERE id = $post_id";
+            $result_post_owner = $koneksi->query($post_owner_query);
+            if ($result_post_owner->num_rows > 0) {
+                $post_owner = $result_post_owner->fetch_assoc()['user_id'];
+                $notif_query = "INSERT INTO notifications (user_id, post_id, message) VALUES ($post_owner, $post_id, '$notif_message')";
+                $koneksi->query($notif_query);
+            }
         }
 
         header("Location: " . $_SERVER['HTTP_REFERER']);

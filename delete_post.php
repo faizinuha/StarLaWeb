@@ -22,7 +22,13 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
         $stmt = $koneksi->prepare("DELETE FROM dislikes WHERE post_id=?");
         $stmt->bind_param("i", $post_id);
         $stmt->execute();
+        
         $stmt = $koneksi->prepare("DELETE FROM likes WHERE post_id=?");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+
+        // Hapus baris terkait di tabel notifications
+        $stmt = $koneksi->prepare("DELETE FROM notifications WHERE post_id=?");
         $stmt->bind_param("i", $post_id);
         $stmt->execute();
 

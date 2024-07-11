@@ -42,7 +42,7 @@
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="proses_data/proses_register.php">
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="nama" class="form-label">Nama:</label>
