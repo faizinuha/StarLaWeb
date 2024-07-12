@@ -18,6 +18,36 @@ if ($result->num_rows > 0) {
 }
 $koneksi->close();
 ?>
+<!-- php 2 -->
+<?php
+session_start();
+
+// require_once __DIR__ . '/../../allkoneksi/koneksi.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $emailOrUsername = $_POST['emailOrUsername'];
+    $password = $_POST['password'];
+
+    $stmt = $koneksi->prepare("SELECT id, name, username, password FROM users WHERE email=? OR username=?");
+    $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+    $stmt->execute();
+    $stmt->bind_result($id, $name, $username, $hashed_password);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($id && password_verify($password, $hashed_password)) {
+        $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $id;
+        $_SESSION['user_name'] = $name;
+        header("Location: /index.php");
+        exit();
+    } else {
+        $_SESSION['login_error'] = "Invalid email/username or password.";
+    header("Location: /login.php");
+        exit();
+    }
+}
+$koneksi->close();
+?>
 
 <!DOCTYPE html>
 <html lang="id">
@@ -111,7 +141,7 @@ $koneksi->close();
                         <h4>Login</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="proses_data/proses_login.php" class="needs-validation" novalidate="">
+                        <form method="POST"class="needs-validation" novalidate="">
                             <div class="form-group">
                                 <label for="emailOrUsername" class="form-label">Username or Email</label>
                                 <div class="float-right">

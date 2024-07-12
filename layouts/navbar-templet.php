@@ -28,7 +28,7 @@ mysqli_close($koneksi);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twiiter</title>
-    <link rel="icon" href="../assets/back_arrow_icon.png">
+    <!-- <link rel="icon" href="../assets/back_arrow_icon.png"> -->
     <!-- Bootstrap CSS -->
     <!-- General CSS Files -->
     <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
@@ -162,10 +162,12 @@ mysqli_close($koneksi);
                             <a class="nav-link" href="login1/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a></li>
+                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a>
+                        </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i class="bi bi-discord"></i> Join Discord</a></li>
+                        <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i class="bi bi-discord"></i> Join Discord</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -193,7 +195,7 @@ mysqli_close($koneksi);
             </div>
         </div>
     </div>
-    
+
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
