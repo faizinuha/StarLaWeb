@@ -31,6 +31,16 @@ if (isset($_GET['id'])) {
             <title>Profil Pengguna</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+            <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+
+            <!-- CSS Libraries -->
+
+            <!-- Template CSS -->
+            <link rel="stylesheet" href="../assets/css/style.css">
+            <link rel="stylesheet" href="../assets/css/components.css">
+            <!-- Start GA -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
         </head>
 
         <body class="bg-light">

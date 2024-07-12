@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
             $edit_sql = "UPDATE comments SET content = ? WHERE id = ? AND user_id = ?";
             $stmt = $koneksi->prepare($edit_sql);
             $stmt->bind_param("sis", $content, $comment_id, $_SESSION['user_id']);
-        
+
             if ($stmt->execute()) {
                 // Redirect untuk mencegah resubmission form
                 header("Location: " . $_SERVER['REQUEST_URI']);
@@ -49,9 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $is_logged_in) {
             } else {
                 echo "Error: " . $stmt->error;
             }
-        
+
             $stmt->close();
-                
         } else {
             // Logika komentar baru
             $post_id = intval($_POST['post_id']); // Asumsi post_id dikirimkan sebagai input tersembunyi
@@ -107,6 +106,16 @@ $result = $stmt->get_result();
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .comment-card {
@@ -201,8 +210,8 @@ $result = $stmt->get_result();
             <div class="col-md-8">
                 <!-- Menampilkan detail post -->
                 <div class="post-details">
-                    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
-                    <p><?php echo htmlspecialchars($post['content']); ?></p>
+                    <h2>Name:<?php echo htmlspecialchars($post['title']); ?></h2>
+                    <p>Deskripsi:<?php echo htmlspecialchars($post['content']); ?></p>
                     <p><strong>Tags:</strong> <?php echo htmlspecialchars($post['Tags']); ?></p>
                 </div>
 

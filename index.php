@@ -7,11 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icons" href="https://t4.ftcdn.net/jpg/04/92/55/37/360_F_492553733_M1ewmNvrx917YggK3b6IQjiqKzbCpufW.jpg">
     <title>Blogger</title>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
 
+    <!-- partilas -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
 
     <style>
@@ -84,9 +85,15 @@
             align-items: center;
             margin-bottom: 10px;
         }
+
         /* cursor */
-        .cursor{
+        .cursor {
             cursor: pointer;
+        }
+
+        .text {
+            position: relative;
+            top: 100;
         }
     </style>
 </head>
@@ -108,9 +115,8 @@
             <div class="row">
                 <!-- Sidebar -->
                 <div class="col-md-4">
-                    <!-- col-md-4 -->
-                    <div class="card">
-                        <div class="card-header">
+                    <div class="card mt-2">
+                        <div class="card-header text border">
                             Categories
                         </div>
                         <div class="card-body">
@@ -121,7 +127,7 @@
                                 $result = $koneksi->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<li class="list-group-item"><a href="category.php?Tags=' . $row['Tags']. '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
+                                        echo '<li class="list-group-item"><a href="category.php?Tags=' . $row['Tags'] . '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
                                     }
                                 }
                                 ?>
@@ -131,8 +137,7 @@
                 </div>
 
                 <!-- Main Content -->
-                <div class="col-md-9">
-                    <hr>
+                <div class="col-md-8">
                     <div class="row">
                         <?php
                         // Koneksi ke database
@@ -158,12 +163,12 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                         ?>
-                                <div class="card mb-5">
-                                    <div class="w-100">
+                                <div class="card mt-4 ">
+                                    <div class="w-150">
                                         <div class="position-relative">
-                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-4 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                             <div class="card-body">
-                                                <div class="profile-container cursor " >
+                                                <div class="profile-container cursor ">
                                                     <?php if (!empty($row['profile_image_path'])) : ?>
                                                         <img onclick="window.location = './profile/profile-pengguna.php?id=<?= htmlspecialchars($row['user_id']); ?>'" src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
                                                     <?php else : ?>
@@ -182,7 +187,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu">
                                                         <?php if ($current_user == $row['uploaded_by']) { ?>
-                                                            <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                                                            <li><a class="dropdown-item " href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
                                                             <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
                                                         <?php } ?>
                                                         <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
@@ -226,8 +231,31 @@
             console.log('particles.js loaded - callback');
         });
     </script>
+    <!-- stisla -->
+    <!-- General JS Scripts -->
+    <script src="../assets/modules/jquery.min.js"></script>
+    <script src="../assets/modules/popper.js"></script>
+    <script src="../assets/modules/tooltip.js"></script>
+    <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../assets/modules/moment.min.js"></script>
+    <script src="../assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+
+    <!-- Page Specific JS File -->
+
+    <!-- Template JS File -->
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../assets/js/custom.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7pL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
+    <!-- <div class="">
+        <?php
+        // Koneksi ke database
+        include 'footer/footer.php';
+        ?>
+    </div> -->
 </body>
 
 </html>

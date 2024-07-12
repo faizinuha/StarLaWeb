@@ -38,13 +38,26 @@ mysqli_close($koneksi);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- SweetAlert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+
+  <!-- CSS Libraries -->
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 </head>
+
 <body>
   <section style="background-color: #eee;">
     <div class="container py-5">
@@ -55,7 +68,7 @@ mysqli_close($koneksi);
               <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
               <li class="breadcrumb-item"><a href="profile_user.php">User</a></li>
               <li class="breadcrumb-item"><a href="../in/logout.php" id="logout">Log Out</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><?php echo $name ?></li>
+              <li class="breadcrumb-item active" aria-current="page">HI,<?php echo $name ?></li>
             </ol>
           </nav>
         </div>
@@ -165,7 +178,7 @@ mysqli_close($koneksi);
           </div>
         </div>
       </div>
-      
+
       <div class="row mt-4">
         <div class="col-12">
           <div class="card mb-4">
@@ -193,4 +206,5 @@ mysqli_close($koneksi);
   </section>
 
 </body>
+
 </html>

@@ -76,6 +76,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Posting</title>
     <!-- Bootstrap CSS -->
+     <!-- General CSS Files -->
+    <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .preview-image {

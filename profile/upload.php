@@ -29,7 +29,8 @@ if (isset($_SESSION['user_id'])) {
             $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" && $imageFileType != "webp"
         ) {
-            echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
+            // echo "Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.";
+            echo "<div class='alert alert-warning' role='alert'>Maaf, hanya file JPG, JPEG, PNG & GIF yang diperbolehkan.</div>";
             $uploadOk = 0;
         }
 
@@ -80,6 +81,16 @@ mysqli_close($koneksi);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+
+  <!-- CSS Libraries -->
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <title>Edit Profil</title>
     <style>
         /* Styling untuk tombol "Upload Image" */
@@ -114,7 +125,7 @@ mysqli_close($koneksi);
                         <input type="file" class="form-control" id="profile_image_path" name="profile_image_path" onchange="previewImage(this)">
                         <img src="#" id="imagePreview" class="mt-4 profile_image_path" alt="profile_image_path" style="display:none;">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-upload" name="submit">Upload Image</button>
+                <button type="submit" class="btn btn-primary btn-upload" name="submit">Upload Image</button>
                     <a href="profile_user.php" class="btn btn-danger btn-back">Back</a>
                 </form>
             </div>

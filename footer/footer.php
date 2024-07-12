@@ -1,52 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+          
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <style>
-    .bg-pink-900 {
-      background-color: #8e44ad;
-    }
+            <div class="card card-primary">
+              <div class="card-header"><h4>Subscribe Our Newsletters</h4></div>
 
-    .text-pink-300 {
-      color: #ff99cc;
-    }
+              <div class="card-body">
+                <form method="POST">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fas fa-envelope"></i>
+                        </div>
+                      </div>
+                      <input id="email" type="email" class="form-control" name="email" autofocus placeholder="Email">
+                    </div>
+                  </div>
 
-    .text-pink-500 {
-      color: #ff66b2;
-    }
-
-    .hover\:text-pink-500:hover {
-      color: #ff66b2;
-    }
-  </style>
-</head>
-
-<body>
-<footer class="bg-pink-900 text-pink-300 py-4">
-  <div class="container d-flex justify-content-between align-items-center">
-    <div>
-      <p>&copy; 2024 Blog Kami. All rights reserved.</p>
-      <p>Designed with ❤️ by Zaki Blogs</p>
-    </div>
-    <div class="social-links d-flex">
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-facebook"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-twitter"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-instagram"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-github"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-linkedin"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-youtube"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-pinterest"></i></a>
-      <a href="#" class="text-pink-300 hover:text-pink-500 mx-2"><i class="bi bi-reddit"></i></a>
-    </div>
-  </div>
-</footer>
-</body>
-
-</html>
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-lg btn-round btn-primary">
+                      Subscribe
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
