@@ -107,7 +107,8 @@
         <div class="container main">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-3">
+                <div class="col-md-4">
+                    <!-- col-md-4 -->
                     <div class="card">
                         <div class="card-header">
                             Categories
