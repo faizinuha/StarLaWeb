@@ -9,8 +9,10 @@
     <title>Blogger</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
 
     <!-- partilas -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
@@ -92,6 +94,7 @@
         }
 
         .text {
+        border:2px solid red;
             position: relative;
             top: 100;
         }
@@ -99,6 +102,26 @@
 </head>
 
 <body>
+    <!-- pesan berhasil login -->
+    <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12">
+            <?php if (isset($_GET['login_success'])): ?>
+              <div class="alert alert-success" role="alert">
+                Selamat datang, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!
+              </div>
+            <?php endif; ?>
+            <h1 id="time" >Selamat datang di halaman utama!</h1>
+            <!-- Konten lainnya di sini -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <!-- berhasi -->
     <!-- Particles container -->
     <div id="particles-js"></div>
 
@@ -175,9 +198,9 @@
                                                         <img onclick="window.location = './profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['user_id']); ?>'" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
                                                     <?php endif; ?>
                                                     <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
+                                                    <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
+                                                    <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                                 </div>
-                                                <h5 class="card-title">Judul: <?php echo htmlspecialchars($row['title']); ?></h5>
-                                                <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
                                                 <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                             </div>
                                             <div class="overlay position-absolute top-0 end-0 m-2">
@@ -232,23 +255,6 @@
         });
     </script>
     <!-- stisla -->
-    <!-- General JS Scripts -->
-    <script src="../assets/modules/jquery.min.js"></script>
-    <script src="../assets/modules/popper.js"></script>
-    <script src="../assets/modules/tooltip.js"></script>
-    <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="../assets/modules/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
-
-    <!-- JS Libraies -->
-
-    <!-- Page Specific JS File -->
-
-    <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7pL+0pEd5eY1z4+cBB+z8V+W9CKMpYW4" crossorigin="anonymous"></script>
     <!-- <div class="">
         <?php
@@ -256,6 +262,9 @@
         include 'footer/footer.php';
         ?>
     </div> -->
+    <script>
+        document.getElementById('app').setAttribute('style', 'display: none;')
+    </script>
 </body>
 
 </html>

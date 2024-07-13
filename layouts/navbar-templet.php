@@ -2,7 +2,7 @@
 session_start();
 
 // Default name if not logged in
-$name = "Not Loggin";
+$name = "Not Logged In";
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Fetch user's name if logged in
@@ -27,24 +27,18 @@ mysqli_close($koneksi);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twiiter</title>
-    <!-- <link rel="icon" href="../assets/back_arrow_icon.png"> -->
+    <title>Bloger</title>
     <!-- Bootstrap CSS -->
-    <!-- General CSS Files -->
     <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
-
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
-    <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <!-- Bootstrap Icons -->
+    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -98,30 +92,6 @@ mysqli_close($koneksi);
                 flex-direction: column;
             }
         }
-
-        @media (max-width: 480px) {
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .navbar-brand {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 240px) {
-            .navbar-brand {
-                font-size: 0.8rem;
-            }
-        }
-
-        @media (max-width: 160px) {
-            .navbar-brand {
-                font-size: 0.6rem;
-            }
-        }
     </style>
 </head>
 
@@ -150,7 +120,6 @@ mysqli_close($koneksi);
                                 <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                                 <li><a class="dropdown-item cursor1" href="Private/setting.php"> <i class="bi bi-gear-wide"></i> Setting</a></li>
-                                <!-- <li><a class="dropdown-item cursor1" href="Private/contant.php">  <i class="bi bi-gear-wide"></i> Akses Contct</a></li> -->
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -159,11 +128,9 @@ mysqli_close($koneksi);
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="login1/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-                        </li>
+                            <a class="nav-link" href="login1/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a>
-                        </li>
+                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a></li>
                     <?php } ?>
                     <li class="nav-item">
                         <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i class="bi bi-discord"></i> Join Discord</a>
@@ -194,6 +161,57 @@ mysqli_close($koneksi);
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file"></span>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="shopping-cart"></span>
+                                Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="users"></span>
+                                Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                Integrations
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+
+            <!-- end content -->
     </div>
 
     <!-- Bootstrap JS (Optional) -->
