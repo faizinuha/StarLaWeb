@@ -68,6 +68,7 @@ mysqli_close($koneksi);
               <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
               <li class="breadcrumb-item"><a href="profile_user.php">User</a></li>
               <li class="breadcrumb-item"><a href="../in/logout.php" id="logout">Log Out</a></li>
+              <li class="breadcrumb-item"><a href="../blogs/upload.php">Uplods</a></li>
               <li class="breadcrumb-item active" aria-current="page">HI,<?php echo $name ?></li>
             </ol>
           </nav>
@@ -170,7 +171,7 @@ mysqli_close($koneksi);
                   <p class="mb-0">About Me</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><?php echo $about_me; ?></p>
+                  <p class="text-muted mb-0" placeholder="NOT FOUND" ><?php echo $about_me; ?></p>
                 </div>
               </div>
               <hr>
