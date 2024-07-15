@@ -1,5 +1,5 @@
 
-<?php include ("layouts/Navbar/main.php");?>
+<?php include ("layouts/navbar-templet.php");?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -80,10 +80,12 @@ if (isset($_SESSION['username'])) {
       padding: 15px 10px;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
       transition: all 0.4s ease;
+      margin-left: -10px; /* Adjust this value to move the sidebar to the left */
     }
 
     .sidebar.close {
       width: calc(55px + 20px);
+      margin-left: -10px; /* Adjust this value to match the open state */
     }
 
     .logo_items {
@@ -325,136 +327,112 @@ if (isset($_SESSION['username'])) {
     .profile-dropdown:hover .dropdown-content {
       display: block;
     }
+
+    .profile-dropdown .profile-info {
+      cursor: pointer;
+    }
   </style>
-  <nav class="sidebar locked">
+  <div class="sidebar">
     <div class="logo_items flex">
       <span class="nav_image">
-        <!-- <img src="images/logo.png" alt="logo_img" /> -->
+        <img src="images/logo.png" alt="logo_img" />
       </span>
-      <span class="logo_name">CodingNepal</span>
-      <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
-      <i class="bx bx-x" id="sidebar-close"></i>
+      <span class="logo_name">CodingLab</span>
+      <i id="sidebar-close" class="bx bx-x"></i>
     </div>
 
     <div class="menu_container">
       <div class="menu_items">
-        <ul class="menu_item">
-          <div class="menu_title flex">
-            <span class="title">Dashboard</span>
-            <span class="line"></span>
-          </div>
-          <li class="item">
-            <a href="../../Admin/index.php" class="link flex">
-              <i class="bx bx-home-alt"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-        </ul>
-
-        <ul class="menu_item">
-          <div class="menu_title flex">
-            <span class="title">Editor</span>
-            <span class="line"></span>
-          </div>
-          <li class="item">
-            <a href="#" class="link flex">
-              <i class="bx bx-cloud-upload"></i>
-              <span>Upload New</span>
-            </a>
-          </li>
-        </ul>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-grid-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-package"></i>
+            <span>Product</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-list-ul"></i>
+            <span>Order list</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-badge-check"></i>
+            <span>Inventory</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-user"></i>
+            <span>Accounts</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="link flex">
+            <i class="bx bx-message-rounded"></i>
+            <span>Chat</span>
+          </a>
+        </li>
       </div>
 
       <div class="sidebar_profile flex">
         <span class="nav_image">
-          <img src="images/profile.jpg" alt="logo_img" />
+          <img src="images/profile.png" alt="logo_img" />
         </span>
         <div class="data_text">
-          <span class="name"><?php echo $name ?></span>
-          <span class="username">@<?php echo $username ?></span>
+          <span class="name">User</span>
+          <br />
+          <span class="username"><?php echo $name; ?></span>
         </div>
       </div>
     </div>
+  </div>
+
+  <nav class="navbar flex">
+    <i id="sidebar-open" class="bx bx-menu"></i>
+    <input type="text" class="search_box" placeholder="Search ..." />
+    <div class="profile-dropdown">
+      <span class="profile-info">
+        <span class="nav_image">
+          <img src="images/profile.png" alt="Profile Image">
+        </span>
+        <?php echo $name; ?>
+      </span>
+      <div class="dropdown-content">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
   </nav>
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarClose = document.querySelector("#sidebar-close");
+    const sidebarOpen = document.querySelector("#sidebar-open");
+    const lockIcon = document.querySelector("#lock-icon");
 
-  <!-- Navbar -->
+    sidebarClose.addEventListener("click", () => {
+      sidebar.classList.add("close");
+    });
 
+    sidebarOpen.addEventListener("click", () => {
+      sidebar.classList.remove("close");
+    });
+
+    lockIcon.addEventListener("click", () => {
+      if (sidebar.classList.contains("close")) {
+        sidebar.classList.remove("close");
+      } else {
+        sidebar.classList.add("close");
+      }
+    });
+  </script>
 </body>
 
 </html>
-<!-- scirp -->
-<script>
-  // Selecting the sidebar and buttons
-  const sidebar = document.querySelector(".sidebar");
-  const sidebarOpenBtn = document.querySelector("#sidebar-open");
-  const sidebarCloseBtn = document.querySelector("#sidebar-close");
-  const sidebarLockBtn = document.querySelector("#lock-icon");
-
-  // Function to toggle the lock state of the sidebar
-  const toggleLock = () => {
-    sidebar.classList.toggle("locked");
-    // If the sidebar is not locked
-    if (!sidebar.classList.contains("locked")) {
-      sidebar.classList.add("hoverable");
-      sidebarLockBtn.classList.replace("bx-lock-alt", "bx-lock-open-alt");
-    } else {
-      sidebar.classList.remove("hoverable");
-      sidebarLockBtn.classList.replace("bx-lock-open-alt", "bx-lock-alt");
-    }
-  };
-
-  // Function to hide the sidebar when the mouse leaves
-  const hideSidebar = () => {
-    if (sidebar.classList.contains("hoverable")) {
-      sidebar.classList.add("close");
-    }
-  };
-
-  // Function to show the sidebar when the mouse enter
-  const showSidebar = () => {
-    if (sidebar.classList.contains("hoverable")) {
-      sidebar.classList.remove("close");
-    }
-  };
-
-  // Function to show and hide the sidebar
-  const toggleSidebar = () => {
-    sidebar.classList.toggle("close");
-  };
-
-  // If the window width is less than 800px, close the sidebar and remove hoverability and lock
-  if (window.innerWidth < 800) {
-    sidebar.classList.add("close");
-    sidebar.classList.remove("locked");
-    sidebar.classList.remove("hoverable");
-  }
-
-  // Adding event listeners to buttons and sidebar for the corresponding actions
-  sidebarLockBtn.addEventListener("click", toggleLock);
-  sidebar.addEventListener("mouseleave", hideSidebar);
-  sidebar.addEventListener("mouseenter", showSidebar);
-  sidebarOpenBtn.addEventListener("click", toggleSidebar);
-  sidebarCloseBtn.addEventListener("click", toggleSidebar);
-
-  // profile
-  // Mengatur dropdown untuk profil
-  document
-    .querySelector(".profile-dropdown")
-    .addEventListener("click", function(event) {
-      event.stopPropagation();
-      this.querySelector(".dropdown-content").classList.toggle("show");
-    });
-
-  // Menutup dropdown ketika klik di luar elemen dropdown
-  window.onclick = function(event) {
-    if (!event.target.matches(".profile-dropdown, .profile-dropdown *")) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains("show")) {
-          openDropdown.classList.remove("show");
-        }
-      }
-    }
-  };
-</script>
