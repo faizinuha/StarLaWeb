@@ -1,45 +1,36 @@
 <?php
-require_once __DIR__ . "/../../allkoneksi/koneksi.php";
-
-// Start session
 session_start();
 
-// Tangkap ID pengguna dan kata sandi dari formulir
-$user_id = $_POST['user_id']; // Ambil dari input tersembunyi di password.php
-$password = $_POST['password'];
+require_once __DIR__ . '/../../allkoneksi/koneksi.php';
 
-error_log("User ID: $user_id");
-error_log("Password: $password");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $emailOrUsername = $_POST['emailOrUsername'];
+    $password = $_POST['password'];
 
-// Query untuk mendapatkan data pengguna berdasarkan ID
-$sql = "SELECT * FROM users WHERE id = ?";
-$stmt = $koneksi->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt = $koneksi->prepare("SELECT id, name, username, password, role FROM users WHERE email=? OR username=?");
+    $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+    $stmt->execute();
+    $stmt->bind_result($id, $name, $username, $hashed_password, $role);
+    $stmt->fetch();
+    $stmt->close();
 
-if ($result->num_rows === 1) {
-    $row = $result->fetch_assoc();
-    error_log("Database Password: " . $row['password']);
-    
-    // Lakukan otentikasi berdasarkan kata sandi
-    if (password_verify($password, $row['password'])) {
-        // Otentikasi berhasil, simpan sesi dan alihkan ke halaman beranda atau dashboard
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['user_name'] = $row['name'];
-        header("Location: ../../index.php"); // Ganti dengan halaman beranda atau dashboard
+    if ($id && password_verify($password, $hashed_password)) {
+        $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $id;
+        $_SESSION['user_name'] = $name;
+        $_SESSION['role'] = $role; // Add the role to the session
+        
+        if ($role === 'admin') {
+            header("Location: ../../admin/index.php");
+        } else {
+            header("Location: ../../index.php");
+        }
         exit();
     } else {
-        // Password salah, kembalikan ke halaman login dengan pesan kesalahan
-        $_SESSION['login_error'] = "Invalid password";
-        header("Location: password.php?id=$user_id&login_error=true");
+        $_SESSION['login_error'] = "Invalid email/username or password.";
+        header("Location: ../login.php?login_error=true");
         exit();
     }
-} else {
-    // Pengguna tidak ditemukan, kembalikan ke halaman login dengan pesan kesalahan
-    $_SESSION['login_error'] = "User not found";
-    header("Location: password.php?id=$user_id&login_error=true");
-    exit();
-} 
+}
+$koneksi->close();
 ?>

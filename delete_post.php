@@ -27,10 +27,10 @@ if (isset($_SESSION['username']) && isset($_GET['id'])) {
         $stmt->bind_param("i", $post_id);
         $stmt->execute();
 
-        // Hapus baris terkait di tabel notifications
-        $stmt = $koneksi->prepare("DELETE FROM notifications WHERE post_id=?");
-        $stmt->bind_param("i", $post_id);
-        $stmt->execute();
+        // // Hapus baris terkait di tabel notifications
+        // $stmt = $koneksi->prepare("DELETE FROM notifications WHERE post_id=?");
+        // $stmt->bind_param("i", $post_id);
+        // $stmt->execute();
 
         // Hapus postingan dari database
         $stmt = $koneksi->prepare("DELETE FROM posts WHERE id=?");

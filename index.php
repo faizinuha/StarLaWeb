@@ -87,8 +87,8 @@
             border: 2px solid red;
             position: relative;
             top: 100;
-            
         }
+
         #particles-js {
             cursor: default !important;
             position: absolute;
@@ -97,6 +97,12 @@
             top: 0;
             left: 0;
             z-index: -1;
+        }
+
+        /* Sticky sidebar */
+        .sticky-sidebar {
+            position: sticky;
+            top: 0;
         }
     </style>
 </head>
@@ -134,7 +140,7 @@
         <div class="container main">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-4">
+                <div class="col-md-3 sticky-sidebar">
                     <div class="card mt-2">
                         <div class="card-header text border">
                             Categories
@@ -157,8 +163,8 @@
                 </div>
 
                 <!-- Main Content -->
-                <div class="col-md-8">
-                    <div class="row">
+                <div class="col-md-9">
+                    <div class="row justify-content-center">
                         <?php
                         // Koneksi ke database
                         include 'allkoneksi/koneksi.php';
@@ -183,7 +189,7 @@
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                         ?>
-                                <div class="card mt-4">
+                                <div class="card mt-4 col-md-12">
                                     <div class="w-150">
                                         <div class="position-relative">
                                             <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
