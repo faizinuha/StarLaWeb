@@ -108,6 +108,20 @@
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
+
+  <!-- SweetAlert Script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    <?php if (isset($_SESSION['registration_success'])): ?>
+      Swal.fire({
+        title: "Good job!",
+        text: "Registrasi berhasil. Kode konfirmasi Anda adalah: <?php echo $verification_code; ?>. Mohon di jaga kode tersebut.",
+        icon: "success"
+      });
+      <?php unset($_SESSION['registration_success']); ?>
+    <?php endif; ?>
+  </script>
 </body>
 
 </html>

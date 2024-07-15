@@ -17,7 +17,39 @@
   <link rel="stylesheet" href="../../assets/css/style.css">
   <link rel="stylesheet" href="../../assets/css/components.css">
 </head>
-
+<style>
+    #myModal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+</style>
 <body>
   <div id="app">
     <section class="section">
@@ -65,16 +97,16 @@
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" tabindex="2" required>
                     <div class="invalid-feedback">
                       please fill in your password
-                      
+
                     </div>
                   </div>
 
                   <div class="form-group">
-                  <div class="float-right">
-                        <a href="../index.php" class="text-small" onclick="bahaya()">
-                          Not Login?
-                        </a>
-                      </div>
+                    <div class="float-right">
+                      <a href="#" class="text-small" onclick="bahaya(); return false;">
+                        Not Login?
+                      </a>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
@@ -97,17 +129,47 @@
       </div>
     </section>
   </div>
-<!-- script -->
-<script>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Yakin gak mau Login😭 Nanti Gak ada Fitur Loh?</p>
+      <button id="registerBtn">Register</button>
+      <button id="okBtn">OK</button>
+    </div>
+  </div>
+  <!-- script -->
+  <script>
   function bahaya() {
-    var aku;
-    alert('Yakin gak mau Login😭 Nanti Gak ada Fitur Loh?');
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var registerBtn = document.getElementById("registerBtn");
+    var okBtn = document.getElementById("okBtn");
 
-    document.getElementById('aku').addEventListener('click',function(){
-      windows.location.href ('register.php')
-    })
+    // Tampilkan modal
+    modal.style.display = "block";
+
+    // Ketika pengguna klik pada tombol Register
+    registerBtn.onclick = function() {
+      window.location.href = 'register.php';
+    }
+
+    // Ketika pengguna klik tombol OK
+    okBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Ketika pengguna klik di luar modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Ketika pengguna tekan tombol Esc
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   }
- // Disable form submissions if there are invalid fields
 </script>
   <!-- General JS Scripts -->
   <script src="../assets/modules/jquery.min.js"></script>

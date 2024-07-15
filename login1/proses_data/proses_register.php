@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Memeriksa panjang password
-    if (strlen($password) < 2) {
+    if (strlen($password) < 8) {
         echo '<script>alert("Password harus memiliki minimal 8 karakter."); window.location.href = "../register.php";</script>';
         exit();
     }
@@ -57,12 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt->execute()) {
         // Debug log
         error_log("User $username successfully registered, preparing to send email.");
+
+        // Set session for registration success
+        $_SESSION['registration_success'] = true;
         
-        // echo '<script>alert("Registrasi berhasil. Kode konfirmasi Anda adalah:.Mohon di Jaga Kode Ya ' . $verification_code . '"); window.location.href = "../login.php";</script>';
-        echo '<script>alert("Registrasi berhasil. Kode konfirmasi Anda adalah:.Mohon di Jaga Kode Ya ' . $verification_code . '"); window.location.href = "../login.php";</script>';
-        echo '<script>alert("Silakan Customer Jika Anda Lupa ");</script>';
-        // Debug log
-        error_log("Confirmation email simulated for $email.");
+        // Redirect to registration success page
+        header("Location: ../register.php");
+        exit();
     } else {
         echo '<script>alert("Registrasi gagal. Mohon coba lagi."); window.location.href = "../register.php";</script>';
         // Debug log
