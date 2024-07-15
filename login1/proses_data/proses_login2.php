@@ -4,11 +4,12 @@ session_start();
 require_once __DIR__ . '/../../allkoneksi/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $emailOrUsername = $_POST['emailOrUsername'];
+    $user_id = $_POST['user_id'];
     $password = $_POST['password'];
 
-    $stmt = $koneksi->prepare("SELECT id, name, username, password, role FROM users WHERE email=? OR username=?");
-    $stmt->bind_param("ss", $emailOrUsername, $emailOrUsername);
+    // Cek apakah ID pengguna valid
+    $stmt = $koneksi->prepare("SELECT id, name, username, password, role FROM users WHERE id=?");
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $stmt->bind_result($id, $name, $username, $hashed_password, $role);
     $stmt->fetch();
@@ -18,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $id;
         $_SESSION['user_name'] = $name;
-        $_SESSION['role'] = $role; // Add the role to the session
+        $_SESSION['role'] = $role; // Tambahkan role ke sesi
         
         if ($role === 'admin') {
             header("Location: ../../admin/index.php");
@@ -28,9 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         $_SESSION['login_error'] = "Invalid email/username or password.";
-        header("Location: ../login.php?login_error=true");
+        header("Location: ../login.php?login_error=true&id=$user_id");
         exit();
     }
 }
+
 $koneksi->close();
 ?>

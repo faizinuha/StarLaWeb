@@ -37,7 +37,6 @@ $login_error = isset($_GET['login_error']) ? $_GET['login_error'] : '';
                             <div class="alert alert-danger">Invalid username or password.</div>
                         <?php endif; ?>
                         <form id="loginForm" action="proses_data/proses_login2.php" method="post">
-                            <!-- Action menuju proses_login2.php -->
                             <!-- Menyertakan ID pengguna sebagai input tersembunyi -->
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                             <div class="mb-3">
@@ -47,12 +46,9 @@ $login_error = isset($_GET['login_error']) ? $_GET['login_error'] : '';
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Login</button>
                             <div class="mt-3 text-center">
-                                <span class="mx-2">|</span>
                                 <a href="forgot_reset_password.php" class="btn-link">Forgot Password?</a>
-                                <span class="mx-2">|</span>
                             </div>
                         </form>
-                        <!-- #region -->
                     </div>
                 </div>
             </div>
@@ -60,7 +56,7 @@ $login_error = isset($_GET['login_error']) ? $_GET['login_error'] : '';
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-          
+        // Tambahkan JavaScript jika diperlukan
     </script>
 </body>
 </html>

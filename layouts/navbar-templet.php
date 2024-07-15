@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Default name if not logged in
 $name = "Not Loggin";
 
