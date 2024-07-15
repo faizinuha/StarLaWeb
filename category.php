@@ -23,6 +23,7 @@ if (isset($_GET['Tags'])) {
     header("Location: index.php"); // Redirect to home page or other default page
     exit;
 }
+include ('layouts/navbar-templet.php');
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +70,7 @@ if (isset($_GET['Tags'])) {
             
             // Close statement and connection
             $stmt->close();
-            $koneksi->close();
+           
             ?>
         </div>
     </div>

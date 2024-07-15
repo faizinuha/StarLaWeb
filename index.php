@@ -100,7 +100,15 @@
 
         /* Sticky sidebar */
         .sticky-sidebar {
+            top: 100px;
+            left: 0;
+            z-index: 100;
+            overflow-x: hidden;
+            transition: all 0.3s;
             position: sticky;
+        }
+        .sticky-sidebar:hover{
+            background-color: #124124;
         }
     </style>
 </head>
