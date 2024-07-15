@@ -7,15 +7,15 @@
   <title>Login &mdash;</title>
 
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="../../assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/modules/fontawesome/css/all.min.css">
 
   <!-- CSS Libraries -->
-  <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
+  <link rel="stylesheet" href="../../assets/modules/bootstrap-social/bootstrap-social.css">
 
   <!-- Template CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
 </head>
 
 <body>
@@ -65,10 +65,16 @@
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" tabindex="2" required>
                     <div class="invalid-feedback">
                       please fill in your password
+                      
                     </div>
                   </div>
 
                   <div class="form-group">
+                  <div class="float-right">
+                        <a href="../index.php" class="text-small" onclick="bahaya()">
+                          Not Login?
+                        </a>
+                      </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
@@ -91,13 +97,24 @@
       </div>
     </section>
   </div>
+<!-- script -->
+<script>
+  function bahaya() {
+    var aku;
+    alert('Yakin gak mau Login😭 Nanti Gak ada Fitur Loh?');
 
+    document.getElementById('aku').addEventListener('click',function(){
+      windows.location.href ('register.php')
+    })
+  }
+ // Disable form submissions if there are invalid fields
+</script>
   <!-- General JS Scripts -->
-  <script src="assets/modules/jquery.min.js"></script>
-  <script src="assets/modules/popper.js"></script>
-  <script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/js/scripts.js"></script>
-  <script src="assets/js/custom.js"></script>
+  <script src="../assets/modules/jquery.min.js"></script>
+  <script src="../assets/modules/popper.js"></script>
+  <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
 </body>
 
 </html>

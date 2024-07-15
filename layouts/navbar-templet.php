@@ -28,17 +28,6 @@ mysqli_close($koneksi);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloger</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <!-- Bootstrap Icons -->
@@ -49,23 +38,25 @@ mysqli_close($koneksi);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #f8f9fa;
+            background-color: #343a40;
+            padding: 1rem 2rem;
         }
 
         .navbar-brand {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: bold;
-            color: #333;
+            color: #fff;
         }
 
         .nav-link {
-            color: #555;
+            color: #ddd;
             font-weight: 500;
             padding: 0.75rem 1rem;
+            transition: color 0.3s;
         }
 
         .nav-link:hover {
-            color: #000;
+            color: #fff;
         }
 
         .btn-discord {
@@ -78,21 +69,30 @@ mysqli_close($koneksi);
             background-color: #4752C4;
         }
 
-        .cursor {
-            cursor: pointer;
+        .dropdown-menu {
+            background-color: #343a40;
+            border: none;
         }
 
-        .list-group {
-            margin-top: 20px;
+        .dropdown-item {
+            color: #ddd;
+            transition: color 0.3s, background-color 0.3s;
         }
 
-        .warna-bg {
-            background-color: blue;
+        .dropdown-item:hover {
+            color: #fff;
+            background-color: #495057;
         }
 
         @media (max-width: 768px) {
-            .navbar-nav.space-x-4 {
+            .navbar-nav {
                 flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 0.5rem 1rem;
             }
         }
     </style>
@@ -100,15 +100,15 @@ mysqli_close($koneksi);
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg warna-bg sticky-top">
-        <div class="container mx-auto">
-            <a class="navbar-brand text-xl font-bold text-gray-800" href="#">Bloger</a>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Bloger</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto space-x-4">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class="bi bi-info"></i>
@@ -117,12 +117,12 @@ mysqli_close($koneksi);
                     <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle">HI,</i> <?php echo $name; ?>
+                                <i class="bi bi-person-circle"> HI,</i> <?php echo $name; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
-                                <li><a class="dropdown-item cursor1" href="Private/setting.php"> <i class="bi bi-gear-wide"></i> Setting</a></li>
+                                <li><a class="dropdown-item cursor" href="Private/setting.php"> <i class="bi bi-gear-wide"></i> Setting</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -138,7 +138,7 @@ mysqli_close($koneksi);
                         </li>
                     <?php } ?>
                     <li class="nav-item">
-                        <a href="https://discord.gg/rvaNTU63s3" class="btn btn-primary"><i class="bi bi-discord"></i> Join Discord</a>
+                        <a href="https://discord.gg/rvaNTU63s3" class="btn btn-discord"><i class="bi bi-discord"></i> Join Discord</a>
                     </li>
                 </ul>
             </div>
@@ -167,12 +167,18 @@ mysqli_close($koneksi);
             </div>
         </div>
     </div>
-
-
-
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <!-- Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="text-center">Welcome to Bloger</h1>
+                <p class="lead text-center">Your ultimate blogging platform</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+8C/5r3qy/p1WQ68BOJ3COd9XYQ2A" crossorigin="anonymous"></script>
 </body>
 
 </html>

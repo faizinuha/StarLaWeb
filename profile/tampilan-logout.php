@@ -114,7 +114,7 @@ $koneksi->close();
                             <div class="form-group">
                                 <label for="emailOrUsername" class="form-label">Username or Email</label>
                                 <div class="float-right">
-                                    <a href="register.php" class="text-small">Register</a>
+                                    <a href="../login1/register.php" class="text-small">Register</a>
                                 </div>
                                 <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter Email or Username" required autofocus>
                                 <div class="invalid-feedback">Please fill in your email</div>
@@ -123,7 +123,7 @@ $koneksi->close();
                                 <div class="d-block">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="float-right">
-                                        <a href="forgot_reset_password.php" class="text-small">Forgot Password?</a>
+                                        <a href="../login1/forgot_reset_password.php" class="text-small">Forgot Password?</a>
                                     </div>
                                 </div>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" tabindex="2" required>
