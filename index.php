@@ -124,8 +124,8 @@
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <h1 id="time">Selamat datang di halaman utama!</h1>
-                        <!-- Konten lainnya di sini -->
+                        <!-- <h1 id="time">Selamat datang di halaman utama!</h1>
+                        Konten lainnya di sini -->
                     </div>
                 </div>
             </div>
