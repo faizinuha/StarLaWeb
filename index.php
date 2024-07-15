@@ -94,15 +94,13 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
+            display: inline;
             z-index: -1;
         }
 
         /* Sticky sidebar */
         .sticky-sidebar {
             position: sticky;
-            top: 0;
         }
     </style>
 </head>
@@ -111,9 +109,9 @@
     <!-- pesan berhasil login -->
     <div id="app">
         <section class="section">
-            <div class="container mt-5">
+            <div class="container mt-2">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-10">
                         <?php if (isset($_GET['login_success'])) : ?>
                             <div class="alert alert-success" role="alert">
                                 <div id="toast-simple" class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800" role="alert">
