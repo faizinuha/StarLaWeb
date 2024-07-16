@@ -138,6 +138,8 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                                // Check if the status is 'uploaded' before displaying the image
+                                if ($row['status'] == 'uploads') {
                         ?>
                                 <div class="card mt-4 col-md-12">
                                     <div class="w-150">
@@ -185,6 +187,7 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                                     </div>
                                 </div>
                             <?php
+                                } // End of status check
                             }
                         } else {
                             ?>
