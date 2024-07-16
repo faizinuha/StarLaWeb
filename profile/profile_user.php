@@ -24,6 +24,7 @@ if (mysqli_num_rows($result) > 0) {
   $instagram = $row['instagram'];
   $Twitter = $row['Twitter'];
   $about_me = $row['about_me'];
+  $role = $row['role'];
 } else {
   echo "Informasi pengguna tidak ditemukan.";
 }
@@ -172,6 +173,15 @@ mysqli_close($koneksi);
                 </div>
                 <div class="col-sm-9">
                   <p class="text-muted mb-0" placeholder="NOT FOUND" ><?php echo $about_me; ?></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Role</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0" placeholder="NOT FOUND" ><?php echo $role; ?></p>
                 </div>
               </div>
               <hr>

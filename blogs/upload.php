@@ -151,7 +151,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- General JS Scripts -->
+  <script src="../assets/modules/jquery.min.js"></script>
+  <script src="../assets/modules/popper.js"></script>
+  <script src="../assets/modules/tooltip.js"></script>
+  <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../assets/modules/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
+  
+  <!-- JS Libraies -->
 
+  <!-- Page Specific JS File -->
+  
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
     <script>
         // Function to preview the selected image
         function previewImage(input) {

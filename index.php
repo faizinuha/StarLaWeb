@@ -1,5 +1,4 @@
-
-<?php include ("layouts/navbar-templet.php");?>
+<?php include("layouts/navbar-templet.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,7 @@
     <link href="styles.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- partilas -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
@@ -58,7 +57,7 @@
         .button-container a {
             margin-left: 10px;
         }
-        
+
         .zoom {
             width: 100%;
             height: 300px;
@@ -98,34 +97,16 @@
             display: inline;
             z-index: -1;
         }
+
+        .custom {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            filter: blur(5px);
+            /* Adjust the value as needed */
+        }
     </style>
 </head>
 
 <body>
-    <!-- pesan berhasil login -->
-    <div id="app">
-        <section class="section">
-            <div class="container mt-2">
-                <div class="row">
-                    <div class="col-10">
-                        <?php if (isset($_GET['login_success'])) : ?>
-                            <div class="alert alert-success" role="alert">
-                                <div id="toast-simple" class="flex items-center w-full max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800" role="alert">
-                                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9" />
-                                    </svg>
-                                    <div class="ps-4 text-sm font-normal">Selamat datang:<?php echo htmlspecialchars($_SESSION['user_name']); ?></div>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        <!-- <h1 id="time">Selamat datang di halaman utama!</h1>
-                        Konten lainnya di sini -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
     <!-- Particles container -->
     <div id="particles-js"></div>
 
@@ -186,7 +167,7 @@
                                 <div class="card mt-4 col-md-12">
                                     <div class="w-150">
                                         <div class="position-relative">
-                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="custome card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                             <div class="card-body">
                                                 <div class="profile-container cursor">
                                                     <?php if (!empty($row['profile_image_path'])) : ?>
@@ -254,12 +235,12 @@
     <!-- stisla -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    
-    <!-- <script>
+
+    <script>
         setTimeout(function() {
             document.getElementById('app').setAttribute('style', 'display:none;')
         }, 5000)
-    </script> -->
+    </script>
 </body>
 
 </html>
