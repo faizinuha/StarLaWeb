@@ -185,15 +185,17 @@ mysqli_close($koneksi);
                     <div class="card">
                       <img src="../blogs/uploads/<?php echo htmlspecialchars($photo['image']); ?>" class="card-img-top" alt="User Photo">
                       <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : 'bg-success'; ?>">
+                        <a class="d-flex justify-content-between align-items-center">
+                          <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : ($photo['status'] == 'uploads' ? 'bg-success' : 'bg-danger'); ?>">
                             <?php echo ucfirst(htmlspecialchars($photo['status'])); ?>
                           </span>
                           <!-- Tombol hapus -->
-                          <button class="btn btn-danger" onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
+                          <button class="btn btn-danger " onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
                             <i class="bi bi-trash"></i> Delete
                           </button>
-                        </div>
+                          <!-- Tombol edit status -->
+                          <button class="btn btn-primary" onclick="editStatus(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['status']); ?>')">Edit Status</button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -206,8 +208,36 @@ mysqli_close($koneksi);
     </div>
   </section>
 
+  <!-- Modal untuk edit status -->
+  <div class="modal fade" id="editStatusModal" tabindex="-1" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editStatusModalLabel">Edit Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editStatusForm">
+            <input type="hidden" id="editPhotoId">
+            <div class="mb-3">
+              <label for="editStatus" class="form-label">Status</label>
+              <select class="form-select" id="editStatus">
+                <option value="pending">Pending</option>
+                <option value="uploads">Upload</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="updateStatus()">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Include JS scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <!-- fungsi untuk menghapus Gambar -->
   <script>
     function deletePhoto(photoId, imageName) {
       Swal.fire({
@@ -252,6 +282,49 @@ mysqli_close($koneksi);
               );
             }
           });
+        }
+      });
+    }
+// fungsi untuk Mengedit Post
+    function editStatus(photoId, currentStatus) {
+      $('#editPhotoId').val(photoId);
+      $('#editStatus').val(currentStatus);
+      $('#editStatusModal').modal('show');
+    }
+
+    function updateStatus() {
+      var photoId = $('#editPhotoId').val();
+      var newStatus = $('#editStatus').val();
+      $.ajax({
+        url: 'update_status.php',
+        type: 'POST',
+        data: {
+          photo_id: photoId,
+          status: newStatus
+        },
+        success: function(response) {
+          if (response.trim() === 'success') {
+            Swal.fire(
+              'Berhasil!',
+              'Status foto berhasil diperbarui.',
+              'success'
+            ).then(() => {
+              location.reload(); // Refresh halaman setelah berhasil memperbarui status
+            });
+          } else {
+            Swal.fire(
+              'Error!',
+              'Gagal memperbarui status foto.',
+              'error'
+            );
+          }
+        },
+        error: function() {
+          Swal.fire(
+            'Error!',
+            'Terjadi kesalahan saat memperbarui status foto.',
+            'error'
+          );
         }
       });
     }
