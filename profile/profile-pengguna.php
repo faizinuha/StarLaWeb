@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
         $instagram = $row['instagram'];
         $Twitter = $row['Twitter'];
         $about_me = $row['about_me'];
-        $role = $row['role'];
+        // $role = $row['role'];
         $profile_image_path = !empty($row['profile_image_path']) ? $row['profile_image_path'] :
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s";
 ?>
@@ -64,7 +64,7 @@ if (isset($_GET['id'])) {
                                 <h6 class="card-subtitle mb-2 text-muted">Tentang Saya</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($about_me); ?></p>
                                 <h6 class="card-subtitle mb-2 text-muted">Role</h6>
-                                <p class="card-text"><?php echo htmlspecialchars($role); ?></p>
+                                <!-- <p class="card-text"><?php echo htmlspecialchars($role); ?></p> -->
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Media Sosial</h5>
