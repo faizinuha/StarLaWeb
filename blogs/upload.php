@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tags = $_POST['tags'];
     $uploaded_by = $_SESSION['username'];
     $user_id = $_SESSION['user_id'];
+    $status = $_POST['status'];
 
     // Upload gambar
     $target_dir = "uploads/";
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Allow certain file formats
-    $allowedFormats = ['jpg', 'png', 'jpeg', 'gif', 'webp', 'anvi'];
+    $allowedFormats = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
     if (!in_array($imageFileType, $allowedFormats)) {
         echo "Sorry, only JPG, JPEG, PNG, GIF, and WEBP files are allowed.";
         $uploadOk = 0;
@@ -51,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             // Simpan posting ke database
-            $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by, user_id) 
-                    VALUES ('$title', '$content', '$tags', '$unique_name', '$uploaded_by', '$user_id')";
+            $sql = "INSERT INTO posts (title, content, tags, image, uploaded_by, user_id, status) 
+                    VALUES ('$title', '$content', '$tags', '$unique_name', '$uploaded_by', '$user_id', '$status')";
             if ($koneksi->query($sql) === TRUE) {
                 header("Location: ../index.php");
                 echo "Posting berhasil ditambahkan.";
@@ -76,14 +77,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Posting</title>
     <!-- Bootstrap CSS -->
-     <!-- General CSS Files -->
     <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
-
-    <!-- CSS Libraries -->
     <link rel="stylesheet" href="../assets/modules/bootstrap-social/bootstrap-social.css">
-
-    <!-- Template CSS -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/components.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -105,12 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <!-- sidebars -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <!-- icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- end sidebar -->
     <div class="container">
         <a href="../index.php" class="btn btn-danger btn-kembali">Kembali</a>
         <div class="alert alert-danger text-center alert-custom" role="alert">
@@ -129,6 +119,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="tags">Tags:</label>
                 <input type="text" id="tags" name="tags" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" class="form-control" required>
+                    <option value="pending">Pending</option>
+                    <option value="uploads">Uploads</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="image" class="form-group">Gambar:</label>
@@ -151,34 +148,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- General JS Scripts -->
-  <script src="../assets/modules/jquery.min.js"></script>
-  <script src="../assets/modules/popper.js"></script>
-  <script src="../assets/modules/tooltip.js"></script>
-  <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-  <script src="../assets/modules/moment.min.js"></script>
-  <script src="../assets/js/stisla.js"></script>
-  
-  <!-- JS Libraies -->
-
-  <!-- Page Specific JS File -->
-  
-  <!-- Template JS File -->
-  <script src="../assets/js/scripts.js"></script>
-  <script src="../assets/js/custom.js"></script>
+    <script src="../assets/modules/jquery.min.js"></script>
+    <script src="../assets/modules/popper.js"></script>
+    <script src="../assets/modules/tooltip.js"></script>
+    <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../assets/modules/moment.min.js"></script>
+    <script src="../assets/js/stisla.js"></script>
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../assets/js/custom.js"></script>
     <script>
-        // Function to preview the selected image
         function previewImage(input) {
             var preview = document.getElementById('imagePreview');
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                     preview.style.display = 'block';
                 }
-
                 reader.readAsDataURL(input.files[0]); // Convert to base64 string
             } else {
                 preview.src = '#';

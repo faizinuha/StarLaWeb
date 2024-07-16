@@ -63,7 +63,7 @@ if (isset($_GET['id'])) {
                                 <p class="card-text font-bold"><?php echo htmlspecialchars($name); ?></p>
                                 <h6 class="card-subtitle mb-2 text-muted">Tentang Saya</h6>
                                 <p class="card-text"><?php echo htmlspecialchars($about_me); ?></p>
-                                <h6 class="card-subtitle mb-2 text-muted">Role</h6>
+                                <!-- <h6 class="card-subtitle mb-2 text-muted">Role</h6> -->
                                 <!-- <p class="card-text"><?php echo htmlspecialchars($role); ?></p> -->
                             </div>
                             <div class="card-body">

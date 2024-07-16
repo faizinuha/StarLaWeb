@@ -1,5 +1,4 @@
 <?php
-// Mulai sesi PHP
 session_start();
 
 // Periksa apakah pengguna sudah masuk atau belum
@@ -24,7 +23,6 @@ if (mysqli_num_rows($result) > 0) {
   $instagram = $row['instagram'];
   $Twitter = $row['Twitter'];
   $about_me = $row['about_me'];
-  $role = $row['role'];
 } else {
   echo "Informasi pengguna tidak ditemukan.";
 }
@@ -49,14 +47,9 @@ mysqli_close($koneksi);
   <!-- General CSS Files -->
   <link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
-
-  <!-- CSS Libraries -->
-
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <!-- Start GA -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 </head>
 
 <body>
@@ -69,8 +62,8 @@ mysqli_close($koneksi);
               <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
               <li class="breadcrumb-item"><a href="profile_user.php">User</a></li>
               <li class="breadcrumb-item"><a href="../in/logout.php" id="logout">Log Out</a></li>
-              <li class="breadcrumb-item"><a href="../blogs/upload.php">Uplods</a></li>
-              <li class="breadcrumb-item active" aria-current="page">HI,<?php echo $name ?></li>
+              <li class="breadcrumb-item"><a href="../blogs/upload.php">Uploads</a></li>
+              <li class="breadcrumb-item active" aria-current="page">HI, <?php echo htmlspecialchars($name); ?></li>
             </ol>
           </nav>
         </div>
@@ -112,13 +105,13 @@ mysqli_close($koneksi);
             <div class="card-body text-center">
               <a href="upload.php">
                 <?php if (!empty($row['profile_image_path'])) : ?>
-                  <img src="<?php echo $row['profile_image_path']; ?>" alt="avatar" class="rounded float-start" style="width: 150px;">
+                  <img src="<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="rounded float-start" style="width: 150px;">
                 <?php else : ?>
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="rounded float-start" style="width: 150px;">
                 <?php endif; ?>
               </a>
-              <h5 class="my-3"><?php echo $name ?></h5>
-              <p class="text-muted mb-1"><?php echo $username ?></p>
+              <h5 class="my-3"><?php echo htmlspecialchars($name); ?></h5>
+              <p class="text-muted mb-1"><?php echo htmlspecialchars($username); ?></p>
               <div class="row justify-content-center mt-lg-5">
                 <div class="col-md-auto">
                   <a href="edit.php" type="button" class="btn btn-primary me-2"><i class="bi bi-pencil-square"></i></a>
@@ -132,15 +125,15 @@ mysqli_close($koneksi);
               <ul class="list-group list-group-flush rounded-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="bi bi-instagram" style="color: #55acee;"></i>
-                  <p class="mb-0"><a href="<?php echo $instagram; ?>" class="text-primary" target="_blank"><?php echo $instagram ?></a></p>
+                  <p class="mb-0"><a href="<?php echo htmlspecialchars($instagram); ?>" class="text-primary" target="_blank"><?php echo htmlspecialchars($instagram); ?></a></p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="bi bi-tiktok" style="color: #333333;"></i>
-                  <p class="mb-0"><a href="<?php echo $Twitter; ?>" class="text-primary" target="_top"><?php echo $Twitter ?></a></p>
+                  <p class="mb-0"><a href="<?php echo htmlspecialchars($Twitter); ?>" class="text-primary" target="_top"><?php echo htmlspecialchars($Twitter); ?></a></p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                   <i class="bi bi-twitter" style="color: #55acee;"></i>
-                  <p class="mb-0"><a href="<?php echo $TikTok; ?>" class="text-primary" target="_top"><?php echo $TikTok ?></a></p>
+                  <p class="mb-0"><a href="<?php echo htmlspecialchars($TikTok); ?>" class="text-primary" target="_top"><?php echo htmlspecialchars($TikTok); ?></a></p>
                 </li>
               </ul>
             </div>
@@ -154,7 +147,7 @@ mysqli_close($koneksi);
                   <p class="mb-0">Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><?php echo $name ?></p>
+                  <p class="text-muted mb-0"><?php echo htmlspecialchars($name); ?></p>
                 </div>
               </div>
               <hr>
@@ -163,7 +156,7 @@ mysqli_close($koneksi);
                   <p class="mb-0">Full Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0"><?php echo $username; ?></p>
+                  <p class="text-muted mb-0"><?php echo htmlspecialchars($username); ?></p>
                 </div>
               </div>
               <hr>
@@ -172,16 +165,7 @@ mysqli_close($koneksi);
                   <p class="mb-0">About Me</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0" placeholder="NOT FOUND" ><?php echo $about_me; ?></p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Role</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0" placeholder="NOT FOUND" ><?php echo $role; ?></p>
+                  <p class="text-muted mb-0"><?php echo htmlspecialchars($about_me); ?></p>
                 </div>
               </div>
               <hr>
@@ -199,11 +183,17 @@ mysqli_close($koneksi);
                 <?php while ($photo = mysqli_fetch_assoc($result_photos)) : ?>
                   <div class="col-md-3 mb-4">
                     <div class="card">
-                      <img src="../blogs/uploads/<?php echo $photo['image']; ?>" class="card-img-top" alt="User Photo">
+                      <img src="../blogs/uploads/<?php echo htmlspecialchars($photo['image']); ?>" class="card-img-top" alt="User Photo">
                       <div class="card-body">
-                        <!-- <p class="card-text">Uploaded at: <?php echo $photo['uploaded_by']; ?></p> -->
-                        <!-- <a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li> -->
-                        <!-- <button class="btn btn-danger" onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo $photo['image']; ?>')">Delete</button> -->
+                        <div class="d-flex justify-content-between align-items-center">
+                          <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : 'bg-success'; ?>">
+                            <?php echo ucfirst(htmlspecialchars($photo['status'])); ?>
+                          </span>
+                          <!-- Tombol hapus -->
+                          <button class="btn btn-danger" onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
+                            <i class="bi bi-trash"></i> Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -216,6 +206,56 @@ mysqli_close($koneksi);
     </div>
   </section>
 
+  <!-- Include JS scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function deletePhoto(photoId, imageName) {
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: 'Foto akan dihapus secara permanen!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: 'delete_photo.php',
+            type: 'POST',
+            data: {
+              photo_id: photoId,
+              image_name: imageName
+            },
+            success: function(response) {
+              if (response.trim() === 'success') {
+                Swal.fire(
+                  'Terhapus!',
+                  'Foto berhasil dihapus.',
+                  'success'
+                ).then(() => {
+                  location.reload(); // Refresh halaman setelah berhasil menghapus
+                });
+              } else {
+                Swal.fire(
+                  'Error!',
+                  'Gagal menghapus foto.',
+                  'error'
+                );
+              }
+            },
+            error: function() {
+              Swal.fire(
+                'Error!',
+                'Terjadi kesalahan saat menghapus foto.',
+                'error'
+              );
+            }
+          });
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

@@ -1,14 +1,13 @@
 <?php
-
 session_start();
 
-
+// Hapus semua variabel session
 session_unset();
 
+// Hancurkan session
 session_destroy();
 
-
-header("Location: ../profile/tampilan-logout.php"); // Ganti dengan halaman login atau halaman lainnya
-echo '<script>alert("berhasil log out");</script>';
+// Redirect ke halaman login atau halaman lainnya
+header("Location: ../profile/tampilan-logout.php");
 exit();
 ?>

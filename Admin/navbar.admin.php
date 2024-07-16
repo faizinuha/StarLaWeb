@@ -189,11 +189,12 @@ mysqli_close($koneksi);
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                         <ul class="dropdown-menu">
                             <li class=active><a class="nav-link" href="../index.php"></a></li>
-                            <li><a class="nav-link" href="index.html">Total Users</a></li>
+                            <li><a class="nav-link" href="../index.php">Total Users</a></li>
                         </ul>
                     </li>
                     <!-- menu -->
                     <li class="menu-header">Menu Lain</li>
+                    <li class="nav-link"><a href="../blogs/upload.php"><i class="fa-sharp fa-solid fa-upload"></i></a></li>
                 </ul>
 
             </aside>

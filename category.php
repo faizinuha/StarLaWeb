@@ -1,6 +1,5 @@
 <?php
 // Start session
-session_start();
 
 // Establish database connection
 require_once __DIR__ . '/allkoneksi/koneksi.php';
@@ -27,7 +26,7 @@ include ('layouts/navbar-templet.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -56,8 +55,8 @@ include ('layouts/navbar-templet.php');
                     echo '<div class="card">';
                     echo '<img src="blogs/uploads/' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
                     echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . htmlspecialchars($row['title']) . '</h5>';
-                    echo '<p class="card-text">' . htmlspecialchars($row['content']) . '</p>';
+                    echo '<h5 class="card-title">Judul:' . htmlspecialchars($row['title']) . '</h5>';
+                    echo '<p class="card-text">Deskripsi:' . htmlspecialchars($row['content']) . '</p>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
