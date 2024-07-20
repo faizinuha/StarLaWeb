@@ -1,25 +1,3 @@
-<?php
-session_start();
-// Default name if not logged in
-$name = "Not Logged In";
-
-require_once __DIR__ . '/../allkoneksi/koneksi.php';
-// Fetch user's name if logged in
-if (isset($_SESSION['username'])) {
-    $username = $_SESSION['username'];
-    $query = "SELECT name FROM users WHERE username = '$username'";
-    $result = mysqli_query($koneksi, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $name = $row['name'];
-    }
-}
-
-// Close database connection
-mysqli_close($koneksi);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,6 +67,10 @@ mysqli_close($koneksi);
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto space-x-4">
+                    <form class="d-flex me-2" role="search" action="search.php" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                     <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -145,6 +127,7 @@ mysqli_close($koneksi);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
