@@ -102,8 +102,16 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 </head>
 
 <body>
+    <style>
+        .POS{
+            
+        }
+    </style>
+    <!-- particles -->
     <div id="particles-js"></div>
+    <!-- end -->
     <div class="content">
+        <button type="button" class="btn btn-outline-primary ml-3 POS"  onclick="customer()">chat</button>
         <div class="container main">
             <div class="row">
                 <div class="col-md-3 sticky-sidebar">
