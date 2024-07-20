@@ -131,7 +131,7 @@
           let password = $('input[name="password"]').val().trim();
 
           let isValid = true;
-
+          
           if (nama === "") {
             $('input[name="nama"]').addClass('is-invalid');
             isValid = false;
