@@ -1,3 +1,25 @@
+<?php
+session_start();
+// Default name if not logged in
+$name = "Not Loggin";
+
+require_once __DIR__ . '/../allkoneksi/koneksi.php';
+// Fetch user's name if logged in
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $query = "SELECT name FROM users WHERE username = '$username'";
+    $result = mysqli_query($koneksi, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $name = $row['name'];
+    }
+}
+
+// Close database connection
+mysqli_close($koneksi);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +30,10 @@
     <link rel="icon" href="../asset/img/paimon-genshin-impact.avif">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../node_modules/egalink-toasty.js/dist/toasty.min.css" rel="stylesheet">
+    <script src="../node_modules/egalink-toasty.js/dist/dist/toasty.min.js"></script>
     <style>
         .navbar {
             position: sticky;
@@ -53,12 +75,17 @@
         .list-group {
             margin-top: 20px;
         }
+
+        .translate-container {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg  ">
         <div class="container mx-auto">
             <a class="navbar-brand text-xl font-bold text-gray-800" href="#">Bloger</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,36 +125,10 @@
             </div>
         </div>
     </nav>
-
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Update Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h4 class="text-danger">Update 2024</h4>
-                    <p>New features:</p>
-                    <ul>
-                        <li>Typing exercises (sourceCodes -> Profile)</li>
-                        <li>Dangerous page</li>
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
