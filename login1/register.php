@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,16 +20,18 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
-  <!-- Start GA -->
+
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-94034622-3');
   </script>
-  <!-- /END GA -->
 </head>
 
 <body>
@@ -50,25 +56,19 @@
                     </div>
                     <div class="form-group col-6">
                       <label for="username" class="form-label">Username:</label>
-                      <input type="text" class="form-control" name="username" required placeholder="Masukkan Username" autofocus>
+                      <input type="text" class="form-control" name="username" required placeholder="Masukkan Username">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" name="email" required placeholder="Masukkan Email" autofocus>
-                    <div class="invalid-feedback">
-                    </div>
+                    <input type="email" class="form-control" name="email" required placeholder="Masukkan Email">
                   </div>
 
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="password" class="form-label">Password:</label>
                       <input type="password" class="form-control" name="password" required placeholder="Masukkan Password">
-                      <div id="pwindicator" class="pwindicator">
-                        <div class="bar"></div>
-                        <div class="label"></div>
-                      </div>
                     </div>
                   </div>
 
@@ -98,29 +98,33 @@
   <script src="../assets/modules/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
 
-  <!-- JS Libraies -->
+  <!-- JS Libraries -->
   <script src="../assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
   <script src="../assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
-
-  <!-- Page Specific JS File -->
-  <script src="../assets/js/page/auth-register.js"></script>
 
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
 
-  <!-- SweetAlert Script -->
+  <!-- SweetAlert2 JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    <?php if (isset($_SESSION['registration_success'])): ?>
-      Swal.fire({
-        title: "Good job!",
-        text: "Registrasi berhasil. Kode konfirmasi Anda adalah: <?php echo $verification_code; ?>. Mohon di jaga kode tersebut.",
-        icon: "success"
-      });
-      <?php unset($_SESSION['registration_success']); ?>
-    <?php endif; ?>
+    $(document).ready(function(){
+      <?php if (isset($_SESSION['registration_success'])): ?>
+        Swal.fire({
+          title: "Good job!",
+          text: "Registrasi berhasil. Kode konfirmasi Anda adalah: <?php echo $_SESSION['verification_code']; ?>. Mohon di jaga kode tersebut.",
+          icon: "success"
+        }).then(function() {
+          window.location.href = "login.php";
+        });
+        <?php 
+        unset($_SESSION['registration_success']);
+        unset($_SESSION['verification_code']); 
+        ?>
+      <?php endif; ?>
+    });
   </script>
 </body>
 
