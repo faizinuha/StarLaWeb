@@ -21,6 +21,9 @@ We have done our best for this blog website. Support us to keep developing and u
 2. Go to phpMyAdmin, create a `blog` database, then import the downloaded SQL file.
 3. For database issues, contact us at: rtxalham@gmail.com
 
+# GitHub Repository
+You can find the repository at [StarLaWeb GitHub Repository](https://github.com/faizinuha/StarLaWeb.git).
+
 ---
 
 If you like, consider donating: [https://saweria.co/C02V](https://saweria.co/C02V)
