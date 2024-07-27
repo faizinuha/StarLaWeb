@@ -9,7 +9,8 @@ if (isset($_GET['query'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             // Display the search results
-            echo "<p>" . $row['Tags'] . "</p>";
+            // echo "<p>" . $row['Tags'] . "</p>";
+            header('../category.php');
         }
     } else {
         echo "No results found.";

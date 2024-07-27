@@ -1,7 +1,7 @@
 <?php
-include 'link.php';
-session_start();
-
+// session_start();
+include 'componen.php';
+// Konfigurasi koneksi ke database
 $name = "Guest";
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
@@ -19,33 +19,6 @@ if (isset($_SESSION['username'])) {
 
 
 ?>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-
-
-<!-- General CSS Files -->
-
-<link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
-
-<!-- CSS Libraries -->
-<link rel="stylesheet" href="../assets/modules/jqvmap/dist/jqvmap.min.css">
-<link rel="stylesheet" href="../assets/modules/weather-icon/css/weather-icons.min.css">
-<link rel="stylesheet" href="../assets/modules/weather-icon/css/weather-icons-wind.min.css">
-<link rel="stylesheet" href="../assets/modules/summernote/summernote-bs4.css">
-
-<!-- Template CSS -->
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/components.css">
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-94034622-3');
-</script>
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
@@ -143,26 +116,27 @@ if (isset($_SESSION['username'])) {
                             <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </li>
-                <?php if (isset($_SESSION['username'])) { ?>
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block"><?php echo $name; ?></div>
+
+                    <?php if (isset($_SESSION['username'])) { ?>
+                <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                        <div class="d-sm-none d-lg-inline-block"><?php echo $name; ?></div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-title">Logged in 5 min ago</div>
+                        <a href="ProfileAdmin/profile.php" class="dropdown-item has-icon">
+                            <i class="far fa-user"></i> Profile
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="dropdown-title">Logged in 5 min ago</div>
-                            <a href="../profile/profile_user.php" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="../in/logout.php" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Logout
-                            </a>
-                        </div>
-                    </li>
+                        <a href="features-settings.html" class="dropdown-item has-icon">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../in/logout.php" class="dropdown-item has-icon text-danger">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </li>
+
             </ul>
         <?php } else { ?>
             <li class="nav-item">
@@ -174,21 +148,25 @@ if (isset($_SESSION['username'])) {
             </li>
         <?php } ?>
         </nav>
+        </li>
         <div class="main-sidebar sidebar-style-2">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="#">Stisla</a>
+                    <a href="index.php">Stisla</a>
                 </div>
                 <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index.html">St</a>
+                    <a href="index.php">St</a>
                 </div>
                 <ul class="sidebar-menu">
                     <li class="menu-header">Dashboard</li>
+                    <li class="menu-header">
+                        <a href="Dashboard.php">Dashboard</a>
+                    </li>
                     <li class="dropdown active">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Fitur</span></a>
                         <ul class="dropdown-menu">
                             <li class=active><a class="nav-link" href="../index.php"></a></li>
-                            <li><a class="nav-link" href="../index.php">Total Users</a></li>
+                            <li><a class="nav-link" href="../index.php">Index</a></li>
                         </ul>
                     </li>
                     <!-- menu -->
@@ -198,36 +176,59 @@ if (isset($_SESSION['username'])) {
 
             </aside>
         </div>
-
         <!-- Main Content -->
     </div>
 </div>
-    </div>
-    </div>
+</div>
+</div>
 
-    <!-- General JS Scripts -->
-    <script src="../assets/modules/jquery.min.js"></script>
-    <script src="../assets/modules/popper.js"></script>
-    <script src="../assets/modules/tooltip.js"></script>
-    <script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="../assets/modules/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
+<!-- General CSS Files -->
+<link rel="stylesheet" href="../assets/modules/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/modules/fontawesome/css/all.min.css">
 
-    <!-- JS Libraies -->
-    <script src="../assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
-    <script src="../assets/modules/chart.min.js"></script>
-    <script src="../assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="../assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../assets/modules/summernote/summernote-bs4.js"></script>
-    <script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+<!-- CSS Libraries -->
+<link rel="stylesheet" href="../assets/modules/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet" href="../assets/modules/weather-icon/css/weather-icons.min.css">
+<link rel="stylesheet" href="../assets/modules/weather-icon/css/weather-icons-wind.min.css">
+<link rel="stylesheet" href="../assets/modules/summernote/summernote-bs4.css">
 
-    <!-- Page Specific JS File -->
-    <script src="../assets/js/page/index-0.js"></script>
+<!-- Template CSS -->
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
 
-    <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
-    <?php
-    include 'footer.php';
-    ?>
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+</script>
+<!-- scrip -->
+
+<!-- General JS Scripts -->
+<script src="../assets/modules/jquery.min.js"></script>
+<script src="../assets/modules/popper.js"></script>
+<script src="../assets/modules/tooltip.js"></script>
+<script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../assets/modules/moment.min.js"></script>
+<script src="../assets/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="../assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+<script src="../assets/modules/chart.min.js"></script>
+<script src="../assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="../assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="../assets/modules/summernote/summernote-bs4.js"></script>
+<script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="../assets/js/page/index-0.js"></script>
+
+<!-- Template JS File -->
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/custom.js"></script>  

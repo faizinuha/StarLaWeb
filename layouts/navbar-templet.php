@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Default name if not logged in
-$name = "Not Loggin";
+$name = "Not Logged In";
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Fetch user's name if logged in
@@ -26,14 +26,15 @@ mysqli_close($koneksi);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twiiter</title>
+    <title>Twitter</title>
     <link rel="icon" href="../asset/img/paimon-genshin-impact.avif">
     <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../node_modules/egalink-toasty.js/dist/toasty.min.css" rel="stylesheet">
-    <script src="../node_modules/egalink-toasty.js/dist/dist/toasty.min.js"></script>
+    <script src="../node_modules/egalink-toasty.js/dist/toasty.min.js"></script>
     <style>
         .navbar {
             position: sticky;
@@ -85,7 +86,7 @@ mysqli_close($koneksi);
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg  ">
+    <nav class="navbar navbar-expand-lg">
         <div class="container mx-auto">
             <a class="navbar-brand text-xl font-bold text-gray-800" href="#">Bloger</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,11 +95,10 @@ mysqli_close($koneksi);
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto space-x-4">
-                    <form class="d-flex me-2" role="search" action="search.php" method="GET">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                     <?php if (isset($_SESSION['username'])) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i> <?php echo $name; ?>
@@ -106,7 +106,7 @@ mysqli_close($koneksi);
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
-                                <li><a class="dropdown-item cursor1" href="Private/setting.php"> <i class="bi bi-gear-wide"></i> Setting</a></li>
+                                <li><a class="dropdown-item cursor1" href="Private/setting.php"><i class="bi bi-gear-wide"></i> Setting</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -125,6 +125,8 @@ mysqli_close($koneksi);
             </div>
         </div>
     </nav>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

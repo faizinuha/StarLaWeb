@@ -13,7 +13,7 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../asset/img/paimon-genshin-impact.avif">
-    <title>Blogger</title>
+    <title>Twiiter</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -115,18 +115,19 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                             Categories
                         </div>
                         <div class="card-body">
-                            <ul class="list-group">
-                                <?php
-                                $sql = "SELECT DISTINCT Tags FROM posts";
-                                $result = $koneksi->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo '<li class="list-group-item"><a href="category.php?Tags=' . $row['Tags'] . '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
-                                    }
-                                }
-                                ?>
-                            </ul>
-                        </div>
+                    <ul class="list-group">
+                        <?php
+                        // Query to get distinct tags from posts with status 'uploads'
+                        $sql = "SELECT DISTINCT Tags FROM posts WHERE status = 'uploads'";
+                        $result = $koneksi->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<li class="list-group-item"><a href="category.php?Tags=' . htmlspecialchars($row['Tags']) . '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
+                            }
+                        }
+                        ?>
+                    </ul>
+                </div>
                     </div>
                 </div>
 
