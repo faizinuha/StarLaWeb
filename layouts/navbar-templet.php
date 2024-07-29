@@ -2,6 +2,12 @@
 session_start();
 // Default name if not logged in
 $name = "Not Logged In";
+// Check if there's an alert in session
+$alert_message = "";
+if (isset($_SESSION['alert'])) {
+    $alert_message = '<div class="alert alert-' . $_SESSION['alert']['type'] . '" role="alert">' . $_SESSION['alert']['message'] . '</div>';
+    unset($_SESSION['alert']); // Clear alert after displaying
+}
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // Fetch user's name if logged in
@@ -79,6 +85,36 @@ mysqli_close($koneksi);
             display: flex;
             gap: 10px;
         }
+
+        /* Styling for color swapper */
+        .color-swapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .color-swapper .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-swapper .color-box:hover {
+            transform: scale(1.2);
+        }
+
+        /* Offcanvas customization */
+        .offcanvas {
+            width: 250px !important;
+        }
+
+        .offcanvas-bottom {
+            height: 250px;
+            bottom: 0;
+            left: 0;
+            right: auto;
+        }
     </style>
 </head>
 
@@ -124,11 +160,43 @@ mysqli_close($koneksi);
         </div>
     </nav>
 
+    <!-- Color Swapper -->
+    <a class="btn btn-primary color-swapper" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        Icons Air
+    </a>
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Icons Air</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                Percantik Background dengan warna
+            </div>
+            <div class="color-swapper">
+                <div class="color-box" style="background-color: white;" onclick="swapColor('white')"></div>
+                <div class="color-box" style="background-color: #1e90ff;" onclick="swapColor('#1e90ff')"></div>
+                <div class="color-box" style="background-color: #2ed573;" onclick="swapColor('#2ed573')"></div>
+                <div class="color-box" style="background-color: #ffa502;" onclick="swapColor('#ffa502')"></div>
+                <div class="color-box" style="background-color: #ff6348;" onclick="swapColor('#ff6348')"></div>
+                <div class="color-box" style="background-color: #3742fa;" onclick="swapColor('#3742fa')"></div>
+            </div>
+            <!-- Alert Message -->
+            <?php if ($alert_message) {
+                echo $alert_message;
+            } ?>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+        function swapColor(color) {
+            document.body.style.transition = "background-color 0.5s ease";
+            document.body.style.backgroundColor = color;
+        }
+    </script>
 </body>
 
 </html>
