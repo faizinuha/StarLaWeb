@@ -23,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($role === 'admin') {
             header("Location: ../../admin/index.php");
         } else {
-            header("Location: ../../index.php");
+            $_SESSION['login_success'] = "Welcome";
+            header("Location: ../../index.php?login_success=true");
+            exit();
         }
         exit();
     } else {

@@ -17,7 +17,7 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
 
     <style>
@@ -106,7 +106,7 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <div id="particles-js"></div>
     <!-- end -->
     <div class="content">
-        
+
         <div class="container main">
             <div class="row">
                 <div class="col-md-3 sticky-sidebar">
@@ -115,19 +115,19 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                             Categories
                         </div>
                         <div class="card-body">
-                    <ul class="list-group">
-                        <?php
-                        // Query to get distinct tags from posts with status 'uploads'
-                        $sql = "SELECT DISTINCT Tags FROM posts WHERE status = 'uploads'";
-                        $result = $koneksi->query($sql);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<li class="list-group-item"><a href="category.php?Tags=' . htmlspecialchars($row['Tags']) . '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
-                            }
-                        }
-                        ?>
-                    </ul>
-                </div>
+                            <ul class="list-group">
+                                <?php
+                                // Query to get distinct tags from posts with status 'uploads'
+                                $sql = "SELECT DISTINCT Tags FROM posts WHERE status = 'uploads'";
+                                $result = $koneksi->query($sql);
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<li class="list-group-item"><a href="category.php?Tags=' . htmlspecialchars($row['Tags']) . '">#' . htmlspecialchars($row['Tags']) . '</a></li>';
+                                    }
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -145,51 +145,51 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                                 // Check if the status is 'uploaded' before displaying the image
                                 if ($row['status'] == 'uploads') {
                         ?>
-                                <div class="card mt-4 col-md-12">
-                                    <div class="w-150">
-                                        <div class="position-relative">
-                                            <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="custom card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                            <div class="card-body">
-                                                <div class="profile-container cursor">
-                                                    <?php if (!empty($row['profile_image_path'])) : ?>
-                                                        <img onclick="window.location = './profile/profile-pengguna.php?id=<?= htmlspecialchars($row['user_id']); ?>'" src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
-                                                    <?php else : ?>
-                                                        <img onclick="window.location = './profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['user_id']); ?>'" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
-                                                    <?php endif; ?>
-                                                    <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
+                                    <div class="card mt-4 col-md-12">
+                                        <div class="w-150">
+                                            <div class="position-relative">
+                                                <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="custom card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                                <div class="card-body">
+                                                    <div class="profile-container cursor">
+                                                        <?php if (!empty($row['profile_image_path'])) : ?>
+                                                            <img onclick="window.location = './profile/profile-pengguna.php?id=<?= htmlspecialchars($row['user_id']); ?>'" src="profile/<?php echo htmlspecialchars($row['profile_image_path']); ?>" alt="avatar" class="profile-image">
+                                                        <?php else : ?>
+                                                            <img onclick="window.location = './profile/profile-pengguna.php?id=<?php echo htmlspecialchars($row['user_id']); ?>'" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGst2EJfEU4M83w0oCJ0mpZ1O_n8jpiuvjOO4IvOFgRA&s" alt="avatar" class="profile-image">
+                                                        <?php endif; ?>
+                                                        <span><?php echo htmlspecialchars($row['uploaded_by']); ?></span>
+                                                    </div>
+                                                    <h5 class="card-title"><strong>Judul:</strong> <?php echo htmlspecialchars($row['title']); ?></h5>
+                                                    <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
+                                                    <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
                                                 </div>
-                                                <h5 class="card-title"><strong>Judul:</strong> <?php echo htmlspecialchars($row['title']); ?></h5>
-                                                <p class="card-text">Deskripsi: <?php echo htmlspecialchars($row['content']); ?></p>
-                                                <p><strong>Tags:</strong> <?php echo htmlspecialchars($row['Tags']); ?></p>
-                                            </div>
-                                            <div class="overlay position-absolute top-0 end-0 m-2">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-gear-wide"></i>
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <?php if ($current_user == $row['uploaded_by']) { ?>
-                                                            <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
-                                                            <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
-                                                        <?php } ?>
-                                                        <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
-                                                        <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
-                                                    </ul>
+                                                <div class="overlay position-absolute top-0 end-0 m-2">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="bi bi-gear-wide"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <?php if ($current_user == $row['uploaded_by']) { ?>
+                                                                <li><a class="dropdown-item" href="edit_post.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                                                                <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
+                                                            <?php } ?>
+                                                            <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
+                                                            <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div>
-                                                    Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
-                                                </div>
-                                                <div class="button-container">
-                                                    <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
-                                                    <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
-                                                    <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id'] ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
+                                                <div class="card-footer">
+                                                    <div>
+                                                        Diposting pada <?php echo htmlspecialchars($row['upload_date']); ?>
+                                                    </div>
+                                                    <div class="button-container">
+                                                        <a href="blogs/komen.php?post_id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary"><i class="bi bi-chat-left"></i></a>
+                                                        <a href="layouts/like.php?action=like&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=like" class="btn btn-primary"><i class="bi bi-hand-thumbs-up"></i> <span id="likeCount<?php echo $row['id']; ?>"><?php echo htmlspecialchars($row['likes']); ?></span></a>
+                                                        <a href="layouts/dislike.php?action=dislike&post_id=<?php echo htmlspecialchars($row['id']); ?>&type=dislike" class="btn btn-danger"><i class="bi bi-hand-thumbs-down"></i> <span id="dislikeCount<?php echo $row['id'] ?>"><?php echo htmlspecialchars($row['dislikes']); ?></span></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                             <?php
                                 } // End of status check
                             }

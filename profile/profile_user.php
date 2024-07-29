@@ -23,12 +23,13 @@ if (mysqli_num_rows($result) > 0) {
   $instagram = $row['instagram'];
   $Twitter = $row['Twitter'];
   $about_me = $row['about_me'];
+  $current_user = $row['id']; // ID pengguna saat ini
 } else {
   echo "Informasi pengguna tidak ditemukan.";
 }
 
 // Ambil foto-foto yang telah diupload oleh pengguna
-$query_photos = "SELECT * FROM posts WHERE user_id = $user_id ORDER BY uploaded_by DESC";
+$query_photos = "SELECT * FROM posts WHERE user_id = $user_id ORDER BY uploaded_by DESC"; // Perbarui sesuai dengan nama kolom waktu unggah yang benar
 $result_photos = mysqli_query($koneksi, $query_photos);
 
 // Tutup koneksi ke database
@@ -181,9 +182,14 @@ mysqli_close($koneksi);
               <h5 class="card-title">Uploaded Photos</h5>
               <div class="row">
                 <?php while ($photo = mysqli_fetch_assoc($result_photos)) : ?>
-                  <div class="col-md-3 mb-4">
+                  <?php
+                  $image = explode(',', $photo['image']); // Memisahkan string gambar menjadi array
+                  ?>
+                  <div class="col-md-4 mb-4 mt-4 m-3">
                     <div class="card">
-                      <img src="../blogs/uploads/<?php echo htmlspecialchars($photo['image']); ?>" class="card-img-top" alt="User Photo">
+                      <?php foreach ($image as $img) : ?>
+                        <img src="../blogs/uploads/<?php echo htmlspecialchars(trim($img)); ?>" class="card-img-top mt-3" alt="User Photo">
+                      <?php endforeach; ?>
                       <div class="card-body">
                         <a class="d-flex justify-content-between align-items-center">
                           <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : ($photo['status'] == 'uploads' ? 'bg-success' : 'bg-danger'); ?>">
@@ -193,8 +199,13 @@ mysqli_close($koneksi);
                           <button class="btn btn-danger " onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
                             <i class="bi bi-trash"></i> Delete
                           </button>
-                          <!-- Tombol edit status -->
                           <button class="btn btn-primary" onclick="editStatus(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['status']); ?>')">Edit Status</button>
+                          <?php if ($current_user == $photo['user_id']) { // Pastikan user_id adalah kolom yang benar 
+                          ?>
+                            <li style="list-style: none;"  ><a class="btn btn-outline-info mb-3 " href="../edit_post.php?id=<?php echo htmlspecialchars($photo['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
+                            <!-- <li><a class="dropdown-item" href="...php?id=<?php echo htmlspecialchars($photo['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li> -->
+                          <?php } ?>
+                          <!-- Tombol edit status -->
                         </a>
                       </div>
                     </div>
@@ -205,6 +216,7 @@ mysqli_close($koneksi);
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -285,7 +297,7 @@ mysqli_close($koneksi);
         }
       });
     }
-// fungsi untuk Mengedit Post
+    // fungsi untuk Mengedit Post
     function editStatus(photoId, currentStatus) {
       $('#editPhotoId').val(photoId);
       $('#editStatus').val(currentStatus);

@@ -131,6 +131,7 @@ mysqli_close($koneksi);
                 <ul class="navbar-nav ml-auto space-x-4">
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+                        <li><a class="nav-link cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
                     </li>
                     <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">
@@ -138,7 +139,7 @@ mysqli_close($koneksi);
                                 <i class="bi bi-person-circle"></i> <?php echo $name; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
+                
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                                 <li><a class="dropdown-item cursor1" href="Private/setting.php"><i class="bi bi-gear-wide"></i> Setting</a></li>
                                 <li>
@@ -160,43 +161,12 @@ mysqli_close($koneksi);
         </div>
     </nav>
 
-    <!-- Color Swapper -->
-    <a class="btn btn-primary color-swapper" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-        Icons Air
-    </a>
-    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Icons Air</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                Percantik Background dengan warna
-            </div>
-            <div class="color-swapper">
-                <div class="color-box" style="background-color: white;" onclick="swapColor('white')"></div>
-                <div class="color-box" style="background-color: #1e90ff;" onclick="swapColor('#1e90ff')"></div>
-                <div class="color-box" style="background-color: #2ed573;" onclick="swapColor('#2ed573')"></div>
-                <div class="color-box" style="background-color: #ffa502;" onclick="swapColor('#ffa502')"></div>
-                <div class="color-box" style="background-color: #ff6348;" onclick="swapColor('#ff6348')"></div>
-                <div class="color-box" style="background-color: #3742fa;" onclick="swapColor('#3742fa')"></div>
-            </div>
-            <!-- Alert Message -->
-            <?php if ($alert_message) {
-                echo $alert_message;
-            } ?>
-        </div>
-    </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script>
-        function swapColor(color) {
-            document.body.style.transition = "background-color 0.5s ease";
-            document.body.style.backgroundColor = color;
-        }
-    </script>
+
 </body>
 
 </html>

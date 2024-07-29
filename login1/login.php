@@ -101,12 +101,12 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <div class="float-right">
                       <a href="#" class="text-small" onclick="bahaya(); return false;">
                         Not Login?
                       </a>
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login
                     </button>
@@ -129,16 +129,16 @@
       </div>
     </section>
   </div>
-  <div id="myModal" class="modal">
+  <!-- <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <p>Yakin gak mau Login😭 Nanti Gak ada Fitur Loh?</p>
       <button id="registerBtn">Register</button>
       <button id="okBtn">OK</button>
     </div>
-  </div>
+  </div> -->
   <!-- script -->
-  <script>
+  <!-- <script>
   function bahaya() {
     var modal = document.getElementById("myModal");
     var span = document.getElementsByClassName("close")[0];
@@ -170,7 +170,7 @@
       }
     }
   }
-</script>
+</script> -->
   <!-- General JS Scripts -->
   <script src="../assets/modules/jquery.min.js"></script>
   <script src="../assets/modules/popper.js"></script>
