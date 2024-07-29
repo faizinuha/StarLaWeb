@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include('../allkoneksi/koneksi.php');
 // Memeriksa koneksi ke database
 if (!$koneksi) {
