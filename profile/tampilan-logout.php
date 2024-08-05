@@ -81,7 +81,7 @@ $koneksi->close();
                     <?php foreach ($users as $user) : ?>
                         <div class="col-md-4 mb-4">
                             <div class="card">
-                                <a href="../login1/password.php?id=<?php echo $user['id']; ?>">
+                                <a href="../auth/password.php?id=<?php echo $user['id']; ?>">
                                     <?php if (!empty($user['profile_image_path'])) : ?>
                                         <img src="<?php echo htmlspecialchars($user['profile_image_path']); ?>" alt="avatar" class="card-img-top mx-auto d-block avatar">
                                     <?php else : ?>
@@ -96,7 +96,7 @@ $koneksi->close();
                     <?php endforeach; ?>
                 </div>
                 <div class="text-center mt-5">
-                    <a href="../login1/login.php" class="btn btn-primary"><i class='bx bx-log-in'></i> Login Lagi</a>
+                    <a href="../auth/login.php" class="btn btn-primary"><i class='bx bx-log-in'></i> Login Lagi</a>
                 </div>
             </div>
 
@@ -110,11 +110,11 @@ $koneksi->close();
                         <h4>Login</h4>
                     </div>
                     <div class="card-body">
-                        <form method="POST"class="needs-validation" action="../login1/proses_data/proses_login.php" novalidate="">
+                        <form method="POST"class="needs-validation" action="../auth/proses_data/proses_login.php" novalidate="">
                             <div class="form-group">
                                 <label for="emailOrUsername" class="form-label">Username or Email</label>
                                 <div class="float-right">
-                                    <a href="../login1/register.php" class="text-small">Register</a>
+                                    <a href="../auth/register.php" class="text-small">Register</a>
                                 </div>
                                 <input type="text" class="form-control" name="emailOrUsername" id="emailOrUsername" placeholder="Enter Email or Username" required autofocus>
                                 <div class="invalid-feedback">Please fill in your email</div>
@@ -123,7 +123,7 @@ $koneksi->close();
                                 <div class="d-block">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="float-right">
-                                        <a href="../login1/forgot_reset_password.php" class="text-small">Forgot Password?</a>
+                                        <a href="../auth/forgot_reset_password.php" class="text-small">Forgot Password?</a>
                                     </div>
                                 </div>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" tabindex="2" required>

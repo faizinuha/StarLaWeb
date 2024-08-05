@@ -140,11 +140,11 @@ if (isset($_SESSION['username'])) {
             </ul>
         <?php } else { ?>
             <li class="nav-item">
-                <a href="../login1/login.php" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="../auth/login.php" class="nav-link"><i class="fas fa-sign-in-alt"></i> Login</a>
             </li>
             </li>
             <li class="nav-item">
-                <a href="../login1/register.php" class="nav-link"><i class="fas fa-user-plus"></i> Register</a>
+                <a href="../auth/register.php" class="nav-link"><i class="fas fa-user-plus"></i> Register</a>
             </li>
         <?php } ?>
         </nav>

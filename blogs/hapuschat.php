@@ -3,7 +3,7 @@ session_start();
 
 // Pastikan pengguna sudah login
 if (!isset($_SESSION['username'])) {
-    header("Location: ../login1/login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 require_once __DIR__ . '/../allkoneksi/koneksi.php';

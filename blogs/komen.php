@@ -229,7 +229,7 @@ $result = $stmt->get_result();
                         </div>
                     </form>
                 <?php else : ?>
-                    <p>Silakan <a href="../login1/login.php">login</a> untuk menambahkan komentar.</p>
+                    <p>Silakan <a href="../auth/login.php">login</a> untuk menambahkan komentar.</p>
                 <?php endif; ?>
 
                 <div class="scroll-container">

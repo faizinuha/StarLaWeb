@@ -150,10 +150,10 @@ mysqli_close($koneksi);
                         </li>
                     <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="login1/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                            <a class="nav-link" href="auth/login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login1/register.php"><i class="bi bi-pencil-square"></i> Register</a>
+                            <a class="nav-link" href="auth/register.php"><i class="bi bi-pencil-square"></i> Register</a>
                         </li>
                     <?php } ?>
                 </ul>

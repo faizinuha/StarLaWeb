@@ -10,7 +10,7 @@ $post_id = isset($_GET['post_id']) ? $_GET['post_id'] : null;
 $current_user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 if (!$current_user_id) {
-    echo "<script>window.location.href='../login1/login.php';</script>";
+    echo "<script>window.location.href='../auth/login.php';</script>";
     exit();
 }
 
