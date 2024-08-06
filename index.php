@@ -17,7 +17,6 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0"></script>
 
     <style>
@@ -25,7 +24,6 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
             width: 100%;
             height: auto;
             border-radius: 10px;
-            margin-bottom: 15px;
             max-height: 300px;
             object-fit: cover;
         }
@@ -33,15 +31,10 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
         .card {
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
         }
 
         .card-body {
             padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
         }
 
         .card-footer {
@@ -96,7 +89,6 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
         .custom {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            /* filter: blur(5px); */
         }
     </style>
 </head>
@@ -130,7 +122,6 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-9">
                     <div class="row justify-content-center">
                         <?php
@@ -145,10 +136,10 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                                 // Check if the status is 'uploaded' before displaying the image
                                 if ($row['status'] == 'uploads') {
                         ?>
-                                    <div class="card mt-4 col-md-12">
-                                        <div class="w-150">
+                                    <div class="card mt-4 col-md-8">
+                                        <div class="w-100">
                                             <div class="position-relative">
-                                                <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="custom card-img-top post-image mt-3 img-fluid" style="border-radius: 10px;" alt="<?php echo htmlspecialchars($row['title']); ?>">
+                                                <img src="blogs/uploads/<?php echo htmlspecialchars($row['image']); ?>" class="custom card-img-top post-image mt-3 img-fluid" alt="<?php echo htmlspecialchars($row['title']); ?>">
                                                 <div class="card-body">
                                                     <div class="profile-container cursor">
                                                         <?php if (!empty($row['profile_image_path'])) : ?>
@@ -173,7 +164,7 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
                                                                 <li><a class="dropdown-item" href="delete_post.php?id=<?php echo htmlspecialchars($row['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li>
                                                             <?php } ?>
                                                             <li><a href="in/download.php?gambar=<?php echo htmlspecialchars($row['image']); ?>" class="dropdown-item">Simpan Foto <i class="bi bi-download"></i></a></li>
-                                                            <li><a href="Private/report.html" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
+                                                            <li><a href="#" id="Report" class="dropdown-item">Report <i class="bi bi-exclamation-triangle"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -212,8 +203,23 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
         particlesJS.load('particles-js', 'particles-config.json', function() {
             console.log('particles.js loaded - callback');
         });
+
+
+        // repots
+        document.getElementById('Report').addEventListener('click',function(event){
+            event.preventDefault();
+
+            alert('Silakan Tunggu')
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'in/report.php?post_id=' + encodeURIComponent(window.location.search.split('post_id=')[1]), true);
+            
+        })
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4JQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 

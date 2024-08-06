@@ -4,6 +4,7 @@ session_start();
 
 // Establish database connection
 require_once __DIR__ . '/allkoneksi/koneksi.php';
+// require_once __DIR__ . '/Admin/componen.php';
 
 // Fetch tag from query string
 if (isset($_GET['Tags'])) {
@@ -23,8 +24,6 @@ if (isset($_GET['Tags'])) {
     header("Location: index.php"); // Redirect to home page or other default page
     exit;
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -39,8 +38,37 @@ if (isset($_GET['Tags'])) {
     <style>
         .card-img-top {
             width: 100%;
-            height: auto;
+            height: 200px;
             object-fit: cover;
+        }
+
+        .gallery {
+            display: flex;
+            margin: 0.1em;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .gallery-item {
+            width: calc(33.333% - 15px);
+            margin-bottom: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item {
+                width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-item {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -48,17 +76,18 @@ if (isset($_GET['Tags'])) {
 <body>
     <div class="container mt-4">
         <h2 class="mb-4">Category: <?php echo htmlspecialchars($Tags); ?></h2>
-        <div class="row">
+        <div class="gallery">
             <?php
             // Display images based on the query result
             if ($result_images->num_rows > 0) {
                 while ($row = $result_images->fetch_assoc()) {
-                    echo '<div class="col-md-6 mb-4">';
+                    echo '<div class="gallery-item">';
                     echo '<div class="card">';
                     echo '<img src="blogs/uploads/' . htmlspecialchars($row['image']) . '" class="card-img-top" alt="Image">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">Judul: ' . htmlspecialchars($row['title']) . '</h5>';
                     echo '<p class="card-text">Deskripsi: ' . htmlspecialchars($row['content']) . '</p>';
+                    echo '<p class="card-text">Uploads: ' . htmlspecialchars($row['upload_date']) . '</p>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
@@ -66,12 +95,10 @@ if (isset($_GET['Tags'])) {
             } else {
                 echo '<p class="alert alert-dark text-center">No posts found in this category</p>';
             }
-
-            echo '<div class="text-center"><a href="index.php" class="btn btn-primary">Kembali</a></div>';
-
-            // Close statement and connection
-            $stmt->close();
             ?>
+        </div>
+        <div class="text-center mt-4">
+            <a href="index.php" class="btn btn-primary">Kembali</a>
         </div>
     </div>
 
