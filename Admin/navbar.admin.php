@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 include 'componen.php';
 // Konfigurasi koneksi ke database
 $name = "Guest";

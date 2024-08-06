@@ -176,46 +176,52 @@ mysqli_close($koneksi);
       </div>
 
       <div class="row mt-4">
-        <div class="col-12">
-          <div class="card mb-4">
+    <div class="col-12">
+        <div class="card mb-4">
             <div class="card-body">
-              <h5 class="card-title">Uploaded Photos</h5>
-              <div class="row">
-                <?php while ($photo = mysqli_fetch_assoc($result_photos)) : ?>
-                  <?php
-                  $image = explode(',', $photo['image']); // Memisahkan string gambar menjadi array
-                  ?>
-                  <div class="col-md-4 mb-4 mt-4 m-3">
-                    <div class="card">
-                      <?php foreach ($image as $img) : ?>
-                        <img src="../blogs/uploads/<?php echo htmlspecialchars(trim($img)); ?>" class="card-img-top mt-3" alt="User Photo">
-                      <?php endforeach; ?>
-                      <div class="card-body">
-                        <a class="d-flex justify-content-between align-items-center">
-                          <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : ($photo['status'] == 'uploads' ? 'bg-success' : 'bg-danger'); ?>">
-                            <?php echo ucfirst(htmlspecialchars($photo['status'])); ?>
-                          </span>
-                          <!-- Tombol hapus -->
-                          <button class="btn btn-danger " onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
-                            <i class="bi bi-trash"></i> Delete
-                          </button>
-                          <button class="btn btn-primary" onclick="editStatus(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['status']); ?>')">Edit Status</button>
-                          <?php if ($current_user == $photo['user_id']) { // Pastikan user_id adalah kolom yang benar 
-                          ?>
-                            <li style="list-style: none;"  ><a class="btn btn-outline-info mb-3 " href="../edit_post.php?id=<?php echo htmlspecialchars($photo['id']); ?>">Edit <i class="bi bi-pencil-square"></i></a></li>
-                            <!-- <li><a class="dropdown-item" href="...php?id=<?php echo htmlspecialchars($photo['id']); ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete <i class="bi bi-trash"></i></a></li> -->
-                          <?php } ?>
-                          <!-- Tombol edit status -->
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                <?php endwhile; ?>
-              </div>
+                <h5 class="card-title">Uploaded Photos</h5>
+                <div class="row">
+                    <?php while ($photo = mysqli_fetch_assoc($result_photos)) : ?>
+                        <?php
+                        $images = explode(',', $photo['image']); // Split the image string into an array
+                        ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <?php foreach ($images as $img) : ?>
+                                    <img src="../blogs/uploads/<?php echo htmlspecialchars(trim($img)); ?>" class="card-img-top mt-3" alt="User Photo">
+                                <?php endforeach; ?>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="badge <?php echo $photo['status'] == 'pending' ? 'bg-warning' : ($photo['status'] == 'uploads' ? 'bg-success' : 'bg-danger'); ?>">
+                                            <?php echo ucfirst(htmlspecialchars($photo['status'])); ?>
+                                        </span>
+                                        <div>
+                                            <!-- Delete button -->
+                                            <button class="btn btn-danger me-2" onclick="deletePhoto(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['image']); ?>')">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                            <!-- Edit status button -->
+                                            <button class="btn btn-primary" onclick="editStatus(<?php echo $photo['id']; ?>, '<?php echo htmlspecialchars($photo['status']); ?>')">
+                                                Edit Status
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Edit button (only for the user who uploaded the photo) -->
+                                    <?php if ($current_user == $photo['user_id']) : ?>
+                                        <a class="btn btn-outline-info w-100" href="../edit_post.php?id=<?php echo htmlspecialchars($photo['id']); ?>">
+                                            Edit <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
 
     </div>
   </section>

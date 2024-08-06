@@ -10,6 +10,7 @@ if (isset($_SESSION['alert'])) {
 }
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
+// require_once __DIR__ . '/../admin/componen.php';
 // Fetch user's name if logged in
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -37,30 +38,34 @@ mysqli_close($koneksi);
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="../node_modules/egalink-toasty.js/dist/toasty.min.css" rel="stylesheet">
-    <script src="../node_modules/egalink-toasty.js/dist/toasty.min.js"></script>
     <style>
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: #f8f9fa;
+            background-color: #343a40;
+            /* Sesuaikan dengan tema dark */
         }
 
         .navbar-brand {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
+            color: #fff;
+        }
+
+        .navbar-brand span {
+            color: red;
+            /* Warna huruf "G" */
         }
 
         .nav-link {
-            color: #555;
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
-            padding: 0.75rem 1rem;
         }
 
-        .nav-link:hover {
-            color: #000;
+        .nav-link:hover,
+        .nav-link:focus {
+            color: rgba(255, 255, 255, 1);
         }
 
         .btn-discord {
@@ -81,12 +86,6 @@ mysqli_close($koneksi);
             margin-top: 20px;
         }
 
-        .translate-container {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* Styling for color swapper */
         .color-swapper {
             display: flex;
             gap: 10px;
@@ -104,7 +103,6 @@ mysqli_close($koneksi);
             transform: scale(1.2);
         }
 
-        /* Offcanvas customization */
         .offcanvas {
             width: 250px !important;
         }
@@ -120,18 +118,20 @@ mysqli_close($koneksi);
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container mx-auto">
-            <a class="navbar-brand text-xl font-bold text-gray-800" href="#">Bloger</a>
+            <a class="navbar-brand" href="#">BLO<span>G</span>ER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto space-x-4">
+                <ul class="navbar-nav ms-auto space-x-4">
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
-                        <li><a class="nav-link cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a></li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a>
                     </li>
                     <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">
@@ -139,7 +139,6 @@ mysqli_close($koneksi);
                                 <i class="bi bi-person-circle"></i> <?php echo $name; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                                 <li><a class="dropdown-item cursor1" href="Private/setting.php"><i class="bi bi-gear-wide"></i> Setting</a></li>
                                 <li>
@@ -161,12 +160,10 @@ mysqli_close($koneksi);
         </div>
     </nav>
 
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
