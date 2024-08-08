@@ -210,9 +210,6 @@ $current_user = isset($_SESSION['username']) ? $_SESSION['username'] : '';
             event.preventDefault();
 
             alert('Silakan Tunggu')
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'in/report.php?post_id=' + encodeURIComponent(window.location.search.split('post_id=')[1]), true);
-            
         })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
