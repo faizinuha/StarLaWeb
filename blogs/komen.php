@@ -249,10 +249,13 @@ $result = $stmt->get_result();
                                         <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editCommentModal" data-comment-id="<?php echo htmlspecialchars($row['id']); ?>" data-comment-content="<?php echo htmlspecialchars($row['content']); ?>">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <form action="hapuschat.php" method="POST" style="display:inline;">
-                                            <input type="hidden" name="comment_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?')"><i class="fas fa-trash"></i></button>
+                                        <form action="hapuschat.php" method="get" style="display:inline;">
+                                            <input type="hidden" name="hapus" value="<?php echo htmlspecialchars($row['id']); ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus komentar ini?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
+
                                     </div>
                                 <?php endif; ?>
                             </div>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 
 // Pastikan pengguna sudah login
@@ -7,22 +7,9 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
+
 // Pastikan hanya request method GET yang diizinkan
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
-    // Definisikan informasi koneksi ke database
-    // $host = "localhost";
-    // $user = "root";
-    // $password = "";
-    // $database = "blog";
-
-    // // Buat koneksi
-    // $koneksi = new mysqli($host, $user, $password, $database);
-
-    // // Periksa koneksi
-    // if ($koneksi->connect_error) {
-    //     die("Koneksi gagal: " . $koneksi->connect_error);
-    // }
-
     // Ambil parameter hapus dari URL dan validasi
     $hapus_id = intval($_GET['hapus']);
 
@@ -30,16 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['hapus'])) {
         // Ambil informasi pengguna yang sedang login
         $pengguna_login = $_SESSION['username'];
 
-        // Ambil nama pengguna yang menulis komentar yang akan dihapus
-        $query = $koneksi->prepare("SELECT author FROM comments WHERE id = ?");
+        // Ambil user_id dari sesi
+        $query_user = $koneksi->prepare("SELECT id FROM users WHERE username = ?");
+        $query_user->bind_param("s", $pengguna_login);
+        $query_user->execute();
+        $query_user->bind_result($user_id_login);
+        $query_user->fetch();
+        $query_user->close();
+
+        // Ambil user_id yang menulis komentar yang akan dihapus
+        $query = $koneksi->prepare("SELECT user_id FROM comments WHERE id = ?");
         $query->bind_param("i", $hapus_id);
         $query->execute();
-        $query->bind_result($nama_pengguna_komentar);
+        $query->bind_result($user_id_komentar);
         $query->fetch();
         $query->close();
 
-        // Periksa apakah pengguna yang sedang login adalah pemilik komentar
-        if ($nama_pengguna_komentar === $pengguna_login) {
+        // Periksa apakah user_id yang sedang login adalah pemilik komentar
+        if ($user_id_komentar === $user_id_login) {
             // Eksekusi query untuk menghapus komentar berdasarkan id
             $query_hapus = $koneksi->prepare("DELETE FROM comments WHERE id = ?");
             $query_hapus->bind_param("i", $hapus_id);

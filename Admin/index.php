@@ -21,7 +21,7 @@ function getTotalData($koneksi, $query)
 $total_users = getTotalData($koneksi, "SELECT COUNT(*) as total FROM users");
 $total_posts = getTotalData($koneksi, "SELECT COUNT(*) as total FROM posts");
 $total_likes = getTotalData($koneksi, "SELECT COUNT(*) as total FROM likes");
-$total_dislikes = getTotalData($koneksi, "SELECT COUNT(*) as total FROM dislikes");
+$total_comment = getTotalData($koneksi, "SELECT COUNT(*) as total FROM comments");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,10 +101,10 @@ $total_dislikes = getTotalData($koneksi, "SELECT COUNT(*) as total FROM dislikes
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Total Dislikes</h4>
+                                <h4>Total Comments</h4>
                             </div>
                             <div class="card-body">
-                                <?php echo $total_dislikes; ?>
+                                <?php echo $total_comment; ?>
                             </div>
                         </div>
                     </div>
