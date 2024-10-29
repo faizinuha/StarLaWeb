@@ -11,6 +11,7 @@ if (isset($_SESSION['alert'])) {
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
 // require_once __DIR__ . '/../admin/componen.php';
+
 // Fetch user's name if logged in
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
@@ -23,9 +24,36 @@ if (isset($_SESSION['username'])) {
     }
 }
 
-// Close database connection
-mysqli_close($koneksi);
+if ($koneksi) {
+    // Ambil ID pengguna yang sedang login
+    $user_id = $_SESSION['user_id'] ?? 0; // Gunakan default jika user_id tidak tersedia
+
+    // Ambil jumlah notifikasi belum dibaca
+    $query = "SELECT COUNT(*) as unread_count FROM notifications WHERE user_id = ? AND is_read = 0";
+    $stmt = $koneksi->prepare($query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $unread_count = $result->fetch_assoc()['unread_count'] ?? 0;
+
+    // Menutup statement setelah selesai
+    $stmt->close();
+}
+
+// Siapkan query untuk mengambil notifikasi
+$notif_query = "SELECT * FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC LIMIT 5";
+$notif_stmt = $koneksi->prepare($notif_query);
+$notif_stmt->bind_param("i", $user_id);
+$notif_stmt->execute();
+$notif_result = $notif_stmt->get_result();
+
 ?>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('notificationCount').textContent = '<?= $unread_count ?>';
+    });
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,22 +64,21 @@ mysqli_close($koneksi);
     <title>Twitter</title>
     <link rel="icon" href="../asset/img/paimon-genshin-impact.avif">
     <!-- Bootstrap CSS -->
-    <!-- link -->
     <?php
     include_once 'link.php';
     include_once 'script.php';
     ?>
     <style>
-        *{
+        * {
             scroll-behavior: smooth;
-            margin:0;
+            margin: 0;
         }
+
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
             background-color: #343a40;
-            /* Sesuaikan dengan tema dark */
         }
 
         .navbar-brand {
@@ -62,7 +89,6 @@ mysqli_close($koneksi);
 
         .navbar-brand span {
             color: red;
-            /* Warna huruf "G" */
         }
 
         .nav-link {
@@ -134,21 +160,31 @@ mysqli_close($koneksi);
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto space-x-4">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-bell"></i> Notifications</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bell"></i> Notifications
+                            <span id="notificationCount" class="badge bg-danger rounded-pill">
+                                <?= $unread_count ?>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                            <?php while ($notif = $notif_result->fetch_assoc()) { ?>
+                                <li><a class='dropdown-item' href='#'><?= $notif['message'] ?></a></li>
+                            <?php } ?>
+                        </ul>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link cursor" href="blogs/upload.php"><i class="bi bi-plus-circle"></i> Upload</a>
                     </li>
                     <?php if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i> <?php echo $name; ?>
+                                <i class="bi bi-person-circle"></i> <?= $name; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="profile/profile_user.php"><i class="bi bi-person"></i> Your Profile</a></li>
                                 <li><a class="dropdown-item cursor1" href="Private/setting.php"><i class="bi bi-gear-wide"></i> Setting</a></li>
-                                <!-- <li><a class="dropdown-item cursor1" href="Private/setting.php"><i class="bi bi-gear-wide"></i></a></li> -->
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -169,7 +205,10 @@ mysqli_close($koneksi);
     </nav>
 
     <!-- Scripts -->
-    
+    <?php
+    // Menutup koneksi setelah semua query dieksekusi
+    mysqli_close($koneksi);
+    ?>
 </body>
 
 </html>
