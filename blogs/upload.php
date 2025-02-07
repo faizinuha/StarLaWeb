@@ -107,10 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             Mohon Upload gambar yang Positif
         </div>
         <h1 class="mt-4">Tambah Posting Baru</h1>
-        <form action="" method="post" enctype="multipart/form-data" class="mt-4">
+        <form action="" method="post" enctype="multipart/form-data" class="mt-4" id="myForm" onsubmit="return validateform()">
             <div class="form-group">
                 <label for="title">Judul:</label>
-                <input type="text" id="title" name="title" class="form-control" required>
+                <input type="text" id="title" name="title" class="form-control"  required>
             </div>
             <div class="form-group">
                 <label for="content">Konten:</label>
@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../assets/js/stisla.js"></script>
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
-    <script>
+    <script>             
         function previewImage(input) {
             var preview = document.getElementById('imagePreview');
             if (input.files && input.files[0]) {
@@ -171,6 +171,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 preview.src = '#';
                 preview.style.display = 'none';
             }
+        }
+        function validateform(){
+            var title = document.getElementById("title").value;
+            if(title.includes("h1","h2","h3","h4")){
+                alert('Maaf Kata2 Blokir');
+                return false;
+            }
+            return true;
         }
     </script>
 </body>

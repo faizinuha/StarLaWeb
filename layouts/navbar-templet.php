@@ -10,28 +10,31 @@ if (isset($_SESSION['alert'])) {
 }
 
 require_once __DIR__ . '/../allkoneksi/koneksi.php';
-// require_once __DIR__ . '/../admin/componen.php';
 
-// Fetch user's name if logged in
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-    $query = "SELECT name FROM users WHERE username = '$username'";
-    $result = mysqli_query($koneksi, $query);
+    $query = "SELECT name FROM users WHERE username = ?";
+    $stmt = $koneksi->prepare($query);
+    $stmt->bind_param("s", $username); // "s" berarti string
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $name = $row['name'];
     }
+    $stmt->close(); // Pastikan untuk menutup statement setelah selesai
 }
 
-if ($koneksi) {
-    // Ambil ID pengguna yang sedang login
-    $user_id = $_SESSION['user_id'] ?? 0; // Gunakan default jika user_id tidak tersedia
 
-    // Ambil jumlah notifikasi belum dibaca
+if ($koneksi) {
+    // Ambil username pengguna yang sedang login
+    $username = $_SESSION['user_id'] ?? ''; // Gunakan default jika username tidak tersedia
+
+    // Ambil jumlah notifikasi belum dibaca menggunakan username
     $query = "SELECT COUNT(*) as unread_count FROM notifications WHERE user_id = ? AND is_read = 0";
     $stmt = $koneksi->prepare($query);
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("s", $username); // Gunakan 's' untuk parameter string
     $stmt->execute();
     $result = $stmt->get_result();
     $unread_count = $result->fetch_assoc()['unread_count'] ?? 0;
@@ -40,13 +43,12 @@ if ($koneksi) {
     $stmt->close();
 }
 
-// Siapkan query untuk mengambil notifikasi
+// Siapkan query untuk mengambil notifikasi menggunakan username
 $notif_query = "SELECT * FROM notifications WHERE user_id = ? AND is_read = 0 ORDER BY created_at DESC LIMIT 5";
 $notif_stmt = $koneksi->prepare($notif_query);
-$notif_stmt->bind_param("i", $user_id);
+$notif_stmt->bind_param("s", $username); // Gunakan 's' untuk parameter string
 $notif_stmt->execute();
 $notif_result = $notif_stmt->get_result();
-
 ?>
 
 <script>

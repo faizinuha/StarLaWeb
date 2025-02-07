@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Profile Pengguna</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
@@ -58,17 +58,6 @@
                 </a> -->
             </div>
         </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper" class="content">
-            <div class="container-fluid">
-                <h1 class="mt-4 font-bold ">Settings Page</h1>
-                <p class="font-bold">Ini adalah halaman pengaturan dengan fitur Change Password, Change Email, dan navigasi sidebar.</p>
-                <!-- Content here -->
-            </div>
-        </div>
-        <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
 
